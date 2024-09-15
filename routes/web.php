@@ -39,5 +39,13 @@ Route::get('/speakers/rabbi-avi-slansky', [SpeakerController::class, 'rabbiAviSl
 
 Route::get('/series/{id}', [SeriesController::class, 'showSeries'])->name('series.show');
 
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/admin/shiurs/create', [ShiurController::class, 'create'])->name('shiur.create');
+    Route::post('/admin/shiurs', [ShiurController::class, 'store'])->name('shiur.store');
+    // Other admin routes
+});
+
+Route::get('/user/purchases', [UserController::class, 'purchases'])->name('user.purchases');
+
 
 require __DIR__.'/auth.php';

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', $series->title . ' | ' . $series->speaker->full_name)
+@section('title',  $series->title)
 
 @section('content')
     <!-- Series Image -->
@@ -13,25 +13,20 @@
         <p>{{ $series->description }}</p>
     </div>
 
-    <!-- Buttons for each Shiur -->
-    <div style="text-align: center;">
-        <p>{{ $series->description }}</p>
-
-        @for ($i = 1; $i <= $series->number_of_shiurs; $i++)
-            <a href="{{ route('shiurs.index', ['id' => $i]) }}" style="margin: 5px;">Shiur #{{ $i }}</a>
-        @endfor
-    </div>
-
-
     <!-- Shiur List -->
-    <div class="shiur-container">
-        @foreach ($shiurs as $shiur)
-            <div class="shiur-box">
-                <h3>{{ $shiur->title }}</h3>
-                <p>{{ Str::limit($shiur->description, 100) }}</p>
-                <p>Price: ${{ $shiur->price }}</p>
-                <a href="{{ route('purchase', ['shiur_id' => $shiur->id]) }}">Purchase & Download</a>
-            </div>
-        @endforeach
+    <div style="text-align: center; margin-bottom: 20px;">
+        <ul style="list-style-type: none; padding: 0; margin: 0;">
+            @foreach ($shiurs as $shiurItem)
+                <li style="margin: 10px 0;">
+                    <a href="{{ route('shiur.show', ['seriesId' => $series->id, 'shiurId' => $shiurItem->id]) }}"
+                       style="display: inline-block; padding: 10px 20px; font-size: 16px; color: white; background-color: lightslategray; text-decoration: none; border-radius: 5px; transition: transform 0.3s, box-shadow 0.3s;"
+                       onmouseover="this.style.transform='scale(1.1)'; this.style.boxShadow='0px 8px 15px rgba(0,0,0,0.3)';"
+                       onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none';">
+                        Shiur #{{ $shiurItem->shiur_number_in_series }} - {{ $shiurItem->title }}
+                    </a>
+                </li>
+            @endforeach
+        </ul>
     </div>
+
 @endsection
