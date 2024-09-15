@@ -4,6 +4,8 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ShiurController;
 use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\SeriesController;
+
 
 Route::get('/', function () {return view('welcome');});
 
@@ -34,6 +36,7 @@ Route::get('/shiurim/mrs-shira-smiles', [ShiurController::class, 'mrsShiraSmiles
 Route::get('/shiurim/mrs-dina-schoonmaker', [ShiurController::class, 'mrsDinaSchoonmaker'])->name('shiurs.schoonmaker');
 Route::get('/shiurim/rabbi-avi-slansky', [ShiurController::class, 'rabbiAviSlansky'])->name('shiurs.slansky');
 
-Route::get('/series/{id}', [ShiurController::class, 'showSeries'])->name('series.show');
+Route::get('/series/{id}', [SeriesController::class, 'showSeries'])->name('series.show');
+
 
 require __DIR__.'/auth.php';

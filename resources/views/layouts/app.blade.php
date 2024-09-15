@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>@yield('title') | Midreshet Adina</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- Add custom CSS if necessary -->
@@ -12,10 +11,13 @@
     <style>
         body {
             background-color: #FFFFFF;
+            margin: 0;
+            padding: 0;
         }
+
         /* Navbar Styles */
         .navbar {
-            background-color: #0077B6;
+            background-color: #B47EE5;
         }
         .navbar-nav {
             flex-direction: row;
@@ -34,11 +36,30 @@
             color: #E6E6FA !important; /* Light Lavender text on hover */
         }
 
+        /* Full-width purple title section */
+        .full-width-title {
+            background-color: #4B0082; /* Dark purple */
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+            width: 100vw; /* Full viewport width */
+            margin-left: calc(-50vw + 50%); /* Extend the background beyond the container */
+            margin-top: 0;
+        }
+
+        .full-width-title h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: #f8f9fa;
+            padding: 2rem 0;
+        }
     </style>
 </head>
 <body>
-
-<!-- app.blade.php -->
 
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-light">
@@ -67,6 +88,13 @@
         </ul>
     </div>
 </nav>
+
+<!-- Purple Title Section (Dynamic Title) -->
+@if (Route::currentRouteName() !== 'home')
+    <div class="full-width-title">
+        <h1>@yield('title')</h1>
+    </div>
+@endif
 
 
 <!-- Main Content -->

@@ -4,7 +4,7 @@
 
 @section('content')
     <!-- Hero Section -->
-    <div class="hero-section" style="background-image: url('{{ asset('images/purpleFlowers.png') }}'); height: 100vh; background-size: cover; background-position: center;">
+    <div id="hero-section" class="hero-section" style="background-image: url('{{ asset('images/flowersPinkRed.png') }}'); height: 100vh; background-size: cover; background-position: center; transition: opacity 1s ease-in-out;">
         <div class="overlay" style="background-color: rgba(0,0,0,0); height: 100%; display: flex; align-items: center;">
             <div class="container text-white text-center">
                 <h1>Ignite Your Inner Spark</h1>
@@ -33,7 +33,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>Thank you for visiting Midreshet Adina. We are excited to help you on your spiritual journey. Explore our Shiurim and connect with our community.</p>
+                    <p>This is a placeholder for a link to another page </p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -44,31 +44,39 @@
     </div>
 @endsection
 
-
 <style>
-/* Hide the button initially */
-.animated-button {
-opacity: 0;
-transform: translateY(100px); /* Start off below the viewport */
-transition: opacity 1s ease-out, transform 1s ease-out;
-}
+    /* Hide the button initially */
+    .animated-button {
+        opacity: 0;
+        transform: translateY(100px); /* Start off below the viewport */
+        transition: opacity 1s ease-out, transform 1s ease-out;
+    }
 
-/* Animation keyframes for gliding */
-@keyframes glideIn {
-from {
-opacity: 0;
-transform: translateY(100px); /* Start position */
-}
-to {
-opacity: 1;
-transform: translateY(0); /* End position */
-}
-}
+    /* Animation keyframes for gliding */
+    @keyframes glideIn {
+        from {
+            opacity: 0;
+            transform: translateY(100px); /* Start position */
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0); /* End position */
+        }
+    }
 
-/* Apply animation */
-.show-button {
-animation: glideIn 2.5s ease-out forwards;
-}
+    /* Apply animation */
+    .show-button {
+        animation: glideIn 2.5s ease-out forwards;
+    }
+
+    /* Fade transition for the hero section */
+    .hero-section {
+        opacity: 1;
+        transition: opacity 1s ease-in-out;
+    }
+    .hero-section.fade-out {
+        opacity: 0;
+    }
 </style>
 
 <script>
@@ -76,6 +84,27 @@ animation: glideIn 2.5s ease-out forwards;
         var button = document.querySelector('.animated-button');
         setTimeout(function() {
             button.classList.add('show-button');
-        }, 500); // Delay before button appears, adjust as needed
+        }, 500); // Delay before button appears
+
+        // array for images in background
+        var heroSection = document.getElementById('hero-section');
+        var images = [
+            '{{ asset('images/flowersPinkRed.png') }}', // First image
+            '{{ asset('images/Kotel.png') }}',   // Second image
+            '{{ asset('images/purpleFlowers.png') }}'     // Third image
+        ];
+        var currentIndex = 0;
+
+        //function to fade out homescreen pic
+        setInterval(function() {
+            heroSection.classList.add('fade-out');
+
+            // Change the image after fading out
+            setTimeout(function() {
+                currentIndex = (currentIndex + 1) % images.length;
+                heroSection.style.backgroundImage = 'url(' + images[currentIndex] + ')';
+                heroSection.classList.remove('fade-out');
+            }, 1000); // Wait for fade out before changing the image
+        }, 5000); // Change image every 5 seconds
     });
 </script>

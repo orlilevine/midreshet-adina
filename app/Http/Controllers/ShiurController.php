@@ -16,26 +16,24 @@ class ShiurController extends Controller
 
     public function mrsShiraSmiles()
     {
-        return view('shiurs.smiles');
+        $series = Series::where('speaker_id', 1)->get();
+
+        return view('shiurs.smiles', compact('series'));
     }
+
 
     public function mrsDinaSchoonmaker()
     {
-// Assuming 'speaker_id' for Mrs. Dina Schoonmaker is 2 (replace with actual ID)
         $series = Series::where('speaker_id', 2)->get();
 
         return view('shiurs.schoonmaker', compact('series'));    }
 
     public function rabbiAviSlansky()
     {
-        return view('shiurs.slansky');
+        $series = Series::where('speaker_id', 3)->get();
+
+        return view('shiurs.slansky', compact('series'));
     }
 
-    public function showSeries($id)
-    {
-        $series = Series::findOrFail($id);
-        $shiurs = Shiur::where('series_id', $id)->get();
 
-        return view('series.show', compact('series', 'shiurs'));
-    }
 }
