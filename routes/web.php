@@ -6,9 +6,11 @@ use App\Http\Controllers\ShiurController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\SeriesController;
 use App\Http\Controllers\SpeakerController;
+use App\Http\Controllers\UserController;
 
 
-Route::get('/', function () {return view('welcome');});
+
+Route::redirect('/', '/home');
 
 Route::get('/dashboard', function () {return view('dashboard');})->name('dashboard');
 
@@ -42,10 +44,11 @@ Route::get('/series/{id}', [SeriesController::class, 'showSeries'])->name('serie
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/shiurs/create', [ShiurController::class, 'create'])->name('shiur.create');
     Route::post('/admin/shiurs', [ShiurController::class, 'store'])->name('shiur.store');
-    // Other admin routes
+    Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard')->middleware('admin');
 });
 
-Route::get('/user/purchases', [UserController::class, 'purchases'])->name('user.purchases');
+Route::get('/purchased-series', [UserController::class, 'purchases'])->name('user.purchases');
+Route::get('/user/series/{id}', [UserController::class, 'showSeries'])->name('user.series.show');
 
 
 require __DIR__.'/auth.php';

@@ -36,6 +36,19 @@
             color: #E6E6FA !important; /* Light Lavender text on hover */
         }
 
+        /* Custom Styling for Login/Register Links */
+        .nav-link.login, .nav-link.register {
+            background-color: #708090; /* Slate gray background */
+            color: white !important; /* White text */
+            border-radius: 5px; /* Rounded corners */
+            font-weight: bold;
+            font-size: 0.8rem; /* Smaller font size */
+            padding: 5px 10px; /* Smaller padding for more compact buttons */
+        }
+        .nav-link.login:hover, .nav-link.register:hover {
+            background-color: #5A5F60; /* Darker shade of slate gray on hover */
+        }
+
         /* Full-width purple title section */
         .full-width-title {
             background-color: #4B0082; /* Dark purple */
@@ -69,7 +82,7 @@
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+    <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
         <ul class="navbar-nav mx-auto">
             <li class="nav-item"><a class="nav-link" href="{{ route('home') }}">Home</a></li>
             <li class="nav-item"><a class="nav-link" href="{{ route('about') }}">About Us</a></li>
@@ -86,6 +99,21 @@
             <li class="nav-item"><a class="nav-link" href="{{ route('gallery') }}">Gallery</a></li>
             <li class="nav-item"><a class="nav-link" href="{{ route('contact') }}">Contact Us</a></li>
         </ul>
+        <ul class="navbar-nav">
+            @guest
+                <li class="nav-item"><a class="nav-link login" href="{{ route('login') }}">Login</a></li>
+                <li class="nav-item"><a class="nav-link register" href="{{ route('register') }}">Register</a></li>
+            @else
+                @if (Auth::user()->isAdmin())
+                    <li class="nav-item"><a class="nav-link" href="{{ route('admin.dashboard') }}">Admin Area</a></li>
+                @endif
+                <li class="nav-item"><a class="nav-link" href="{{ route('user.purchases') }}">My Shiurim</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+            @endguest
+        </ul>
     </div>
 </nav>
 
@@ -95,7 +123,6 @@
         <h1>@yield('title')</h1>
     </div>
 @endif
-
 
 <!-- Main Content -->
 <main class="container my-5">
