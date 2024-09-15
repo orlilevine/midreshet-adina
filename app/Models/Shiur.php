@@ -13,6 +13,7 @@ class Shiur extends Model
         return $this->belongsTo(Series::class);
     }
 
+
     public function purchases()
     {
         return $this->hasMany(Purchase::class);

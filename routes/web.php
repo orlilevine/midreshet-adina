@@ -24,8 +24,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/series/{series_id}/shiur/{shiur_number}', [ShiurController::class, 'show'])->name('shiurs.show');
-Route::get('/shiurim/{id?}', [ShiurController::class, 'index'])->name('shiurs.index');
+Route::get('/series/{seriesId}/shiur/{shiurId}', [ShiurController::class, 'show'])->name('shiur.show');
 
 Route::get('/purchase/{shiur_id}', [PurchaseController::class, 'create'])->name('purchase');
 

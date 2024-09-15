@@ -14,13 +14,14 @@
     </div>
 
     <!-- Buttons for each Shiur -->
-    <div style="text-align: center; margin-bottom: 20px;">
+    <div style="text-align: center;">
+        <p>{{ $series->description }}</p>
+
         @for ($i = 1; $i <= $series->number_of_shiurs; $i++)
-            <a href="{{ route('shiurs.show', ['series_id' => $series->id, 'shiur_number' => $i]) }}" class="btn btn-primary" style="margin: 5px;">
-                Shiur #{{ $i }}
-            </a>
+            <a href="{{ route('shiurs.index', ['id' => $i]) }}" style="margin: 5px;">Shiur #{{ $i }}</a>
         @endfor
     </div>
+
 
     <!-- Shiur List -->
     <div class="shiur-container">

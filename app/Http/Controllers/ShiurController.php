@@ -9,17 +9,16 @@ use App\Models\Series;
 class ShiurController extends Controller
 {
 
-    public function index($id = null)
+    public function show($seriesId, $shiurId)
     {
-        // If an ID is provided, fetch that specific shiur
-        if ($id) {
-            $shiur = Shiur::findOrFail($id);
-            return view('shiurs.index', compact('shiur'));
-        }
+        // Retrieve the series by its ID
+        $series = Series::findOrFail($seriesId);
 
-        // If no ID is provided, fetch all shiurs
-        $shiurs = Shiur::all();
-        return view('shiurs.index', compact('shiurs'));
+        // Retrieve the shiur by its ID
+        $shiur = Shiur::where('id', $shiurId)->where('series_id', $seriesId)->firstOrFail();
+
+        // Return the view with the shiur and series data
+        return view('shiurs.show', compact('shiur', 'series'));
     }
 
 
