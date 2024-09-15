@@ -5,10 +5,10 @@
 @section('content')
     <div class="container">
         <div class="series-container">
-            @foreach ($series as $series)
+            @foreach ($series as $series=)
                 <div class="series-box">
-                    <a href="{{ route('series.show', ['id' => $series->id]) }}">
-                        <img src="{{ asset($series->image_path) }}" alt="{{ $series->title }} Cover" style="width: 100%; height: auto;">
+                    <a href="{{ route('series.show', ['id' => $serie->id]) }}">
+                        <img src="{{ asset($serie->image_path) }}" alt="{{ $serie->title }} Cover" style="width: 100%; height: auto;">
                     </a>
                 </div>
             @endforeach

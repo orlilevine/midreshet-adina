@@ -1,10 +1,15 @@
 @extends('layouts.app')
 
-@section('title', $series->title)
+@section('title', $series->title . ' | ' . $series->speaker->full_name)
 
 @section('content')
-    <h1>{{ $series->title }}</h1>
+    <div style="text-align: center; margin-bottom: 20px;">
+        <img src="{{ asset($series->image_path) }}" alt="{{ $series->title }} Cover" style="width: 20%; height: auto; border-radius: 10px;">
+    </div>
+
+    <div style="text-align: center;">
     <p>{{ $series->description }}</p>
+    </div>
 
     <div class="shiur-container">
         @foreach ($shiurs as $shiur)
