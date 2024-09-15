@@ -8,11 +8,20 @@ use App\Models\Series;
 
 class ShiurController extends Controller
 {
-    public function index()
+    public function show($id)
     {
-        $shiurs = Shiur::all();
-        return view('shiurs.index', compact('shiurs'));
+        // Find the series by ID
+        $series = Series::findOrFail($id);
+
+        // Retrieve all shiurs related to this series
+        $shiurs = Shiur::where('series_id', $id)->get();
+
+        // Pass both series and shiurs to the view
+        return view('series.show', compact('series', 'shiurs'));
     }
+
+
+
 
     public function mrsShiraSmiles()
     {
