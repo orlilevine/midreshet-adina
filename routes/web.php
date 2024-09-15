@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ShiurController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\SeriesController;
+use App\Http\Controllers\SpeakerController;
 
 
 Route::get('/', function () {return view('welcome');});
@@ -24,6 +25,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/series/{series_id}/shiur/{shiur_number}', [ShiurController::class, 'show'])->name('shiurs.show');
+Route::get('/shiurim/{id?}', [ShiurController::class, 'index'])->name('shiurs.index');
 
 Route::get('/purchase/{shiur_id}', [PurchaseController::class, 'create'])->name('purchase');
 
@@ -32,9 +34,9 @@ Route::get('/gallery', function () {return view('gallery');})->name('gallery');
 
 Route::get('/contact', function () {return view('contact');})->name('contact');
 
-Route::get('/shiurim/mrs-shira-smiles', [ShiurController::class, 'mrsShiraSmiles'])->name('shiurs.smiles');
-Route::get('/shiurim/mrs-dina-schoonmaker', [ShiurController::class, 'mrsDinaSchoonmaker'])->name('shiurs.schoonmaker');
-Route::get('/shiurim/rabbi-avi-slansky', [ShiurController::class, 'rabbiAviSlansky'])->name('shiurs.slansky');
+Route::get('/speakers/mrs-shira-smiles', [SpeakerController::class, 'mrsShiraSmiles'])->name('speakers.smiles');
+Route::get('/speakers/mrs-dina-schoonmaker', [SpeakerController::class, 'mrsDinaSchoonmaker'])->name('speakers.schoonmaker');
+Route::get('/speakers/rabbi-avi-slansky', [SpeakerController::class, 'rabbiAviSlansky'])->name('speakers.slansky');
 
 Route::get('/series/{id}', [SeriesController::class, 'showSeries'])->name('series.show');
 

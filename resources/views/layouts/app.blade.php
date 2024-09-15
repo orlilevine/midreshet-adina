@@ -78,9 +78,9 @@
                     Shiurim
                 </a>
                 <div class="dropdown-menu" aria-labelledby="shiursDropdown">
-                    <a class="dropdown-item" href="{{ route('shiurs.smiles') }}">Mrs. Shira Smiles</a>
-                    <a class="dropdown-item" href="{{ route('shiurs.schoonmaker') }}">Mrs. Dina Schoonmaker</a>
-                    <a class="dropdown-item" href="{{ route('shiurs.slansky') }}">Rabbi Avi Slansky</a>
+                    <a class="dropdown-item" href="{{ route('speakers.smiles') }}">Mrs. Shira Smiles</a>
+                    <a class="dropdown-item" href="{{ route('speakers.schoonmaker') }}">Mrs. Dina Schoonmaker</a>
+                    <a class="dropdown-item" href="{{ route('speakers.slansky') }}">Rabbi Avi Slansky</a>
                 </div>
             </li>
             <li class="nav-item"><a class="nav-link" href="{{ route('gallery') }}">Gallery</a></li>

@@ -8,41 +8,22 @@ use App\Models\Series;
 
 class ShiurController extends Controller
 {
-    public function show($id)
+
+    public function index($id = null)
     {
-        // Find the series by ID
-        $series = Series::findOrFail($id);
+        // If an ID is provided, fetch that specific shiur
+        if ($id) {
+            $shiur = Shiur::findOrFail($id);
+            return view('shiurs.index', compact('shiur'));
+        }
 
-        // Retrieve all shiurs related to this series
-        $shiurs = Shiur::where('series_id', $id)->get();
-
-        // Pass both series and shiurs to the view
-        return view('series.show', compact('series', 'shiurs'));
+        // If no ID is provided, fetch all shiurs
+        $shiurs = Shiur::all();
+        return view('shiurs.index', compact('shiurs'));
     }
 
 
 
-
-    public function mrsShiraSmiles()
-    {
-        $series = Series::where('speaker_id', 1)->get();
-
-        return view('shiurs.smiles', compact('series'));
-    }
-
-
-    public function mrsDinaSchoonmaker()
-    {
-        $series = Series::where('speaker_id', 2)->get();
-
-        return view('shiurs.schoonmaker', compact('series'));    }
-
-    public function rabbiAviSlansky()
-    {
-        $series = Series::where('speaker_id', 3)->get();
-
-        return view('shiurs.slansky', compact('series'));
-    }
 
 
 }

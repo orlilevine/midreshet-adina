@@ -16,4 +16,5 @@ class SeriesController extends Controller
 
         return view('series.show', compact('series', 'shiurs'));
     }
+
 }
