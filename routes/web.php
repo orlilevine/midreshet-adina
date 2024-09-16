@@ -7,6 +7,7 @@ use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\SeriesController;
 use App\Http\Controllers\SpeakerController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminController;
 
 
 
@@ -42,10 +43,20 @@ Route::get('/speakers/rabbi-avi-slansky', [SpeakerController::class, 'rabbiAviSl
 Route::get('/series/{id}', [SeriesController::class, 'showSeries'])->name('series.show');
 
 Route::middleware(['auth', 'admin'])->group(function () {
-    Route::get('/admin/shiurs/create', [ShiurController::class, 'create'])->name('shiur.create');
-    Route::post('/admin/shiurs', [ShiurController::class, 'store'])->name('shiur.store');
-    Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard')->middleware('admin');
+    Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+
+    Route::get('/admin/shiur/create', [AdminController::class, 'createShiur'])->name('admin.shiur.create');
+    Route::post('/admin/shiurs', [AdminController::class, 'storeShiur'])->name('shiur.store');
+
+    Route::get('/admin/series/create', [AdminController::class, 'createSeries'])->name('admin.series.create');
+    Route::post('/admin/series/store', [AdminController::class, 'storeSeries'])->name('admin.series.store');
+
+    Route::get('/admin/speaker/create', [AdminController::class, 'createSpeaker'])->name('admin.speaker.create');
+    Route::post('/admin/speaker/store', [AdminController::class, 'storeSpeaker'])->name('admin.speaker.store');
 });
+
+
+
 
 Route::get('/purchased-series', [UserController::class, 'purchases'])->name('user.purchases');
 Route::get('/user/series/{id}', [UserController::class, 'showSeries'])->name('user.series.show');

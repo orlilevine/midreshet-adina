@@ -7,8 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Series extends Model
 {
-    protected $fillable = ['title', 'description', 'image_path', 'number_of_shiurs', 'speaker_id'];
-
+    protected $fillable = [
+        'title',
+        'description',
+        'image_path',
+        'speaker_id',
+        'zoom_link',
+        'zoom_id',
+        'zoom_password',
+    ];
     public function speaker()
     {
         return $this->belongsTo(Speaker::class);

@@ -5,7 +5,7 @@
 @section('content')
     <!-- Series Image -->
     <div style="text-align: center; margin-bottom: 20px;">
-        <img src="{{ asset($series->image_path) }}" alt="{{ $series->title }} Cover" style="width: 20%; height: auto; border-radius: 10px;">
+        <img src="{{ asset('storage/' . $series->image_path) }}" alt="{{ $series->title }} Cover" style="width: 21%; height: auto;">
     </div>
 
     <!-- Series Description -->

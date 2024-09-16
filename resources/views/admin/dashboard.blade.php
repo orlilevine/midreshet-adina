@@ -1,16 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-</head>
-<body>
-<div class="container">
-    <h1>Welcome to the Admin Dashboard</h1>
-    <p>This is the admin dashboard. You can manage the application from here.</p>
-</div>
-</body>
-</html>
+@extends('layouts.app')
 
+@section('title', 'Admin Dashboard')
+
+@section('content')
+    <div class="container">
+
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        <div class="row">
+            <div class="col-md-12 mb-3">
+                <a href="{{ route('admin.series.create') }}" class="btn btn-block" style="background-color: slategray; color: white;">Create Series</a>
+            </div>
+            <div class="col-md-12 mb-3">
+                <a href="{{ route('admin.shiur.create') }}" class="btn btn-block" style="background-color: slategray; color: white;">Create Shiur</a>
+            </div>
+            <div class="col-md-12 mb-3">
+                <a href="{{ route('admin.speaker.create') }}" class="btn btn-block" style="background-color: slategray; color: white;">Create Speaker</a>
+            </div>
+        </div>
+
+    </div>
+@endsection

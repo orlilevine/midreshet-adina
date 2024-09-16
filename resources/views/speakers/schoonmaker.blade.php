@@ -8,7 +8,7 @@
             @foreach ($series as $serie)
                 <div class="series-box">
                     <a href="{{ route('series.show', ['id' => $serie->id]) }}">
-                        <img src="{{ asset($serie->image_path) }}" alt="{{ $serie->title }} Cover" style="width: 100%; height: auto;">
+                        <img src="{{ asset('storage/' . $serie->image_path) }}" alt="{{ $serie->title }} Cover" style="width: 100%; height: auto;">
                     </a>
                 </div>
             @endforeach
