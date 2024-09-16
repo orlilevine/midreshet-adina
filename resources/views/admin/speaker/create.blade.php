@@ -4,7 +4,6 @@
 
 @section('content')
     <div class="container">
-        <h1>Create Speaker</h1>
 
         @if(session('success'))
             <div class="alert alert-success">

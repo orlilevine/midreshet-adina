@@ -15,50 +15,42 @@ class AdminController extends Controller
     }
     public function createShiur()
     {
-        // Retrieve all series to populate the dropdown
+        // Retrieve all speakers to populate the dropdown
+        $speakers = Speaker::all();
+
+        // Retrieve all series to populate the series dropdown
         $series = Series::all();
 
-        // Pass the series to the view
-        return view('admin.shiur.create', compact('series'));
+        // Pass the speakers and series to the view
+        return view('admin.shiur.create', compact('speakers', 'series'));
     }
+
 
 
     public function storeShiur(Request $request)
     {
-        // Validate the form data, including the files
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
             'series_id' => 'required|exists:series,id',
-            'recording' => 'nullable|file|mimes:mp3,wav|max:1024000000', // max size in KB (100MB)
+            'recording' => 'nullable|file|mimes:mp3,wav|max:1024000000',
             'shiur_date' => 'required|date',
-            'series_image' => 'nullable|image|mimes:jpeg,png,jpg,gif', // Validate image file
         ]);
 
-        // Create the Shiur
         $shiur = new Shiur();
         $shiur->title = $validated['title'];
         $shiur->description = $validated['description'] ?? null;
         $shiur->series_id = $validated['series_id'];
-        $shiur->shiur_date = $validated['shiur_date']; // Store the date
+        $shiur->shiur_date = $validated['shiur_date'];
 
-        // Handle the recording file upload
         if ($request->hasFile('recording')) {
             $filePath = $request->file('recording')->store('recordings', 'public');
             $shiur->recording_path = $filePath;
         }
 
-        // Handle the series image upload
-        if ($request->hasFile('series_image')) {
-            $imagePath = $request->file('series_image')->store('series_images', 'public');
-            $shiur->series->image_path = $imagePath; // Assuming series image is saved in the `series` table
-            $shiur->series->save(); // Save the updated series with the new image path
-        }
 
-        // Save the Shiur
         $shiur->save();
 
-        // Redirect to the appropriate page
         return redirect()->route('admin.dashboard')->with('success', 'Shiur created successfully.');
     }
 
@@ -138,4 +130,17 @@ class AdminController extends Controller
 
         return redirect()->route('admin.dashboard')->with('success', 'Speaker created successfully.');
     }
+
+    //fetch series is for creating shiur page - to populate series dropdown from selected speaker
+    public function fetchSeries(Request $request)
+    {
+        $speakerId = $request->input('speaker_id');
+        if ($speakerId) {
+            $series = Series::where('speaker_id', $speakerId)->get();
+            return response()->json(['series' => $series]);
+        }
+        return response()->json(['series' => []]);
+    }
+
+
 }

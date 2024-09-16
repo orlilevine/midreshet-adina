@@ -53,6 +53,9 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
     Route::get('/admin/speaker/create', [AdminController::class, 'createSpeaker'])->name('admin.speaker.create');
     Route::post('/admin/speaker/store', [AdminController::class, 'storeSpeaker'])->name('admin.speaker.store');
+
+    Route::get('/fetch-series', [AdminController::class, 'fetchSeries'])->name('fetch.series');
+
 });
 
 
