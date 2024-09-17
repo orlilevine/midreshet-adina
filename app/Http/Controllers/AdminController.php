@@ -5,6 +5,8 @@ use App\Models\Series;
 use App\Models\Shiur;
 use App\Models\Speaker;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 
 class AdminController extends Controller
 {
@@ -52,6 +54,20 @@ class AdminController extends Controller
         $shiur->save();
 
         return redirect()->route('admin.dashboard')->with('success', 'Shiur created successfully.');
+    }
+    public function getSpeakerShiurStats()
+    {
+        $speakerStats = DB::table('purchases')
+            ->join('shiurs', 'purchases.shiur_id', '=', 'shiurs.id')
+            ->join('series', 'shiurs.series_id', '=', 'series.id')
+            ->join('speakers', 'series.speaker_id', '=', 'speakers.id')
+            ->join('users', 'purchases.user_id', '=', 'users.id')
+            ->select('users.name as user_name', 'speakers.full_name as speaker_name', DB::raw('COUNT(purchases.id) as total_shiurs'))
+            ->groupBy('users.name', 'speakers.full_name')
+            ->orderBy('speakers.full_name')
+            ->get();
+
+        return view('admin.speakerStats', compact('speakerStats'));
     }
 
     public function createSeries()
