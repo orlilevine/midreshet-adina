@@ -3,7 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ShiurController;
-use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\SeriesController;
 use App\Http\Controllers\SpeakerController;
 use App\Http\Controllers\UserController;
@@ -28,9 +28,6 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/series/{seriesId}/shiur/{shiurId}', [ShiurController::class, 'show'])->name('shiur.show');
-
-Route::get('/purchase/{shiur_id}', [PurchaseController::class, 'create'])->name('purchase');
-
 
 Route::get('/gallery', function () {return view('gallery');})->name('gallery');
 
@@ -59,10 +56,11 @@ Route::middleware(['auth', 'admin'])->group(function () {
 });
 
 
-
-
 Route::get('/purchased-series', [UserController::class, 'purchases'])->name('user.purchases');
 Route::get('/user/series/{id}', [UserController::class, 'showSeries'])->name('user.series.show');
 
+Route::get('/purchase/{shiurId}', [PaymentController::class, 'createCheckoutSession'])->name('payment.createSession');
+Route::get('/payment/success', [PaymentController::class, 'paymentSuccess'])->name('payments.success');
+Route::get('/payment/cancel', [PaymentController::class, 'paymentCancel'])->name('payments.cancel');
 
 require __DIR__.'/auth.php';

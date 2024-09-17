@@ -4,9 +4,16 @@
 
 @section('content')
     <div style="text-align: center;">
-        <h1>{{ $shiur->title }}</h1>
         <p>{{ $shiur->description }}</p>
         <p>Price: ${{ $shiur->price }}</p>
-        <a href="{{ route('purchase', ['shiur_id' => $shiur->id]) }}">Purchase & Download</a>
+        <p>Date: {{ \Carbon\Carbon::parse($shiur->shiur_date)->format('F j, Y') }}</p>
+        <div style="text-align: center; margin-bottom: 20px;">
+            <!-- Form to initiate purchase -->
+            <form action="{{ route('payment.createSession', ['shiurId' => $shiur->id]) }}" method="GET">
+                <button type="submit" style="padding: 10px 20px; background-color: #007bff; color: white; border: none; cursor: pointer; border-radius: 5px;">
+                    Purchase this Shiur
+                </button>
+            </form>
+        </div>
     </div>
 @endsection
