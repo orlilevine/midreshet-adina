@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Stripe\Stripe;
 use Stripe\Checkout\Session;
 use App\Models\Shiur;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Purchase;
 
 class PaymentController extends Controller
 {
@@ -29,7 +31,7 @@ class PaymentController extends Controller
                 'quantity' => 1,
             ]],
             'mode' => 'payment',
-            'success_url' => route('payments.success'),
+            'success_url' => route('payments.success', ['shiurId' => $shiur->id]),
             'cancel_url' => route('payments.cancel'),
         ]);
 
@@ -37,10 +39,24 @@ class PaymentController extends Controller
     }
 
     // Payment success
-    public function paymentSuccess()
+    public function paymentSuccess($shiurId)
     {
+        // Retrieve the Shiur that was purchased
+        $shiur = Shiur::findOrFail($shiurId);
+
+        // Get the authenticated user's ID
+        $userId = Auth::id();
+
+        // Save the purchase in the purchases table
+        Purchase::create([
+            'user_id' => $userId,
+            'shiur_id' => $shiur->id,
+            'amount' => $shiur->price, // Assuming the amount is from the Shiur price
+        ]);
+
         return view('payments.success');
     }
+
 
     // Payment canceled
     public function paymentCancel()

@@ -60,7 +60,7 @@ Route::get('/purchased-series', [UserController::class, 'purchases'])->name('use
 Route::get('/user/series/{id}', [UserController::class, 'showSeries'])->name('user.series.show');
 
 Route::get('/purchase/{shiurId}', [PaymentController::class, 'createCheckoutSession'])->name('payment.createSession');
-Route::get('/payment/success', [PaymentController::class, 'paymentSuccess'])->name('payments.success');
+Route::get('/payment/success/{shiurId}', [PaymentController::class, 'paymentSuccess'])->name('payments.success');
 Route::get('/payment/cancel', [PaymentController::class, 'paymentCancel'])->name('payments.cancel');
 
 require __DIR__.'/auth.php';

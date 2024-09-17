@@ -1,20 +1,34 @@
 @extends('layouts.app')
 
-@section('title', 'Your Purchased Shiurim')
+@section('title', 'Your Purchased Shiurim | ' . $series->title)
 
 @section('content')
     <div class="container">
         <div class="row">
             @foreach($series->shiurs as $shiur)
-                <div>
-                    <h5>{{ $shiur->title }}</h5>
+                <div style="border: 1px solid black; border-radius: 8px; padding: 15px; margin-bottom: 20px;">
+                    <h5 style="font-weight: bold;">{{ $shiur->title }}</h5>
+                    <br>
                     <p>{{ $shiur->description }}</p>
+                    <p>{{ \Carbon\Carbon::parse($shiur->shiur_date)->format('F j, Y') }}</p>
+
+                    @if($series->zoom_link)
+                        <p><strong>Zoom Link:</strong> <a href="{{ $series->zoom_link }}" target="_blank">{{ $series->zoom_link }}</a></p>
+                    @endif
+
+                    @if($series->zoom_id)
+                        <p><strong>Zoom ID:</strong> {{ $series->zoom_id }}</p>
+                    @endif
+
+                    @if($series->zoom_password)
+                        <p><strong>Zoom Password:</strong> {{ $series->zoom_password }}</p>
+                    @endif
+
                     <audio controls>
                         <source src="{{ asset($shiur->recording_path) }}" type="audio/mpeg">
                         Your browser does not support the audio element.
                     </audio>
                     <br>
-                    <!-- Move the button below the audio element and apply inline styling -->
                     <a href="{{ asset($shiur->recording_path) }}" download class="btn" style="background-color: slategray; color: white; margin-top: 10px; display: inline-block; padding: 5px 10px; text-align: center; text-decoration: none;">Download</a>
                 </div>
             @endforeach
