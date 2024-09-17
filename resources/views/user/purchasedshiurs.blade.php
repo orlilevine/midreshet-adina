@@ -6,8 +6,8 @@
     <div class="container">
         <div class="row">
             @foreach($series->shiurs as $shiur)
-                <div style="border: 1px solid black; border-radius: 8px; padding: 15px; margin-bottom: 20px;">
-                    <h5 style="font-weight: bold;">{{ $shiur->title }}</h5>
+                <div style="border: 1px solid black; border-radius: 8px; padding: 15px; margin: 0 10px 20px 10px; box-sizing: border-box; font-size: 12px;">
+                    <h5 style="font-weight: bold; font-size: 15px;">{{ $shiur->title }}</h5>
                     <br>
                     <p>{{ $shiur->description }}</p>
                     <p>{{ \Carbon\Carbon::parse($shiur->shiur_date)->format('F j, Y') }}</p>
