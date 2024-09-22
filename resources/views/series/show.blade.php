@@ -30,7 +30,7 @@
                 <li style="margin: 10px 0;">
                     <a href="{{ route('shiur.show', ['seriesId' => $series->id, 'shiurId' => $shiurItem->id]) }}"
                        style="display: inline-block; padding: 10px 20px; font-size: 16px; color: white; background-color: lightslategray; text-decoration: none; border-radius: 5px; transition: transform 0.3s, box-shadow 0.3s;">
-                        Shiur #{{ $shiurItem->shiur_number_in_series }} - {{ $shiurItem->title }}
+                        {{ $shiurItem->title }}
                     </a>
                 </li>
             @endforeach
