@@ -21,9 +21,8 @@
             <div class="col-md-12 mb-3">
                 <a href="{{ route('admin.speaker.create') }}" class="btn btn-block" style="background-color: slategray; color: white;">Create Speaker</a>
             </div>
-            <!-- New button for Speaker Shiur Stats -->
             <div class="col-md-12 mb-3">
-                <a href="{{ route('admin.speakerStats') }}" class="btn btn-block" style="background-color: slategray; color: white;">View Speaker Shiur Stats</a>
+                <a href="{{ route('admin.shiurStats') }}" class="btn btn-block" style="background-color: slategray; color: white;">View Shiur Stats</a>
             </div>
         </div>
 

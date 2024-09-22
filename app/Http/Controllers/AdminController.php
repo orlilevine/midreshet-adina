@@ -6,6 +6,8 @@ use App\Models\Shiur;
 use App\Models\Speaker;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
+
 
 
 class AdminController extends Controller
@@ -54,20 +56,6 @@ class AdminController extends Controller
         $shiur->save();
 
         return redirect()->route('admin.dashboard')->with('success', 'Shiur created successfully.');
-    }
-    public function getSpeakerShiurStats()
-    {
-        $speakerStats = DB::table('purchases')
-            ->join('shiurs', 'purchases.shiur_id', '=', 'shiurs.id')
-            ->join('series', 'shiurs.series_id', '=', 'series.id')
-            ->join('speakers', 'series.speaker_id', '=', 'speakers.id')
-            ->join('users', 'purchases.user_id', '=', 'users.id')
-            ->select('users.name as user_name', 'speakers.full_name as speaker_name', DB::raw('COUNT(purchases.id) as total_shiurs'))
-            ->groupBy('users.name', 'speakers.full_name')
-            ->orderBy('speakers.full_name')
-            ->get();
-
-        return view('admin.speakerStats', compact('speakerStats'));
     }
 
     public function createSeries()
@@ -156,6 +144,33 @@ class AdminController extends Controller
             return response()->json(['series' => $series]);
         }
         return response()->json(['series' => []]);
+    }
+
+    public function showShiurStats()
+    {
+        // Retrieve all Shiurim to populate the dropdown
+        $shiurim = Shiur::all();
+
+        return view('admin.shiurStats', compact('shiurim'));
+    }
+
+    public function getShiurStats($shiur_id)
+    {
+        // Ensure shiur_id is an integer
+        $shiur_id = (int) $shiur_id;
+
+        // Fetch all purchases for the selected Shiur and format the created_at date
+        $purchases = DB::table('purchases')
+            ->join('users', 'purchases.user_id', '=', 'users.id')
+            ->where('purchases.shiur_id', $shiur_id)
+            ->select('users.name', 'purchases.created_at')
+            ->get()
+            ->map(function($purchase) {
+                $purchase->created_at = Carbon::parse($purchase->created_at)->format('F j, Y g:i A');
+                return $purchase;
+            });
+
+        return response()->json($purchases);
     }
 
 

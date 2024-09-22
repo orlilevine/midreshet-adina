@@ -64,6 +64,6 @@ Route::get('/payment/success/{shiurId}', [PaymentController::class, 'paymentSucc
 Route::get('/payment/cancel', [PaymentController::class, 'paymentCancel'])->name('payments.cancel');
 
 
-Route::get('/admin/speaker-stats', [AdminController::class, 'getSpeakerShiurStats'])->name('admin.speakerStats');
-
+Route::get('/admin/shiur-stats', [AdminController::class, 'showShiurStats'])->name('admin.shiurStats');
+Route::get('/admin/shiur-stats/{shiur_id}', [AdminController::class, 'getShiurStats']);
 require __DIR__.'/auth.php';
