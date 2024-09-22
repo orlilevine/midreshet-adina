@@ -29,7 +29,7 @@
                         Your browser does not support the audio element.
                     </audio>
                     <br>
-                    <a href="{{ asset($shiur->recording_path) }}" download class="btn" style="background-color: slategray; color: white; margin-top: 10px; display: inline-block; padding: 5px 10px; text-align: center; text-decoration: none;">Download</a>
+                    <a href="{{ Storage::url($shiur->recording_path) }}" download class="btn" style="background-color: slategray; color: white; margin-top: 10px; display: inline-block; padding: 5px 10px; text-align: center; text-decoration: none;">Download</a>
                 </div>
             @endforeach
         </div>
