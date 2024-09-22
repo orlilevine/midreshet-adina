@@ -14,7 +14,7 @@ use App\Http\Controllers\HomeController;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 
-Route::get('/dashboard', function () {return view('home');})->name('dashboard');
+Route::get('/dashboard', function () {return view('dashboard');})->name('dashboard');
 
 Route::get('/home',[HomeController::class, 'index'])->name('home');
 
@@ -54,9 +54,11 @@ Route::middleware(['auth', 'admin'])->group(function () {
 Route::get('/purchased-series', [UserController::class, 'purchases'])->name('user.purchases');
 Route::get('/user/series/{id}', [UserController::class, 'showSeries'])->name('user.series.show');
 
-Route::get('/purchase/{shiurId}', [PaymentController::class, 'createCheckoutSession'])->name('payment.createSession');
 Route::get('/payment/success/{shiurId}', [PaymentController::class, 'paymentSuccess'])->name('payments.success');
 Route::get('/payment/cancel', [PaymentController::class, 'paymentCancel'])->name('payments.cancel');
+Route::get('/payment/success/series/{seriesId}', [PaymentController::class, 'paymentSuccessSeries'])->name('payments.success.series');
+Route::get('/purchase/shiur/{shiurId}', [PaymentController::class, 'createCheckoutSessionForShiur'])->name('payment.createSession.shiur');
+Route::get('/purchase/series/{seriesId}', [PaymentController::class, 'createCheckoutSessionForSeries'])->name('payment.createSession.series');
 
 
 require __DIR__.'/auth.php';

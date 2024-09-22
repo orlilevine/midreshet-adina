@@ -14,12 +14,13 @@
     </div>
 
     <div style="text-align: center; margin-bottom: 20px;">
-        <form action="{{ route('payment.createSession', ['shiurId' => $series->id]) }}" method="GET">
+        <form action="{{ route('payment.createSession.series', ['seriesId' => $series->id]) }}" method="GET">
             <button type="submit" style="padding: 10px 20px; background-color: #28a745; color: white; border: none; cursor: pointer; border-radius: 5px;">
                 Purchase Entire Series for ${{ $series->price }}
             </button>
         </form>
     </div>
+
 
 
     <!-- Shiur List -->

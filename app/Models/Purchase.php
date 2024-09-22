@@ -12,8 +12,10 @@ class Purchase extends Model
     protected $fillable = [
         'user_id',
         'shiur_id',
+        'series_id',
         'amount',
     ];
+
     public function shiur()
     {
         return $this->belongsTo(Shiur::class);
@@ -24,4 +26,10 @@ class Purchase extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function series()
+    {
+        return $this->belongsTo(Series::class, 'series_id');
+    }
+
 }

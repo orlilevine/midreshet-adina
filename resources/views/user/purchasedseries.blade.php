@@ -5,7 +5,6 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <p>Add a filter to filter between different speakers</p>
             @if(!$purchasedSeries->isEmpty())
                 @foreach($purchasedSeries as $series)
                     <div class="col-md-4 d-flex flex-column align-items-center mb-4">

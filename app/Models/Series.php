@@ -25,4 +25,10 @@ class Series extends Model
     {
         return $this->hasMany(Shiur::class);
     }
+
+    public function purchases()
+    {
+        return $this->hasMany(Purchase::class, 'series_id');
+    }
+
 }
