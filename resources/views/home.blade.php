@@ -4,81 +4,46 @@
 
 @section('content')
     <!-- Hero Section -->
-    <div id="hero-section" class="hero-section" style="height: 100vh; background-size: cover; background-position: center; transition: opacity 1s ease-in-out;">
-        <div class="overlay" style="background-color: rgba(0,0,0,0); height: 100%; display: flex; align-items: center;">
-            <div class="container text-white text-center">
-                @foreach($slides as $slide)
-                    <div class="slide" style="background-image: url('{{ asset($slide->image_url) }}');">
-                        <h1>{{ $slide->title }}</h1>
-                        <p>{{ $slide->subtitle }}</p>
-                    </div>
-                @endforeach
-                <!-- Button to trigger modal -->
-                <button type="button" class="btn btn-primary mt-3 animated-button" data-toggle="modal" data-target="#welcomeModal">
-                    Click here to grow
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal -->
-    <div class="modal fade" id="welcomeModal" tabindex="-1" role="dialog" aria-labelledby="welcomeModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="welcomeModalLabel">Welcome to Midreshet Adina</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+    <div id="hero-section" class="hero-section">
+        <div class="overlay">
+            @foreach($slides as $slide)
+                <div class="slide" style="background-image: url('{{ asset($slide->image_url) }}');">
+                    <h1 class="text-white">{{ $slide->title }}</h1>
+                    <p class="text-white">{{ $slide->subtitle }}</p>
                 </div>
-                <div class="modal-body">
-                    <p>This is a placeholder for a link to another page </p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <a href="#" class="btn btn-primary">Learn More</a>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
 @endsection
 
 <style>
+    .hero-section {
+        position: relative;
+        height: 100vh; /* Full viewport height */
+        overflow: hidden; /* Prevent overflow */
+    }
+
     .slide {
-        position: absolute;
+        position: absolute; /* Full coverage */
         width: 100%;
         height: 100%;
         background-size: cover;
         background-position: center;
-        display: none;
-        transition: opacity 1s ease-in-out;
+        align-items: center; /* Center text vertically */
+        justify-content: center; /* Center text horizontally */
+        text-align: center; /* Center text alignment */
+        opacity: 0; /* Start with opacity 0 */
+        transform: translateX(100%); /* Start off-screen to the right */
+        transition: opacity 0.5s ease, transform 1.5s ease; /* Longer glide effect */
+        visibility: hidden; /* Hide all slides by default */
     }
 
     .slide.active {
-        display: block;
-        opacity: 1;
+        opacity: 1; /* Make it fully visible */
+        transform: translateX(0); /* Move to original position */
+        visibility: visible; /* Make active slide visible */
     }
 
-    .animated-button {
-        opacity: 0;
-        transform: translateY(100px);
-        transition: opacity 1s ease-out, transform 1s ease-out;
-    }
-
-    .show-button {
-        animation: glideIn 2.5s ease-out forwards;
-    }
-
-    @keyframes glideIn {
-        from {
-            opacity: 0;
-            transform: translateY(100px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
 
 </style>
 
@@ -90,12 +55,18 @@
         // Function to show the next slide
         function showNextSlide() {
             slides[currentIndex].classList.remove('active');
+
+            // Update the index for the next slide
             currentIndex = (currentIndex + 1) % slides.length;
+
+            // Add the active class to the next slide
             slides[currentIndex].classList.add('active');
         }
 
         // Start by showing the first slide
-        slides[currentIndex].classList.add('active');
+        if (slides.length > 0) {
+            slides[currentIndex].classList.add('active');
+        }
 
         // Change slides every 5 seconds
         setInterval(showNextSlide, 5000);
