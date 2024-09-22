@@ -53,7 +53,7 @@
             background-color: #Ff007f;
             color: white;
             text-align: center;
-            padding: 40px 20px;
+            padding: 22px;
             width: 100vw;
             margin-left: calc(-50vw + 50%);
             margin-top: 0;
@@ -117,12 +117,9 @@
     </div>
 </nav>
 
-<!-- Purple Title Section (Dynamic Title) -->
-@if (Route::currentRouteName() !== 'home')
     <div class="full-width-title">
         <h1>@yield('title')</h1>
     </div>
-@endif
 
 <!-- Main Content -->
 <main class="container-fluid my-5">

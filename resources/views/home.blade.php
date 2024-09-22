@@ -4,22 +4,21 @@
 
 @section('content')
     <!-- Hero Section -->
-    <div id="hero-section" class="hero-section" style="background-image: url('{{ asset('images/flowersPinkRed.png') }}'); height: 100vh; background-size: cover; background-position: center; transition: opacity 1s ease-in-out;">
+    <div id="hero-section" class="hero-section" style="height: 100vh; background-size: cover; background-position: center; transition: opacity 1s ease-in-out;">
         <div class="overlay" style="background-color: rgba(0,0,0,0); height: 100%; display: flex; align-items: center;">
             <div class="container text-white text-center">
-                <h1>Ignite Your Inner Spark</h1>
-                <p>Midreshet Adina enriches our community’s spirituality through Shiurim.</p>
+                @foreach($slides as $slide)
+                    <div class="slide" style="background-image: url('{{ asset($slide->image_url) }}');">
+                        <h1>{{ $slide->title }}</h1>
+                        <p>{{ $slide->subtitle }}</p>
+                    </div>
+                @endforeach
                 <!-- Button to trigger modal -->
                 <button type="button" class="btn btn-primary mt-3 animated-button" data-toggle="modal" data-target="#welcomeModal">
                     Click here to grow
                 </button>
             </div>
         </div>
-    </div>
-
-    <!-- Main Content -->
-    <div class="container my-5">
-        <!-- Additional content for the homepage can go here -->
     </div>
 
     <!-- Modal -->
@@ -45,66 +44,60 @@
 @endsection
 
 <style>
-    /* Hide the button initially */
+    .slide {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-position: center;
+        display: none;
+        transition: opacity 1s ease-in-out;
+    }
+
+    .slide.active {
+        display: block;
+        opacity: 1;
+    }
+
     .animated-button {
         opacity: 0;
-        transform: translateY(100px); /* Start off below the viewport */
+        transform: translateY(100px);
         transition: opacity 1s ease-out, transform 1s ease-out;
     }
 
-    /* Animation keyframes for gliding */
-    @keyframes glideIn {
-        from {
-            opacity: 0;
-            transform: translateY(100px); /* Start position */
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0); /* End position */
-        }
-    }
-
-    /* Apply animation */
     .show-button {
         animation: glideIn 2.5s ease-out forwards;
     }
 
-    /* Fade transition for the hero section */
-    .hero-section {
-        opacity: 1;
-        transition: opacity 1s ease-in-out;
+    @keyframes glideIn {
+        from {
+            opacity: 0;
+            transform: translateY(100px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
     }
-    .hero-section.fade-out {
-        opacity: 0;
-    }
+
 </style>
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        var button = document.querySelector('.animated-button');
-        setTimeout(function() {
-            button.classList.add('show-button');
-        }, 500); // Delay before button appears
-
-        // array for images in background
-        var heroSection = document.getElementById('hero-section');
-        var images = [
-            '{{ asset('images/flowersPinkRed.png') }}', // First image
-            '{{ asset('images/Kotel.png') }}',   // Second image
-            '{{ asset('images/purpleFlowers.png') }}'     // Third image
-        ];
+        var slides = document.querySelectorAll('.slide');
         var currentIndex = 0;
 
-        //function to fade out homescreen pic
-        setInterval(function() {
-            heroSection.classList.add('fade-out');
+        // Function to show the next slide
+        function showNextSlide() {
+            slides[currentIndex].classList.remove('active');
+            currentIndex = (currentIndex + 1) % slides.length;
+            slides[currentIndex].classList.add('active');
+        }
 
-            // Change the image after fading out
-            setTimeout(function() {
-                currentIndex = (currentIndex + 1) % images.length;
-                heroSection.style.backgroundImage = 'url(' + images[currentIndex] + ')';
-                heroSection.classList.remove('fade-out');
-            }, 1000); // Wait for fade out before changing the image
-        }, 5000); // Change image every 5 seconds
+        // Start by showing the first slide
+        slides[currentIndex].classList.add('active');
+
+        // Change slides every 5 seconds
+        setInterval(showNextSlide, 5000);
     });
 </script>

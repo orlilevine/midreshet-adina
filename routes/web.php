@@ -8,24 +8,18 @@ use App\Http\Controllers\SeriesController;
 use App\Http\Controllers\SpeakerController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\HomeController;
 
 
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::redirect('/', '/home');
 
 Route::get('/dashboard', function () {return view('home');})->name('dashboard');
 
-Route::get('/home', function () {return view('home');})->name('home');
+Route::get('/home',[HomeController::class, 'index'])->name('home');
 
 
 Route::get('/about', function () {return view('about');})->name('about');
-
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
 
 Route::get('/series/{seriesId}/shiur/{shiurId}', [ShiurController::class, 'show'])->name('shiur.show');
 
@@ -53,8 +47,9 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
     Route::get('/fetch-series', [AdminController::class, 'fetchSeries'])->name('fetch.series');
 
+    Route::get('/admin/shiur-stats', [AdminController::class, 'showShiurStats'])->name('admin.shiurStats');
+    Route::get('/admin/shiur-stats/{shiur_id}', [AdminController::class, 'getShiurStats']);
 });
-
 
 Route::get('/purchased-series', [UserController::class, 'purchases'])->name('user.purchases');
 Route::get('/user/series/{id}', [UserController::class, 'showSeries'])->name('user.series.show');
@@ -64,6 +59,4 @@ Route::get('/payment/success/{shiurId}', [PaymentController::class, 'paymentSucc
 Route::get('/payment/cancel', [PaymentController::class, 'paymentCancel'])->name('payments.cancel');
 
 
-Route::get('/admin/shiur-stats', [AdminController::class, 'showShiurStats'])->name('admin.shiurStats');
-Route::get('/admin/shiur-stats/{shiur_id}', [AdminController::class, 'getShiurStats']);
 require __DIR__.'/auth.php';
