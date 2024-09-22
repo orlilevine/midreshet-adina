@@ -4,7 +4,6 @@
 
 @section('content')
     <div class="container my-5">
-        <h1>Contact Us</h1>
         <p>This is the Contact Us page. You can add contact information and a form here.</p>
 
         <form>
