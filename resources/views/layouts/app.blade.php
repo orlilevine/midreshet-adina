@@ -15,10 +15,10 @@
             padding: 0;
         }
 
-        /* Navbar Styles */
         .navbar {
-            background-color: #B47EE5;
+            background-color: hotpink;
         }
+
         .navbar-nav {
             flex-direction: row;
             justify-content: center; /* Center the items horizontally */
@@ -49,16 +49,16 @@
             background-color: #5A5F60; /* Darker shade of slate gray on hover */
         }
 
-        /* Full-width purple title section */
         .full-width-title {
-            background-color: #4B0082; /* Dark purple */
+            background-color: #Ff007f;
             color: white;
             text-align: center;
             padding: 40px 20px;
-            width: 100vw; /* Full viewport width */
-            margin-left: calc(-50vw + 50%); /* Extend the background beyond the container */
+            width: 100vw;
+            margin-left: calc(-50vw + 50%);
             margin-top: 0;
         }
+
 
         .full-width-title h1 {
             margin: 0;
