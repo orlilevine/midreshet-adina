@@ -13,7 +13,7 @@ use App\Http\Controllers\AdminController;
 
 Route::redirect('/', '/home');
 
-Route::get('/dashboard', function () {return view('dashboard');})->name('dashboard');
+Route::get('/dashboard', function () {return view('home');})->name('dashboard');
 
 Route::get('/home', function () {return view('home');})->name('home');
 

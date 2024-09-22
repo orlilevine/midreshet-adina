@@ -25,7 +25,7 @@
                     @endif
 
                     <audio controls>
-                        <source src="{{ asset($shiur->recording_path) }}" type="audio/mpeg">
+                        <source src="{{ Storage::url($shiur->recording_path) }}" type="audio/mpeg">
                         Your browser does not support the audio element.
                     </audio>
                     <br>
