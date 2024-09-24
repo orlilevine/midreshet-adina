@@ -7,6 +7,17 @@
                 <div class="card shadow-lg">
                     <div class="card-header text-center text-white" style="background-color: darkturquoise;">{{ __('Create Your Account') }}</div>
                     <div class="card-body">
+
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+
                         <form method="POST" action="{{ route('register') }}">
                             @csrf
 
@@ -20,6 +31,37 @@
                             <div class="form-group">
                                 <label for="last_name">Last Name</label>
                                 <input id="last_name" type="text" class="form-control" name="last_name" value="{{ old('last_name') }}" required>
+                            </div>
+
+                            <!-- Email -->
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
+                            </div>
+
+                            <!-- Password -->
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <input id="password" type="password" class="form-control" name="password" required>
+                            </div>
+
+                            <!-- Confirm Password -->
+                            <div class="form-group">
+                                <label for="password_confirmation">Confirm Password</label>
+                                <input id="password_confirmation" type="password" class="form-control" name="password_confirmation" required>
+                            </div>
+
+
+                            <!-- Phone Number -->
+                            <div class="form-group">
+                                <label for="phone_number">Phone Number</label>
+                                <input id="phone_number" type="text" class="form-control" name="phone_number" value="{{ old('phone_number') }}" required>
+                            </div>
+
+                            <!-- Date of Birth -->
+                            <div class="form-group">
+                                <label for="date_of_birth">Date of Birth</label>
+                                <input id="date_of_birth" type="date" class="form-control" name="date_of_birth" value="{{ old('date_of_birth') }}" required>
                             </div>
 
                             <!-- Street Address -->
@@ -52,48 +94,10 @@
                                 <input id="country" type="text" class="form-control" name="country" value="{{ old('country') }}" required>
                             </div>
 
-                            <!-- Phone Number -->
-                            <div class="form-group">
-                                <label for="phone_number">Phone Number</label>
-                                <input id="phone_number" type="text" class="form-control" name="phone_number" value="{{ old('phone_number') }}" required>
-                            </div>
-
-                            <!-- Date of Birth -->
-                            <div class="form-group">
-                                <label for="date_of_birth">Date of Birth</label>
-                                <input id="date_of_birth" type="date" class="form-control" name="date_of_birth" value="{{ old('date_of_birth') }}" required>
-                            </div>
-
-                            <!-- Email -->
-                            <div class="form-group">
-                                <label for="email">Email Address</label>
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
-                            </div>
-
-                            <!-- Password -->
-                            <div class="form-group">
-                                <label for="password">Password</label>
-                                <input id="password" type="password" class="form-control" name="password" required>
-                            </div>
-
-                            <!-- Confirm Password -->
-                            <div class="form-group">
-                                <label for="password_confirmation">Confirm Password</label>
-                                <input id="password_confirmation" type="password" class="form-control" name="password_confirmation" required>
-                            </div>
 
                             <div class="form-group text-center">
                                 <button type="submit" class="btn btn-success btn-lg">Register</button>
                             </div>
-                            @if ($errors->any())
-                                <div class="alert alert-danger">
-                                    <ul>
-                                        @foreach ($errors->all() as $error)
-                                            <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            @endif
 
                         </form>
                     </div>
