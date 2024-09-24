@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Shiur extends Model
 {
     protected $table = 'shiurs'; // Ensure this matches your table name
+    protected $casts = [
+        'shiur_date' => 'datetime',
+    ];
 
     public function series()
     {

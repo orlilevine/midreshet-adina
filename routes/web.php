@@ -49,6 +49,11 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
     Route::get('/admin/shiur-stats', [AdminController::class, 'showShiurStats'])->name('admin.shiurStats');
     Route::get('/admin/shiur-stats/{shiur_id}', [AdminController::class, 'getShiurStats']);
+
+    Route::get('admin/shiur/edit', [AdminController::class, 'editShiur'])->name('admin.shiur.edit');
+    Route::post('admin/shiur/update/{shiur}', [AdminController::class, 'updateShiur'])->name('admin.shiur.update');
+    Route::get('admin/shiur/edit/{shiur}', [AdminController::class, 'editShiurForm'])->name('admin.shiur.editForm');
+
 });
 
 Route::get('/purchased-series', [UserController::class, 'purchases'])->name('user.purchases');

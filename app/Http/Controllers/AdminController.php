@@ -172,6 +172,45 @@ class AdminController extends Controller
 
         return response()->json($purchases);
     }
+    public function editShiur()
+    {
+        // Retrieve recently created Shiurs
+        $shiurs = Shiur::latest()->get(); // Adjust query as needed
+        return view('admin.shiur.edit', compact('shiurs'));
+    }
+
+    public function editShiurForm($id)
+    {
+        $shiur = Shiur::findOrFail($id);
+        return view('admin.shiur.editForm', compact('shiur'));
+    }
+    public function updateShiur(Request $request, $id)
+    {
+        $shiur = Shiur::findOrFail($id);
+
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'recording' => 'nullable|file|mimes:mp3,wav|max:1024000000',
+            'shiur_date' => 'required|date',
+        ]);
+
+        $shiur->title = $validated['title'];
+        $shiur->description = $validated['description'] ?? null;
+        $shiur->shiur_date = $validated['shiur_date'];
+
+        // Only update the recording if it's uploaded
+        if ($request->hasFile('recording')) {
+            $filePath = $request->file('recording')->store('recordings', 'public');
+            $shiur->recording_path = $filePath;
+        }
+
+        $shiur->save();
+
+        return redirect()->route('admin.dashboard')->with('success', 'Shiur updated successfully.');
+    }
+
+
 
 
 }
