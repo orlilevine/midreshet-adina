@@ -23,30 +23,36 @@
             flex-direction: row;
             justify-content: center; /* Center the items horizontally */
         }
+
         .nav-item {
             margin: 0 15px; /* Add horizontal spacing between the items */
         }
+
         .nav-link {
             color: #FFFFFF !important; /* White text */
             font-weight: bold; /* Bold text */
             font-size: 1.3rem; /* Larger text */
             padding: 10px 15px; /* Add padding to make items taller */
         }
+
         .nav-link:hover {
             color: #E6E6FA !important; /* Light Lavender text on hover */
         }
 
-        /* Custom Styling for Login/Register Links */
+        /* Custom Styling for Login/Register Buttons */
         .nav-link.login, .nav-link.register {
-            background-color: #708090; /* Slate gray background */
+            background-color: darkturquoise; /* Dark Turquoise background */
             color: white !important; /* White text */
             border-radius: 5px; /* Rounded corners */
             font-weight: bold;
-            font-size: 0.8rem; /* Smaller font size */
-            padding: 5px 10px; /* Smaller padding for more compact buttons */
+            font-size: 1rem; /* Adjust font size */
+            padding: 10px 20px; /* Add padding for larger buttons */
+            transition: background-color 0.3s, transform 0.2s; /* Add transition effects */
         }
+
         .nav-link.login:hover, .nav-link.register:hover {
-            background-color: #5A5F60; /* Darker shade of slate gray on hover */
+            background-color: #006666; /* Darker shade on hover */
+            transform: scale(1.05); /* Slightly enlarge on hover */
         }
 
         .full-width-title {
@@ -58,7 +64,6 @@
             margin-left: calc(-50vw + 50%);
             margin-top: 0;
         }
-
 
         .full-width-title h1 {
             margin: 0;
@@ -117,9 +122,9 @@
     </div>
 </nav>
 
-    <div class="full-width-title">
-        <h1>@yield('title')</h1>
-    </div>
+<div class="full-width-title">
+    <h1>@yield('title')</h1>
+</div>
 
 <!-- Main Content -->
 <main class="container-fluid my-5">
