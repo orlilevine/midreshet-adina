@@ -8,12 +8,16 @@
         <p>Price: ${{ $shiur->price }}</p>
         <p>Date: {{ \Carbon\Carbon::parse($shiur->shiur_date)->format('F j, Y') }}</p>
         <div style="text-align: center; margin-bottom: 20px;">
+            @auth
             <!-- Form to initiate purchase -->
             <form action="{{ route('payment.createSession.shiur', ['shiurId' => $shiur->id]) }}" method="GET">
                 <button type="submit" style="padding: 10px 20px; background-color: #007bff; color: white; border: none; cursor: pointer; border-radius: 5px;">
                     Purchase this Shiur
                 </button>
             </form>
+            @else
+                <p>Please <a href="{{ route('login') }}">log in</a> or <a href="{{route ('register') }}"> register </a>to purchase this Shiur.</p>
+            @endauth
         </div>
     </div>
 @endsection

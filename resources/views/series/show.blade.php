@@ -14,11 +14,15 @@
     </div>
 
     <div style="text-align: center; margin-bottom: 20px;">
+        @auth
         <form action="{{ route('payment.createSession.series', ['seriesId' => $series->id]) }}" method="GET">
             <button type="submit" style="padding: 10px 20px; background-color: #28a745; color: white; border: none; cursor: pointer; border-radius: 5px;">
                 Purchase Entire Series for ${{ $series->price }}
             </button>
         </form>
+        @else
+            <p>Please <a href="{{ route('login') }}">log in</a> or <a href="{{route ('register') }}">register</a> to purchase this Series.</p>
+        @endauth
     </div>
 
 
