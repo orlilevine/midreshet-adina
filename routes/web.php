@@ -9,6 +9,8 @@ use App\Http\Controllers\SpeakerController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Auth\RegisteredUserController;
+
 
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -60,5 +62,7 @@ Route::get('/payment/success/series/{seriesId}', [PaymentController::class, 'pay
 Route::get('/purchase/shiur/{shiurId}', [PaymentController::class, 'createCheckoutSessionForShiur'])->name('payment.createSession.shiur');
 Route::get('/purchase/series/{seriesId}', [PaymentController::class, 'createCheckoutSessionForSeries'])->name('payment.createSession.series');
 
+Route::get('/register', [RegisteredUserController::class, 'create'])->name('register');
+Route::post('/register', [RegisteredUserController::class, 'store']);
 
 require __DIR__.'/auth.php';

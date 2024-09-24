@@ -10,7 +10,7 @@
                     <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
                         {{ __("You're logged in!") }}
                     </h2>
-                    <a href="{{ route('user.purchases') }}" class="btn btn-primary mt-4" style="background-color: slategray; color: white;">
+                    <a href="{{ route('user.purchases') }}" class="btn btn-primary mt-4" style="background-color: darkturquoise; color: white;">
                         Go to My Purchased Shiurim
                     </a>
                 </div>
