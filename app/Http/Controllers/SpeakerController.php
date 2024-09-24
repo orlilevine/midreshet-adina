@@ -6,29 +6,16 @@ use App\Models\Series;
 use App\Models\Speaker;
 use Illuminate\Http\Request;
 
-
 class SpeakerController extends Controller
 {
-    public function mrsShiraSmiles()
+    public function showSpeaker($speakerId)
     {
-        $series = Series::where('speaker_id', 1)->get();
+        // Get the speaker details
+        $speaker = Speaker::findOrFail($speakerId);
 
-        return view('speakers.smiles', compact('series'));
+        // Get series related to the speaker
+        $series = Series::where('speaker_id', $speakerId)->get();
+
+        return view('speakers/show', compact('speaker', 'series'));
     }
-
-
-    public function mrsDinaSchoonmaker()
-    {
-        $series = Series::where('speaker_id', 2)->get();
-        return view('speakers.schoonmaker', compact('series'));
-    }
-
-    public function rabbiAviSlansky()
-    {
-        $series = Series::where('speaker_id', 3)->get();
-
-        return view('speakers.slansky', compact('series'));
-    }
-
-
 }

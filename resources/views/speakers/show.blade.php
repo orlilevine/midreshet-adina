@@ -1,15 +1,17 @@
 @extends('layouts.app')
 
-@section('title', 'Rabbi Avi Slansky')
+@section('title', $speaker->name)
 
 @section('content')
     <div class="container">
+        <h2>{{ $speaker->name }}</h2>
         <div class="series-container">
-            @foreach ($series as $series=)
+            @foreach ($series as $serie)
                 <div class="series-box">
                     <a href="{{ route('series.show', ['id' => $serie->id]) }}">
-                        <img src="{{ asset($serie->image_path) }}" alt="{{ $serie->title }} Cover" style="width: 100%; height: auto;">
+                        <img src="{{ asset('storage/' . $serie->image_path) }}" alt="{{ $serie->title }} Cover" style="width: 100%; height: auto;">
                     </a>
+                    <p>{{ $serie->title }}</p>
                 </div>
             @endforeach
         </div>
@@ -29,12 +31,11 @@
     }
 
     .series-box img {
-        border-radius: 10px; /* Optional: adds rounded corners to images */
-        transition: transform 0.3s ease; /* Optional: adds a hover effect */
+        border-radius: 10px;
+        transition: transform 0.3s ease;
     }
 
     .series-box img:hover {
-        transform: scale(1.05); /* Slightly zoom in on hover */
+        transform: scale(1.05);
     }
-
 </style>

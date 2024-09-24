@@ -29,9 +29,7 @@ Route::get('/gallery', function () {return view('gallery');})->name('gallery');
 
 Route::get('/contact', function () {return view('contact');})->name('contact');
 
-Route::get('/speakers/mrs-shira-smiles', [SpeakerController::class, 'mrsShiraSmiles'])->name('speakers.smiles');
-Route::get('/speakers/mrs-dina-schoonmaker', [SpeakerController::class, 'mrsDinaSchoonmaker'])->name('speakers.schoonmaker');
-Route::get('/speakers/rabbi-avi-slansky', [SpeakerController::class, 'rabbiAviSlansky'])->name('speakers.slansky');
+Route::get('/speakers/{speakerId}', [SpeakerController::class, 'showSpeaker'])->name('speakers.show');
 
 Route::get('/series/{id}', [SeriesController::class, 'showSeries'])->name('series.show');
 
