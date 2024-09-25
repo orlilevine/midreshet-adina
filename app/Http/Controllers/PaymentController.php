@@ -12,13 +12,23 @@ use App\Models\Series;
 
 class PaymentController extends Controller
 {
-    public function createCheckoutSessionForShiur($shiurId)
+    public function createCheckoutSessionForShiur(Request $request, $shiurId)
     {
         // Fetch the Shiur
         $shiur = Shiur::findOrFail($shiurId);
 
         // Set up Stripe
         Stripe::setApiKey(env('STRIPE_SECRET'));
+
+        // Define the coupon if provided
+        $discounts = [];
+        if ($request->has('coupon_code')) {
+            $discounts = [
+                [
+                    'coupon' => $request->coupon_code,
+                ]
+            ];
+        }
 
         // Create Stripe checkout session for a Shiur
         $session = Session::create([
@@ -33,6 +43,7 @@ class PaymentController extends Controller
                 ],
                 'quantity' => 1,
             ]],
+            'discounts' => $discounts, // Add discount if available
             'mode' => 'payment',
             'success_url' => route('payments.success', ['shiurId' => $shiur->id]),
             'cancel_url' => route('payments.cancel'),
@@ -41,13 +52,24 @@ class PaymentController extends Controller
         // Redirect to Stripe payment page
         return redirect($session->url);
     }
-    public function createCheckoutSessionForSeries($seriesId)
+
+    public function createCheckoutSessionForSeries(Request $request, $seriesId)
     {
         // Fetch the Series
         $series = Series::findOrFail($seriesId);
 
         // Set up Stripe
         Stripe::setApiKey(env('STRIPE_SECRET'));
+
+        // Define the coupon if provided
+        $discounts = [];
+        if ($request->has('coupon_code')) {
+            $discounts = [
+                [
+                    'coupon' => $request->coupon_code,
+                ]
+            ];
+        }
 
         // Create Stripe checkout session for a Series
         $session = Session::create([
@@ -62,6 +84,7 @@ class PaymentController extends Controller
                 ],
                 'quantity' => 1,
             ]],
+            'discounts' => $discounts, // Add discount if available
             'mode' => 'payment',
             'success_url' => route('payments.success.series', ['seriesId' => $series->id]),
             'cancel_url' => route('payments.cancel'),

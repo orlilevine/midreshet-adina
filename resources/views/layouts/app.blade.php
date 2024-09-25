@@ -167,5 +167,28 @@
 <!-- Bootstrap JS, Popper.js, and jQuery -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Coupon Functionality JS for series/show.blade.php-->
+<script>
+    document.getElementById('showCoupon').addEventListener('click', function(event) {
+        event.preventDefault();
+        document.getElementById('couponSection').style.display = 'block';
+        document.getElementById('showCoupon').style.display = 'none';
+    });
+
+    document.getElementById('applyCoupon').addEventListener('click', function(event) {
+        event.preventDefault();
+
+        // You can add some basic validation for the coupon code if needed
+        var couponCode = document.getElementById('coupon_code').value;
+
+        if(couponCode.trim() === '') {
+            alert('Please enter a valid coupon code.');
+        } else {
+            // Optionally, submit the form or leave it to the user to proceed with the purchase
+            document.getElementById('checkoutForm').submit();
+        }
+    });
+</script>
 </body>
 </html>

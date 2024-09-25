@@ -10,22 +10,30 @@
 
     <!-- Series Description -->
     <div style="text-align: center; margin-bottom: 20px;">
-        <p>{{ $series->description }}</p>
-    </div>
-
-    <div style="text-align: center; margin-bottom: 20px;">
         @auth
-        <form action="{{ route('payment.createSession.series', ['seriesId' => $series->id]) }}" method="GET">
-            <button type="submit" style="padding: 10px 20px; background-color: #28a745; color: white; border: none; cursor: pointer; border-radius: 5px;">
-                Purchase Entire Series for ${{ $series->price }}
-            </button>
-        </form>
+            <form id="checkoutForm" action="{{ route('payment.createSession.series', ['seriesId' => $series->id]) }}" method="GET">
+                <!-- Coupon Section (Hidden by Default) -->
+                <div id="couponSection" style="display: none; margin-bottom: 10px;">
+                    <input type="text" name="coupon_code" id="coupon_code" placeholder="Enter coupon code" style="padding: 5px; width: 200px;">
+                    <button type="button" id="applyCoupon" style="padding: 5px 10px; background-color: #007bff; color: white; border: none; cursor: pointer; border-radius: 5px;">
+                        Apply Coupon
+                    </button>
+                </div>
+
+                <!-- Checkout Button -->
+                <button type="submit" style="padding: 10px 20px; background-color: #28a745; color: white; border: none; cursor: pointer; border-radius: 5px;">
+                    Purchase Entire Series for ${{ $series->price }}
+                </button>
+
+                <!-- Button to Show Coupon Section -->
+                <p style="margin-bottom: 10px;">
+                    <a href="#" id="showCoupon" style="font-size: 14px; text-decoration: underline; color: #007bff;">Have a coupon?</a>
+                </p>
+            </form>
         @else
-            <p>Please <a href="{{ route('login') }}">log in</a> or <a href="{{route ('register') }}">register</a> to purchase this Series.</p>
+            <p>Please <a href="{{ route('login') }}">log in</a> or <a href="{{ route('register') }}">register</a> to purchase this Series.</p>
         @endauth
     </div>
-
-
 
     <!-- Shiur List -->
     <div style="text-align: center; margin-bottom: 20px;">
