@@ -1,10 +1,9 @@
 @extends('layouts.app')
 
-@section('title', $speaker->name)
+@section('title', $speaker->full_name)
 
 @section('content')
     <div class="container">
-        <h2>{{ $speaker->name }}</h2>
         <div class="series-container">
             @foreach ($series as $serie)
                 <div class="series-box">
