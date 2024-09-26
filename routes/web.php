@@ -64,6 +64,9 @@ Route::get('/payment/cancel', [PaymentController::class, 'paymentCancel'])->name
 Route::get('/payment/success/series/{seriesId}', [PaymentController::class, 'paymentSuccessSeries'])->name('payments.success.series');
 Route::get('/purchase/shiur/{shiurId}', [PaymentController::class, 'createCheckoutSessionForShiur'])->name('payment.createSession.shiur');
 Route::get('/purchase/series/{seriesId}', [PaymentController::class, 'createCheckoutSessionForSeries'])->name('payment.createSession.series');
+Route::post('/payment/zelle', [PaymentController::class, 'handleZellePaymentSeries'])->name('payment.zelle.series');
+Route::post('/payment/check', [PaymentController::class, 'handleCheckPaymentSeries'])->name('payment.check.series');
+
 
 Route::get('/register', [RegisteredUserController::class, 'create'])->name('register');
 Route::post('/register', [RegisteredUserController::class, 'store']);

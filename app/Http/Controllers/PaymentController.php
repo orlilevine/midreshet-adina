@@ -110,7 +110,7 @@ class PaymentController extends Controller
             'shiur_id' => null, // No specific shiur for series purchase
         ]);
 
-        return view('payments.success'); // You might want to customize this view
+        return view('payments.success');
     }
 
     // Payment success
@@ -138,4 +138,53 @@ class PaymentController extends Controller
     {
         return view('payments.cancel');
     }
+
+    public function handleZellePaymentSeries(Request $request)
+    {
+        $validated = $request->validate([
+            'zelle_account_from' => 'required|string|max:255',
+            'zelle_amount' => 'required|numeric',
+            'zelle_date' => 'required|date',
+        ]);
+
+        $series = Series::findOrFail($request->input('series_id'));
+        $seriesPrice = $series->price;
+
+        Purchase::create([
+            'user_id' => Auth::id(),
+            'series_id' => $request->input('series_id'),
+            'amount' => $seriesPrice,
+            'payment_method' => 'zelle',
+            'zelle_account_from' => $validated['zelle_account_from'],
+            'zelle_amount' => $validated['zelle_amount'],
+            'zelle_date' => $validated['zelle_date'],
+        ]);
+
+        return redirect()->back()->with('success', 'Series purchased');
+    }
+
+    public function handleCheckPaymentSeries(Request $request)
+    {
+        $validated = $request->validate([
+            'check_name' => 'required|string|max:255',
+            'check_amount' => 'required|numeric',
+            'check_date' => 'required|date',
+        ]);
+
+        $series = Series::findOrFail($request->input('series_id'));
+        $seriesPrice = $series->price;
+
+        Purchase::create([
+            'user_id' => Auth::id(),
+            'series_id' => $request->input('series_id'),
+            'amount' => $seriesPrice,
+            'payment_method' => 'check',
+            'check_name' => $validated['check_name'],
+            'check_amount' => $validated['check_amount'],
+            'check_date' => $validated['check_date'],
+        ]);
+
+        return redirect()->back()->with('success', 'Series purchased');
+    }
+
 }

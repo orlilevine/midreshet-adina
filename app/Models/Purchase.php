@@ -10,10 +10,9 @@ class Purchase extends Model
 
     use HasFactory;
     protected $fillable = [
-        'user_id',
-        'shiur_id',
-        'series_id',
-        'amount',
+        'user_id', 'shiur_id', 'series_id', 'amount', 'payment_method',
+        'zelle_account_from', 'zelle_amount', 'zelle_date',
+        'check_name', 'check_amount', 'check_date'
     ];
 
     public function shiur()
