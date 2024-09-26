@@ -36,7 +36,7 @@
                         if (data.length > 0) {
                             data.forEach(function(stat) {
                                 var li = document.createElement('li');
-                                li.textContent = stat.name + ' - Purchased on: ' + stat.created_at;
+                                li.textContent = stat.full_name + ' - Purchased on: ' + stat.created_at;
                                 statsList.appendChild(li);
                             });
                         } else {
