@@ -48,17 +48,19 @@
                 <!-- Hidden Payment Options Section -->
                 <div id="paymentOptions" style="display: none; text-align: center; margin-top: 10px;">
                     <button style="padding: 10px 20px; background-color: #007bff; color: white; border: none; cursor: pointer; border-radius: 5px; margin: 5px;" onclick="toggleCouponSection()">Coupon</button>
-                    <button id="zelleButton" style="padding: 10px 20px; background-color: #007bff; color: white; border: none; cursor: pointer; border-radius: 5px; margin: 5px;">I paid with Zelle</button>
-                    <button id="checkButton" style="padding: 10px 20px; background-color: #007bff; color: white; border: none; cursor: pointer; border-radius: 5px; margin: 5px;">I dropped off a check</button>
+                    <button id="zelleButton" style="padding: 10px 20px; background-color: #007bff; color: white; border: none; cursor: pointer; border-radius: 5px; margin: 5px;">Zelle</button>
+                    <button id="checkButton" style="padding: 10px 20px; background-color: #007bff; color: white; border: none; cursor: pointer; border-radius: 5px; margin: 5px;">Check</button>
                 </div>
 
                 <!-- Zelle Payment Form (Initially Hidden) -->
                 <div id="zellePaymentForm" style="display: none; text-align: center; margin-top: 10px;">
+                    <p><strong>Please don't fill this out until after you submit your Zelle.</strong></p>
+                    <p>Price of series: ${{ $series->price }}</p>
                     <form action="{{ route('payment.zelle.series') }}" method="POST">
                         @csrf
                         <input type="hidden" name="series_id" value="{{ $series->id }}">
                         <input type="text" name="zelle_account_from" placeholder="Zelle Account Name" required style="padding: 5px; margin: 5px;">
-                        <input type="number" name="zelle_amount" placeholder="Zelle Amount" required style="padding: 5px; margin: 5px;">
+                        <input type="number" name="zelle_amount" placeholder="Amount I Zelled" required style="padding: 5px; margin: 5px;">
                         <input type="date" name="zelle_date" placeholder="Zelle Date" required style="padding: 5px; margin: 5px;">
                         <button type="submit" style="padding: 10px 20px; background-color: #28a745; color: white; border: none; cursor: pointer; border-radius: 5px;">
                             Submit Zelle Payment
@@ -68,11 +70,14 @@
 
                 <!-- Check Payment Form (Initially Hidden) -->
                 <div id="checkPaymentForm" style="display: none; text-align: center; margin-top: 10px;">
+                    <p><strong>Please don't fill this out until after you drop off your check.</strong></p>
+                    <p>Check dropoff address is in Queens, NY. Please contact us to find out the address.</p>
+                    <p>Price of series: ${{ $series->price }}</p>
                     <form action="{{ route('payment.check.series') }}" method="POST">
                         @csrf
                         <input type="hidden" name="series_id" value="{{ $series->id }}">
                         <input type="text" name="check_name" placeholder="Check Name" required style="padding: 5px; margin: 5px;">
-                        <input type="number" name="check_amount" placeholder="Check Amount"  required style="padding: 5px; margin: 5px;">
+                        <input type="number" name="check_amount" placeholder="Check Amount" required style="padding: 5px; margin: 5px;">
                         <input type="date" name="check_date" placeholder="Check Date" required style="padding: 5px; margin: 5px;">
                         <button type="submit" style="padding: 10px 20px; background-color: #28a745; color: white; border: none; cursor: pointer; border-radius: 5px;">
                             Submit Check Payment
@@ -101,14 +106,12 @@
     </div>
 
     <script>
-        // Toggle display of coupon section and payment options
         document.getElementById('showOtherPaymentOptions').onclick = function(event) {
-            event.preventDefault(); // Prevent the default anchor click behavior
+            event.preventDefault();
             var paymentOptions = document.getElementById('paymentOptions');
             paymentOptions.style.display = paymentOptions.style.display === 'none' ? 'block' : 'none';
         };
 
-        // Function to toggle coupon section display
         function toggleCouponSection() {
             var couponSection = document.getElementById('couponSection');
             couponSection.style.display = couponSection.style.display === 'none' ? 'block' : 'none';
@@ -123,6 +126,5 @@
             document.getElementById('checkPaymentForm').style.display = 'block';
             document.getElementById('zellePaymentForm').style.display = 'none';
         };
-
     </script>
 @endsection
