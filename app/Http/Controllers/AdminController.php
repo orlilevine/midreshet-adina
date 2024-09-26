@@ -163,7 +163,7 @@ class AdminController extends Controller
         $purchases = DB::table('purchases')
             ->join('users', 'purchases.user_id', '=', 'users.id')
             ->where('purchases.shiur_id', $shiur_id)
-            ->select('users.name', 'purchases.created_at')
+            ->select(DB::raw("CONCAT(users.first_name, ' ', users.last_name) as full_name"), 'purchases.created_at')
             ->get()
             ->map(function($purchase) {
                 $purchase->created_at = Carbon::parse($purchase->created_at)->format('F j, Y g:i A');
