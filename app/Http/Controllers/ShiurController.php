@@ -5,10 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Shiur;
 use App\Models\Series;
+use App\Models\Purchase;
+use Illuminate\Support\Facades\Auth;
 
 class ShiurController extends Controller
 {
-
     public function show($seriesId, $shiurId)
     {
         // Retrieve the series by its ID
@@ -22,13 +23,22 @@ class ShiurController extends Controller
             ->orderBy('shiur_number_in_series')
             ->get();
 
-        // Return the view with the shiur, series, and shiurs data
-        return view('shiurs.show', compact('shiur', 'series', 'shiurs'));
+        // Check if the authenticated user has purchased the specific shiur or the entire series
+        $user = Auth::user();
+        $hasPurchasedShiur = false;
+        $hasPurchasedSeries = false;
+
+        if ($user) {
+            $hasPurchasedShiur = Purchase::where('user_id', $user->id)
+                ->where('shiur_id', $shiurId)
+                ->exists();
+
+            $hasPurchasedSeries = Purchase::where('user_id', $user->id)
+                ->where('series_id', $seriesId)
+                ->exists();
+        }
+
+        // Return the view with the shiur, series, shiurs data, and purchase status
+        return view('shiurs.show', compact('shiur', 'series', 'shiurs', 'hasPurchasedShiur', 'hasPurchasedSeries'));
     }
-
-
-
-
-
-
 }
