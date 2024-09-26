@@ -159,8 +159,12 @@ class AdminController extends Controller
         // Ensure shiur_id is an integer
         $shiur_id = (int) $shiur_id;
 
-        // Fetch all purchases for the selected Shiur and format the created_at date
-        $purchases = DB::table('purchases')
+        // Get the shiur to find its series_id
+        $shiur = Shiur::findOrFail($shiur_id);
+        $series_id = $shiur->series_id;
+
+        // Fetch all purchases made directly for this shiur
+        $shiurPurchases = DB::table('purchases')
             ->join('users', 'purchases.user_id', '=', 'users.id')
             ->where('purchases.shiur_id', $shiur_id)
             ->select(DB::raw("CONCAT(users.first_name, ' ', users.last_name) as full_name"), 'purchases.created_at')
@@ -170,8 +174,23 @@ class AdminController extends Controller
                 return $purchase;
             });
 
+        // Fetch all purchases for the series that this shiur belongs to
+        $seriesPurchases = DB::table('purchases')
+            ->join('users', 'purchases.user_id', '=', 'users.id')
+            ->where('purchases.series_id', $series_id)
+            ->select(DB::raw("CONCAT(users.first_name, ' ', users.last_name) as full_name"), 'purchases.created_at')
+            ->get()
+            ->map(function($purchase) {
+                $purchase->created_at = Carbon::parse($purchase->created_at)->format('F j, Y g:i A');
+                return $purchase;
+            });
+
+        // Merge both purchases (shiur-specific and series-wide)
+        $purchases = $shiurPurchases->merge($seriesPurchases);
+
         return response()->json($purchases);
     }
+
     public function editShiur()
     {
         // Retrieve recently created Shiurs
