@@ -56,6 +56,7 @@
                 <div id="zellePaymentForm" style="display: none; text-align: center; margin-top: 10px;">
                     <p><strong>Please don't fill this out until after you submit your Zelle.</strong></p>
                     <p>Price of series: ${{ $series->price }}</p>
+                    <p>Zelle Account: </p>
                     <form action="{{ route('payment.zelle.series') }}" method="POST">
                         @csrf
                         <input type="hidden" name="series_id" value="{{ $series->id }}">

@@ -187,4 +187,57 @@ class PaymentController extends Controller
         return redirect()->back()->with('success', 'Series purchased');
     }
 
+    public function handleZellePaymentShiur(Request $request)
+    {
+        // Validate request and assign to $validated
+        $validated = $request->validate([
+            'shiur_id' => 'required|exists:shiurs,id',
+            'zelle_account_from' => 'required|string',
+            'zelle_amount' => 'required|numeric',
+            'zelle_date' => 'required|date',
+        ]);
+
+        $shiur = Shiur::findOrFail($validated['shiur_id']);
+        $shiurPrice = $shiur->price;
+
+        // Set the shiur as purchased for the user
+        Purchase::create([
+            'user_id' => Auth::id(),
+            'shiur_id' => $validated['shiur_id'],
+            'payment_method' => 'zelle',
+            'amount' => $shiurPrice,
+            'zelle_account_from' => $validated['zelle_account_from'],
+            'zelle_amount' => $validated['zelle_amount'],
+            'zelle_date' => $validated['zelle_date'],
+        ]);
+
+        return redirect()->back()->with('success', 'Shiur purchased');
+    }
+
+    public function handleCheckPaymentShiur(Request $request)
+    {
+        // Validate request and assign to $validated
+        $validated = $request->validate([
+            'shiur_id' => 'required|exists:shiurs,id',
+            'check_name' => 'required|string',
+            'check_amount' => 'required|numeric',
+            'check_date' => 'required|date',
+        ]);
+
+        $shiur = Shiur::findOrFail($validated['shiur_id']);
+        $shiurPrice = $shiur->price;
+
+        Purchase::create([
+            'user_id' => Auth::id(),
+            'shiur_id' => $validated['shiur_id'],
+            'amount' => $shiurPrice,
+            'payment_method' => 'check',
+            'check_name' => $validated['check_name'],
+            'check_amount' => $validated['check_amount'],
+            'check_date' => $validated['check_date'],
+        ]);
+
+        return redirect()->back()->with('success', 'Shiur purchased');
+    }
+
 }
