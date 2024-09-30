@@ -12,7 +12,7 @@ class Purchase extends Model
     protected $fillable = [
         'user_id', 'shiur_id', 'series_id', 'amount', 'payment_method',
         'zelle_account_from', 'zelle_amount', 'zelle_date',
-        'check_name', 'check_amount', 'check_date'
+        'check_name', 'check_amount', 'check_date', 'coupon', 'coupon_code',
     ];
 
     public function shiur()

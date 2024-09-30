@@ -19,7 +19,7 @@
                         <!-- Coupon Section (Hidden by Default) -->
                         <div id="couponSection" style="display: none; margin-bottom: 10px;">
                             <input type="text" name="coupon_code" id="coupon_code" placeholder="Enter coupon code" style="padding: 5px; width: 200px;">
-                            <button type="button" id="applyCoupon" style="padding: 5px 10px; background-color: #007bff; color: white; border: none; cursor: pointer; border-radius: 5px;">
+                            <button type="submit" id="applyCoupon" style="padding: 5px 10px; background-color: #007bff; color: white; border: none; cursor: pointer; border-radius: 5px;">
                                 Apply Coupon
                             </button>
                         </div>
@@ -106,5 +106,21 @@
             document.getElementById('checkPaymentForm').style.display = 'block';
             document.getElementById('zellePaymentForm').style.display = 'none';
         };
+
+        function toggleCouponSection() {
+            var couponSection = document.getElementById('couponSection');
+            couponSection.style.display = couponSection.style.display === 'none' ? 'block' : 'none';
+        }
+
+        document.getElementById('applyCoupon').addEventListener('click', function(event) {
+            event.preventDefault();
+            var couponCode = document.getElementById('coupon_code').value;
+
+            if (couponCode.trim() === '') {
+                alert('Please enter a valid coupon code.');
+            } else {
+                document.getElementById('checkoutForm').submit();
+            }
+        });
     </script>
 @endsection

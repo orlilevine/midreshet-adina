@@ -45,7 +45,7 @@ class PaymentController extends Controller
             ]],
             'discounts' => $discounts, // Add discount if available
             'mode' => 'payment',
-            'success_url' => route('payments.success', ['shiurId' => $shiur->id]),
+            'success_url' => route('payments.success', ['shiurId' => $shiur->id, 'coupon_code' => $request->coupon_code]),
             'cancel_url' => route('payments.cancel'),
         ]);
 
@@ -86,7 +86,7 @@ class PaymentController extends Controller
             ]],
             'discounts' => $discounts, // Add discount if available
             'mode' => 'payment',
-            'success_url' => route('payments.success.series', ['seriesId' => $series->id]),
+            'success_url' => route('payments.success.series', ['seriesId' => $series->id, 'coupon_code' => $request->coupon_code]),
             'cancel_url' => route('payments.cancel'),
         ]);
 
@@ -94,13 +94,15 @@ class PaymentController extends Controller
         return redirect($session->url);
     }
 
-
-// New method for series purchase success
-    public function paymentSuccessSeries($seriesId)
+    public function paymentSuccessSeries(Request $request, $seriesId)
     {
         // Retrieve the Series that was purchased
         $series = Series::findOrFail($seriesId);
         $userId = Auth::id();
+
+        // Get coupon data if it was used
+        $couponCode = $request->input('coupon_code');
+        $couponUsed = $couponCode ? 1 : 0;
 
         // Save the purchase in the purchases table
         Purchase::create([
@@ -108,13 +110,16 @@ class PaymentController extends Controller
             'series_id' => $series->id, // Save series ID
             'amount' => $series->price, // Assuming the amount is from the Series price
             'shiur_id' => null, // No specific shiur for series purchase
+            'coupon' => $couponUsed,
+            'coupon_code' => $couponCode,
+            'payment_method' => 'cc', // Assuming payment is through credit card
         ]);
 
         return view('payments.success');
     }
 
     // Payment success
-    public function paymentSuccess($shiurId)
+    public function paymentSuccess(Request $request, $shiurId)
     {
         // Retrieve the Shiur that was purchased
         $shiur = Shiur::findOrFail($shiurId);
@@ -122,11 +127,17 @@ class PaymentController extends Controller
         // Get the authenticated user's ID
         $userId = Auth::id();
 
+// Get coupon data if it was used
+        $couponCode = $request->input('coupon_code');
+        $couponUsed = $couponCode ? 1 : 0;
+
         // Save the purchase in the purchases table
         Purchase::create([
             'user_id' => $userId,
             'shiur_id' => $shiur->id,
             'amount' => $shiur->price, // Assuming the amount is from the Shiur price
+            'coupon' => $couponUsed,
+            'coupon_code' => $couponCode,
         ]);
 
         return view('payments.success');
