@@ -29,7 +29,7 @@
                     <!-- Coupon Section (Hidden by Default) -->
                     <div id="couponSection" style="display: none; margin-bottom: 10px;">
                         <input type="text" name="coupon_code" id="coupon_code" placeholder="Enter coupon code" style="padding: 5px; width: 200px;">
-                        <button type="button" id="applyCoupon" style="padding: 5px 10px; background-color: #007bff; color: white; border: none; cursor: pointer; border-radius: 5px;">
+                        <button type="submit" id="applyCoupon" style="padding: 5px 10px; background-color: #007bff; color: white; border: none; cursor: pointer; border-radius: 5px;">
                             Apply Coupon
                         </button>
                     </div>
@@ -108,27 +108,46 @@
             @endforeach
         </ul>
     </div>
-
-    <script>
-        document.getElementById('showOtherPaymentOptions').onclick = function(event) {
-            event.preventDefault();
-            var paymentOptions = document.getElementById('paymentOptions');
-            paymentOptions.style.display = paymentOptions.style.display === 'none' ? 'block' : 'none';
-        };
-
-        function toggleCouponSection() {
-            var couponSection = document.getElementById('couponSection');
-            couponSection.style.display = couponSection.style.display === 'none' ? 'block' : 'none';
-        }
-
-        document.getElementById('zelleButton').onclick = function() {
-            document.getElementById('zellePaymentForm').style.display = 'block';
-            document.getElementById('checkPaymentForm').style.display = 'none';
-        };
-
-        document.getElementById('checkButton').onclick = function() {
-            document.getElementById('checkPaymentForm').style.display = 'block';
-            document.getElementById('zellePaymentForm').style.display = 'none';
-        };
-    </script>
 @endsection
+
+        <script>
+            window.onload = function() {
+                var otherPaymentOptionsBtn = document.getElementById('showOtherPaymentOptions');
+                var paymentOptions = document.getElementById('paymentOptions');
+
+                if (otherPaymentOptionsBtn) {
+                    otherPaymentOptionsBtn.onclick = function(event) {
+                        event.preventDefault();
+                        paymentOptions.style.display = paymentOptions.style.display === 'none' ? 'block' : 'none';
+                    };
+                }
+
+                document.getElementById('zelleButton').onclick = function() {
+                    document.getElementById('zellePaymentForm').style.display = 'block';
+                    document.getElementById('checkPaymentForm').style.display = 'none';
+                };
+
+                document.getElementById('checkButton').onclick = function() {
+                    document.getElementById('checkPaymentForm').style.display = 'block';
+                    document.getElementById('zellePaymentForm').style.display = 'none';
+                };
+            };
+
+            function toggleCouponSection() {
+                var couponSection = document.getElementById('couponSection');
+                couponSection.style.display = couponSection.style.display === 'none' ? 'block' : 'none';
+            }
+
+            document.getElementById('applyCoupon').addEventListener('click', function(event) {
+                event.preventDefault();
+                var couponCode = document.getElementById('coupon_code').value;
+
+                if (couponCode.trim() === '') {
+                    alert('Please enter a valid coupon code.');
+                } else {
+                    document.getElementById('checkoutForm').submit();
+                }
+            });
+        </script>
+
+
