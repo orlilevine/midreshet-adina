@@ -55,8 +55,8 @@
                 <!-- Zelle Payment Form (Initially Hidden) -->
                 <div id="zellePaymentForm" style="display: none; text-align: center; margin-top: 10px;">
                     <p><strong>Please don't fill this out until after you submit your Zelle.</strong></p>
+                    <p>Zelle Account: 9176035614</p>
                     <p>Price of series: ${{ $series->price }}</p>
-                    <p>Zelle Account: </p>
                     <form action="{{ route('payment.zelle.series') }}" method="POST">
                         @csrf
                         <input type="hidden" name="series_id" value="{{ $series->id }}">
@@ -71,8 +71,11 @@
 
                 <!-- Check Payment Form (Initially Hidden) -->
                 <div id="checkPaymentForm" style="display: none; text-align: center; margin-top: 10px;">
-                    <p><strong>Please don't fill this out until after you drop off your check.</strong></p>
-                    <p>Check dropoff address is in Queens, NY. Please contact us to find out the address.</p>
+                    <p><strong>Please don't fill this out until after you mail your check.</strong></p>
+                    <p>Check mail address:
+                        136-05 72nd Road,
+                        Flushing, NY 11367
+                    </p>
                     <p>Price of series: ${{ $series->price }}</p>
                     <form action="{{ route('payment.check.series') }}" method="POST">
                         @csrf
