@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Series;
 use App\Models\Shiur;
 use App\Models\Speaker;
+use App\Models\Message;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
@@ -230,6 +231,12 @@ class AdminController extends Controller
     }
 
 
+
+    public function showMessages()
+    {
+        $messages = Message::all();
+        return view('admin.messages', compact('messages'));
+    }
 
 
 }

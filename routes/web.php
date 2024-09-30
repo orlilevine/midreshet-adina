@@ -9,6 +9,7 @@ use App\Http\Controllers\SpeakerController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 
 
@@ -28,6 +29,7 @@ Route::get('/series/{seriesId}/shiur/{shiurId}', [ShiurController::class, 'show'
 Route::get('/gallery', function () {return view('gallery');})->name('gallery');
 
 Route::get('/contact', function () {return view('contact');})->name('contact');
+Route::post('/contact', [ContactController::class, 'submitMessage'])->name('contact.submit');
 
 Route::get('/speakers/{speakerId}', [SpeakerController::class, 'showSpeaker'])->name('speakers.show');
 
@@ -53,6 +55,9 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('admin/shiur/edit', [AdminController::class, 'editShiur'])->name('admin.shiur.edit');
     Route::post('admin/shiur/update/{shiur}', [AdminController::class, 'updateShiur'])->name('admin.shiur.update');
     Route::get('admin/shiur/edit/{shiur}', [AdminController::class, 'editShiurForm'])->name('admin.shiur.editForm');
+
+    Route::get('/admin/messages', [AdminController::class, 'showMessages'])->name('admin.messages');
+
 
 });
 
