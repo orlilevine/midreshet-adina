@@ -22,7 +22,7 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ $series->title }}</h5>
                             <p class="card-text">{{ Str::limit($series->description, 100) }}</p>
-                            <a href="{{ route('series.show', ['id' => $series->id]) }}" class="btn" style="background-color: #ff007f; color: white;">Explore Shiurim</a>
+                            <a href="{{ route('series.show', ['id' => $series->id]) }}" class="btn" style="background-color: #ff007f; color: white;">Explore This Series</a>
                         </div>
                     </div>
                 </div>

@@ -19,16 +19,6 @@
 
         <form action="{{ route('admin.series.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
-            <!-- Display validation errors -->
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
 
             <div class="form-group">
                 <label for="title">Series Title</label>
@@ -73,6 +63,12 @@
             <div class="form-group">
                 <label for="zoom_password">Zoom Password</label>
                 <input type="text" class="form-control" id="zoom_password" name="zoom_password" value="{{ old('zoom_password') }}">
+            </div>
+
+            <!-- Add price input with default value of 100 -->
+            <div class="form-group">
+                <label for="price">Price</label>
+                <input type="number" class="form-control" id="price" name="price" value="{{ old('price', 100) }}" min="0" required>
             </div>
 
             <button type="submit" class="btn btn-primary">Create Series</button>

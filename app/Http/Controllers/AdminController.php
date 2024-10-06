@@ -78,6 +78,7 @@ class AdminController extends Controller
             'zoom_link' => 'nullable|string',
             'zoom_id' => 'nullable|string',
             'zoom_password' => 'nullable|string',
+            'price' => 'required|numeric|min:0',  // Validate the price input
         ]);
 
         // Handle the file upload
@@ -99,10 +100,12 @@ class AdminController extends Controller
             'zoom_link' => $validated['zoom_link'],
             'zoom_id' => $validated['zoom_id'],
             'zoom_password' => $validated['zoom_password'],
+            'price' => $validated['price'], // Save the price
         ]);
 
         return redirect()->route('admin.dashboard')->with('success', 'Series created successfully.');
     }
+
 
 
     public function createSpeaker()
