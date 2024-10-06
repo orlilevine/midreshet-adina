@@ -44,7 +44,7 @@
         }
 
         .nav-link.login, .nav-link.register {
-            background-color: darkturquoise;
+            background-color: #001f3f;
             color: white !important;
             border-radius: 50px;
             font-size: 1.2rem;
@@ -128,7 +128,7 @@
         }
 
         footer a:hover {
-            color: darkturquoise;
+            color: #001f3f;
             text-decoration: none;
         }
 
