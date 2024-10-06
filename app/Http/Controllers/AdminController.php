@@ -40,6 +40,7 @@ class AdminController extends Controller
             'series_id' => 'required|exists:series,id',
             'recording' => 'nullable|file|mimes:mp3,wav|max:1024000000',
             'shiur_date' => 'required|date',
+            'price' => 'required|numeric|min:0', // Validate the price
         ]);
 
         $shiur = new Shiur();
@@ -47,17 +48,18 @@ class AdminController extends Controller
         $shiur->description = $validated['description'] ?? null;
         $shiur->series_id = $validated['series_id'];
         $shiur->shiur_date = $validated['shiur_date'];
+        $shiur->price = $validated['price']; // Set the price
 
         if ($request->hasFile('recording')) {
             $filePath = $request->file('recording')->store('recordings', 'public');
             $shiur->recording_path = $filePath;
         }
 
-
         $shiur->save();
 
         return redirect()->route('admin.dashboard')->with('success', 'Shiur created successfully.');
     }
+
 
     public function createSeries()
     {

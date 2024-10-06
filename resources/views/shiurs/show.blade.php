@@ -13,7 +13,7 @@
             @auth
                 @if($hasPurchasedShiur || $hasPurchasedSeries)
                     <!-- Purchased button -->
-                    <a href="{{ route('user.purchases') }}" class="hover-button" style="padding: 15px 30px; background-color: #28a745; color: white; border-radius: 10px; text-decoration: none; transition: transform 0.3s, box-shadow 0.3s;">
+                    <a href="{{ route('user.purchases') }}" class="hover-button" style="padding: 15px 30px; background-color: #ff007f; color: white; border-radius: 10px; text-decoration: none; transition: transform 0.3s, box-shadow 0.3s;">
                         Shiur Purchased - Go to My Shiurim
                     </a>
                 @else

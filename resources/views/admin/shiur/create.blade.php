@@ -53,10 +53,14 @@
             </div>
 
             <div class="form-group">
+                <label for="price">Price ($)</label>
+                <input type="number" name="price" class="form-control" value="15" step="0.01" required>
+            </div>
+
+            <div class="form-group">
                 <label for="recording">Recording</label>
                 <input type="file" name="recording" class="form-control">
             </div>
-
 
             <button type="submit" class="btn btn-success">Save Shiur</button>
         </form>
