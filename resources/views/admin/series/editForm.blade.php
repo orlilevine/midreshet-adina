@@ -41,6 +41,11 @@
             </div>
 
             <div class="form-group">
+                <label for="price">Price</label>
+                <input type="number" name="price" class="form-control" value="{{ $series->price }}" step="0.01" min="0" required>
+            </div>
+
+            <div class="form-group">
                 <label for="series_image">Series Image (optional)</label>
                 <input type="file" name="series_image" class="form-control">
             </div>

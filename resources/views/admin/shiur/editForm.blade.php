@@ -36,6 +36,11 @@
             </div>
 
             <div class="form-group">
+                <label for="price">Price</label>
+                <input type="number" name="price" class="form-control" value="{{ $shiur->price }}" step="0.01" min="0" required>
+            </div>
+
+            <div class="form-group">
                 <label for="recording">Recording (optional)</label>
                 <input type="file" name="recording" class="form-control">
             </div>
