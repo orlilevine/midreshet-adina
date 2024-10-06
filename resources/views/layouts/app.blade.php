@@ -13,74 +13,137 @@
             background-color: #FFFFFF;
             margin: 0;
             padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
         }
 
         .navbar {
-            background-color: hotpink;
+            background-color: #ff007f;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s;
         }
 
         .navbar-nav {
             flex-direction: row;
-            justify-content: center; /* Center the items horizontally */
+            justify-content: center;
         }
 
         .nav-item {
-            margin: 0 15px; /* Add horizontal spacing between the items */
+            margin: 0 15px;
         }
 
         .nav-link {
-            color: #FFFFFF !important; /* White text */
-            font-weight: bold; /* Bold text */
-            font-size: 1.3rem; /* Larger text */
-            padding: 10px 15px; /* Add padding to make items taller */
+            color: #FFFFFF !important;
+            font-weight: bold;
+            font-size: 1.3rem;
+            padding: 10px 15px;
         }
 
         .nav-link:hover {
-            color: #E6E6FA !important; /* Light Lavender text on hover */
+            color: #E6E6FA !important;
         }
 
-        /* Custom Styling for Login/Register Buttons */
         .nav-link.login, .nav-link.register {
-            background-color: darkturquoise; /* Dark Turquoise background */
-            color: white !important; /* White text */
-            border-radius: 5px; /* Rounded corners */
-            font-weight: bold;
-            font-size: 1rem; /* Adjust font size */
-            padding: 10px 20px; /* Add padding for larger buttons */
-            transition: background-color 0.3s, transform 0.2s; /* Add transition effects */
+            background-color: darkturquoise;
+            color: white !important;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            padding: 10px 25px;
+            transition: background-color 0.3s, transform 0.2s;
         }
 
         .nav-link.login:hover, .nav-link.register:hover {
-            background-color: #006666; /* Darker shade on hover */
-            transform: scale(1.05); /* Slightly enlarge on hover */
+            background-color: #006666;
+            transform: scale(1.05);
         }
 
         .full-width-title {
             background-color: #Ff007f;
             color: white;
             text-align: center;
-            padding: 22px;
+            padding: 40px 0;
             width: 100vw;
             margin-left: calc(-50vw + 50%);
             margin-top: 0;
+            font-size: 3rem;
         }
 
-        .full-width-title h1 {
-            margin: 0;
-            font-size: 2.5em;
+        .hero {
+            background-image: url('path-to-your-image.jpg'); /* Add a beautiful background image */
+            background-size: cover;
+            background-position: center;
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.4);
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-top: 20px;
+        }
+
+        .hero .btn {
+            background-color: #ff007f;
+            color: white;
+            font-size: 1.2rem;
+            padding: 15px 30px;
+            border-radius: 50px;
+            margin-top: 20px;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+
+        .hero .btn:hover {
+            background-color: darkturquoise;
+            transform: translateY(-5px);
+        }
+
+        main {
+            padding: 60px 0;
         }
 
         /* Footer Styles */
         footer {
             background-color: #f8f9fa;
-            padding: 2rem 0;
+            padding: 4rem 0;
+        }
+
+        footer h5 {
+            font-size: 1.5rem;
+            color: #ff007f;
+        }
+
+        footer p, footer a {
+            font-size: 1.1rem;
+            color: #333;
+        }
+
+        footer a:hover {
+            color: darkturquoise;
+            text-decoration: none;
+        }
+
+        .footer-bottom {
+            background-color: #ff007f;
+            color: white;
+            padding: 15px;
+            font-size: 0.9rem;
         }
     </style>
 </head>
 <body>
 
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-light">
+<nav class="navbar navbar-expand-lg navbar-light sticky-top">
     <a class="navbar-brand" href="#">
         <img src="{{ asset('images/MAlogo.jpg') }}" alt="Logo" style="height: 80px; width: auto;" />
     </a>
@@ -122,49 +185,55 @@
     </div>
 </nav>
 
-<div class="full-width-title">
-    <h1>@yield('title')</h1>
-</div>
+<!-- Hero Section: Displayed only on the Home route -->
+@if (Route::is('home'))
+    <div class="hero">
+        <div>
+            <h1>Welcome to Midreshet Adina</h1>
+            <p>Explore our enriching shiurim and grow on your spiritual journey.</p>
+            <a href="{{ route('about') }}" class="btn">Learn More</a>
+        </div>
+    </div>
+@endif
+
 
 <!-- Main Content -->
-<main class="container-fluid my-5">
+<main class="container">
     @yield('content')
 </main>
 
 <!-- Footer -->
-<footer class="bg-light text-center text-lg-start mt-auto">
-    <div class="container p-4">
+<footer>
+    <div class="container">
         <div class="row">
-            <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
-                <h5 class="text-uppercase">Midreshet Adina</h5>
-                <p>Helping women grow in their spiritual journey.</p>
+            <div class="col-lg-6 col-md-12">
+                <h5>Midreshet Adina</h5>
+                <p>Helping women grow in their spiritual journey through deep Torah learning and inspiring shiurim.</p>
             </div>
-
-            <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-                <h5 class="text-uppercase">Quick Links</h5>
-                <ul class="list-unstyled mb-0">
-                    <li><a href="{{ route('home') }}" class="text-dark">Home</a></li>
-                    <li><a href="{{ route('about') }}" class="text-dark">About Us</a></li>
-                    <li><a href="{{ route('contact') }}" class="text-dark">Contact Us</a></li>
+            <div class="col-lg-3 col-md-6">
+                <h5>Quick Links</h5>
+                <ul class="list-unstyled">
+                    <li><a href="{{ route('home') }}">Home</a></li>
+                    <li><a href="{{ route('about') }}">About Us</a></li>
+                    <li><a href="{{ route('contact') }}">Contact Us</a></li>
                 </ul>
             </div>
-
-            <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-                <h5 class="text-uppercase">Follow Us</h5>
+            <div class="col-lg-3 col-md-6">
+                <h5>Follow Us</h5>
                 <ul class="list-unstyled">
-                    <li><a href="#" class="text-dark">Facebook</a></li>
-                    <li><a href="#" class="text-dark">Instagram</a></li>
-                    <li><a href="#" class="text-dark">LinkedIn</a></li>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">YouTube</a></li>
                 </ul>
             </div>
         </div>
     </div>
-    <div class="text-center p-3 bg-dark text-white">
+    <div class="footer-bottom text-center">
         &copy; {{ date('Y') }} Midreshet Adina. All rights reserved.
     </div>
 </footer>
 
-<!-- Bootstrap JS, Popper.js, and jQuery -->
+<!-- Bootstrap and JS -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
 
