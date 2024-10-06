@@ -53,37 +53,65 @@
 
                     <!-- Hidden Payment Options -->
                     <div id="paymentOptions" style="display: none; margin-top: 20px;">
-                        <button class="hover-button" style="padding: 15px 30px; background-color: #001f3f; color: white; border-radius: 10px; margin: 10px;">
-                            Coupon
-                        </button>
-                        <button id="zelleButton" class="hover-button" style="padding: 15px 30px; background-color: #001f3f; color: white; border-radius: 10px; margin: 10px;">
-                            Zelle
-                        </button>
-                        <button id="checkButton" class="hover-button" style="padding: 15px 30px; background-color: #001f3f; color: white; border-radius: 10px; margin: 10px;">
-                            Check
-                        </button>
+                        <button class="hover-button" id="couponButton" style="padding: 15px 30px; background-color: #001f3f; color: white; border-radius: 10px; margin: 5px;">Coupon</button>
+                        <button class="hover-button" id="zelleButton" style="padding: 15px 30px; background-color: #001f3f; color: white; border-radius: 10px; margin: 5px;">Zelle</button>
+                        <button class="hover-button" id="checkButton" style="padding: 15px 30px; background-color: #001f3f; color: white; border-radius: 10px; margin: 5px;">Check</button>
+                    </div>
+
+                    <!-- Zelle Payment Form (Initially Hidden) -->
+                    <div id="zellePaymentForm" style="display: none; text-align: center; margin-top: 10px;">
+                        <p><strong>Please don't fill this out until after you submit your Zelle.</strong></p>
+                        <p>Zelle Account: 9176035614</p>
+                        <p>Price of series: ${{ $series->price }}</p>
+                        <form action="{{ route('payment.zelle.series') }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="series_id" value="{{ $series->id }}">
+                            <input type="text" name="zelle_account_from" placeholder="Zelle Account Name" required style="padding: 5px; margin: 5px;">
+                            <input type="number" name="zelle_amount" placeholder="Amount I Zelled" required style="padding: 5px; margin: 5px;">
+                            <input type="date" name="zelle_date" required style="padding: 5px; margin: 5px;">
+                            <button type="submit" class="hover-button" style="padding: 15px 30px; background-color: #28a745; color: white; border-radius: 10px;">
+                                Submit Zelle Payment
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Check Payment Form (Initially Hidden) -->
+                    <div id="checkPaymentForm" style="display: none; text-align: center; margin-top: 10px;">
+                        <p><strong>Please don't fill this out until after you mail your check.</strong></p>
+                        <p>Check mail address: 136-05 72nd Road, Flushing, NY 11367</p>
+                        <p>Price of series: ${{ $series->price }}</p>
+                        <form action="{{ route('payment.check.series') }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="series_id" value="{{ $series->id }}">
+                            <input type="text" name="check_name" placeholder="Check Name" required style="padding: 5px; margin: 5px;">
+                            <input type="number" name="check_amount" placeholder="Check Amount" required style="padding: 5px; margin: 5px;">
+                            <input type="date" name="check_date" required style="padding: 5px; margin: 5px;">
+                            <button type="submit" class="hover-button" style="padding: 15px 30px; background-color: #28a745; color: white; border-radius: 10px;">
+                                Submit Check Payment
+                            </button>
+                        </form>
                     </div>
                 @endif
             @else
-                <p style="font-size: 1.2em; color: #003366;">Please <a href="{{ route('login') }}" style="color: #001f3f;">log in</a> or <a href="{{ route('register') }}" style="color: #001f3f;">register</a> to purchase this Series.</p>
+                <p>Please <a href="{{ route('login') }}">log in</a> or <a href="{{ route('register') }}">register</a> to purchase this Series.</p>
             @endauth
         </div>
 
-            <!-- Shiur List -->
+        <!-- Shiur List -->
             <div style="text-align: center; margin-bottom: 40px;">
-                <ul style="list-style-type: none; padding: 0; margin: 0;">
-                    @foreach ($shiurs as $shiurItem)
+            <ul style="list-style-type: none; padding: 0; margin: 0;">
+                @foreach ($shiurs as $shiurItem)
                         <li style="margin: 15px 0;">
-                            <a href="{{ route('shiur.show', ['seriesId' => $series->id, 'shiurId' => $shiurItem->id]) }}"
+                        <a href="{{ route('shiur.show', ['seriesId' => $series->id, 'shiurId' => $shiurItem->id]) }}"
                                style="display: inline-block; padding: 12px 30px; font-size: 18px; color: white; background-color: #ff007f; text-decoration: none; border-radius: 50px; transition: transform 0.3s, box-shadow 0.3s;"
                                onmouseover="this.style.transform='scale(1.1)'; this.style.boxShadow='0 4px 8px rgba(0, 0, 0, 0.2)';"
                                onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none';">
-                                {{ $shiurItem->title }}
-                            </a>
-                        </li>
-                    @endforeach
-                </ul>
-            </div>
+                            {{ $shiurItem->title }}
+                        </a>
+                    </li>
+                @endforeach
+            </ul>
+        </div>
 
 
             <style>
@@ -98,30 +126,31 @@
             }
         </style>
 
-        <script>
-            document.getElementById('showOtherPaymentOptions').onclick = function(event) {
-                event.preventDefault();
-                var paymentOptions = document.getElementById('paymentOptions');
-                paymentOptions.style.display = paymentOptions.style.display === 'none' ? 'block' : 'none';
-            };
+    <script>
+        window.onload = function() {
+            var otherPaymentOptionsBtn = document.getElementById('showOtherPaymentOptions');
+            var paymentOptions = document.getElementById('paymentOptions');
 
-            document.getElementById('applyCoupon').addEventListener('click', function(event) {
-                event.preventDefault();
-                var couponCode = document.getElementById('coupon_code').value;
-
-                if (couponCode.trim() === '') {
-                    alert('Please enter a valid coupon code.');
-                } else {
-                    document.getElementById('checkoutForm').submit();
-                }
-            });
+            if (otherPaymentOptionsBtn) {
+                otherPaymentOptionsBtn.onclick = function(event) {
+                    event.preventDefault();
+                    paymentOptions.style.display = paymentOptions.style.display === 'none' ? 'block' : 'none';
+                };
+            }
 
             document.getElementById('zelleButton').onclick = function() {
-                alert('Zelle payment option selected.');
+                document.getElementById('zellePaymentForm').style.display = 'block';
+                document.getElementById('checkPaymentForm').style.display = 'none';
             };
 
             document.getElementById('checkButton').onclick = function() {
-                alert('Check payment option selected.');
+                document.getElementById('checkPaymentForm').style.display = 'block';
+                document.getElementById('zellePaymentForm').style.display = 'none';
             };
-        </script>
+
+            document.getElementById('couponButton').onclick = function() {
+                document.getElementById('couponSection').style.display = 'block';
+            };
+        };
+    </script>
 @endsection
