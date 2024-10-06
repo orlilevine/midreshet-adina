@@ -103,7 +103,7 @@
         }
 
         .hero .btn:hover {
-            background-color: darkturquoise;
+            background-color: #001f3f;
             transform: translateY(-5px);
         }
 
