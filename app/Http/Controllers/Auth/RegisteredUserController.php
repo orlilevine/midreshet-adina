@@ -4,12 +4,12 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rules;
 use App\Providers\RouteServiceProvider;
-
+use Illuminate\Validation\Rules;
 
 class RegisteredUserController extends Controller
 {
@@ -33,7 +33,9 @@ class RegisteredUserController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
-        \Log::info($request->all());
+
+        // Set the default role_id (adjust this based on your role setup)
+        $defaultRoleId = Role::where('name', 'user')->first()->id ?? 1; // Fallback to ID 1 if not found
 
         $user = User::create([
             'first_name' => $request->first_name,
@@ -47,12 +49,11 @@ class RegisteredUserController extends Controller
             'date_of_birth' => $request->date_of_birth,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'role_id' => $defaultRoleId,
         ]);
 
         Auth::login($user);
 
         return redirect(RouteServiceProvider::HOME);
     }
-
-
 }

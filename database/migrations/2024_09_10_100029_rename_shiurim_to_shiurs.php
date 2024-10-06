@@ -11,7 +11,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::rename('shiurs', 'shiurs');
+        if (Schema::hasTable('shiurim')) {
+            Schema::rename('shiurim', 'shiurs');
+        }
     }
 
     public function down()
