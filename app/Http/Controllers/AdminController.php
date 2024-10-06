@@ -238,5 +238,53 @@ class AdminController extends Controller
         return view('admin.messages', compact('messages'));
     }
 
+    public function editSeries()
+    {
+        // Retrieve all series for the edit view
+        $series = Series::all();
+        return view('admin.series.edit', compact('series'));
+    }
+
+    public function editSeriesForm($id)
+    {
+        $series = Series::findOrFail($id);
+        $speakers = Speaker::all(); // For the speaker dropdown
+        return view('admin.series.editForm', compact('series', 'speakers'));
+    }
+
+    public function updateSeries(Request $request, $id)
+    {
+        // Validate the request
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'series_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'speaker_id' => 'required|exists:speakers,id',
+            'zoom_link' => 'nullable|string|max:255',
+            'zoom_id' => 'nullable|string|max:255',
+            'zoom_password' => 'nullable|string|max:255',
+        ]);
+
+        // Find the series to update
+        $series = Series::findOrFail($id);
+
+        // Handle the file upload
+        if ($request->hasFile('series_image')) {
+            $imagePath = $request->file('series_image')->store('series_images', 'public');
+            $series->image_path = $imagePath; // Update the image path
+        }
+
+        // Update other fields
+        $series->title = $validated['title'];
+        $series->description = $validated['description'];
+        $series->speaker_id = $validated['speaker_id'];
+        $series->zoom_link = $validated['zoom_link'];
+        $series->zoom_id = $validated['zoom_id'];
+        $series->zoom_password = $validated['zoom_password'];
+
+        $series->save(); // Save changes
+
+        return redirect()->route('admin.series.edit', $id)->with('success', 'Series updated successfully.');
+    }
 
 }

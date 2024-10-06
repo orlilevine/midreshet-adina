@@ -16,11 +16,13 @@ class ShiurController extends Controller
         $series = Series::findOrFail($seriesId);
 
         // Retrieve the shiur by its ID
-        $shiur = Shiur::where('id', $shiurId)->where('series_id', $seriesId)->firstOrFail();
+        $shiur = Shiur::where('id', $shiurId)
+            ->where('series_id', $seriesId)
+            ->firstOrFail();
 
-        // Retrieve all shiurs in the series, ordered by their `shiur_number_in_series`
+        // Retrieve all shiurs in the series, ordered by their `shiur_date` (earliest first)
         $shiurs = Shiur::where('series_id', $seriesId)
-            ->orderBy('shiur_number_in_series')
+            ->orderBy('shiur_date', 'asc')  // Order by shiur_date in ascending order
             ->get();
 
         // Check if the authenticated user has purchased the specific shiur or the entire series

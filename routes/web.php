@@ -56,6 +56,10 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::post('admin/shiur/update/{shiur}', [AdminController::class, 'updateShiur'])->name('admin.shiur.update');
     Route::get('admin/shiur/edit/{shiur}', [AdminController::class, 'editShiurForm'])->name('admin.shiur.editForm');
 
+    Route::get('admin/series/edit', [AdminController::class, 'editSeries'])->name('admin.series.edit');
+    Route::put('/admin/series/update/{id}', [AdminController::class, 'updateSeries'])->name('admin.series.update');
+    Route::get('admin/series/edit/{series}', [AdminController::class, 'editSeriesForm'])->name('admin.series.editForm');
+
     Route::get('/admin/messages', [AdminController::class, 'showMessages'])->name('admin.messages');
 
 
