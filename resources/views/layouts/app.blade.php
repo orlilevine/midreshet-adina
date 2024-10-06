@@ -187,11 +187,11 @@
 
 <!-- Hero Section: Displayed only on the Home route -->
 @if (Route::is('home'))
-    <div class="hero">
-        <div>
+    <div class="hero" style="background-image: url('{{ asset('images/KotelBlueSky.png') }}'); background-size: cover; background-position: center; height: 100vh;">
+        <div style="color: white; text-align: center; padding-top: 20vh;">
             <h1>Welcome to Midreshet Adina</h1>
             <p>Explore our enriching shiurim and grow on your spiritual journey.</p>
-            <a href="{{ route('about') }}" class="btn">Learn More</a>
+            <a href="{{ route('about') }}" class="btn btn-primary">Learn More</a>
         </div>
     </div>
 @endif
