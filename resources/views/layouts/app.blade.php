@@ -138,6 +138,15 @@
             padding: 15px;
             font-size: 0.9rem;
         }
+        .typed-text-1 span, .typed-text-2 span, .typed-button {
+            opacity: 0;
+            display: inline-block;
+            transition: opacity 0.3s ease-in;
+        }
+
+        .typed-text-1 span.fade-in, .typed-text-2 span.fade-in, .typed-button.fade-in {
+            opacity: 1;
+        }
     </style>
 </head>
 <body>
@@ -189,9 +198,9 @@
 @if (Route::is('home'))
     <div class="hero" style="background-image: url('{{ asset('images/KotelBlueSky.png') }}'); background-size: cover; background-position: center; height: 100vh;">
         <div style="color: white; text-align: center; padding-top: 20vh;">
-            <h1>Welcome to Midreshet Adina</h1>
-            <p>Explore our enriching shiurim and grow on your spiritual journey.</p>
-            <a href="{{ route('about') }}" class="btn btn-primary">Learn More</a>
+            <h1><span class="typed-text-1"></span></h1>
+            <p><span class="typed-text-2"></span></p>
+            <a href="{{ route('about') }}" class="btn btn-primary typed-button">Learn More</a>
         </div>
     </div>
 @endif
@@ -236,6 +245,49 @@
 <!-- Bootstrap and JS -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const texts = [
+            "Welcome to Midreshet Adina",
+            "Explore our enriching shiurim and grow on your spiritual journey"
+        ];
+        const typedElements = [document.querySelector('.typed-text-1'), document.querySelector('.typed-text-2')];
+        const button = document.querySelector('.typed-button'); // Button to fade in
+
+        let textIndex = 0;
+        let charIndex = 0;
+
+        function typeText() {
+            if (charIndex < texts[textIndex].length) {
+                const currentChar = texts[textIndex].charAt(charIndex);
+
+                // Create a span for each character or space
+                const span = document.createElement('span');
+                span.textContent = currentChar === ' ' ? '\u00A0' : currentChar; // Handle space explicitly
+                typedElements[textIndex].appendChild(span);
+
+                // Gradually fade in the character or space
+                setTimeout(() => {
+                    span.classList.add('fade-in');
+                }, 20);
+
+                charIndex++;
+                setTimeout(typeText, 50);  // Speed up typing
+            } else if (textIndex < texts.length - 1) {
+                textIndex++;
+                charIndex = 0;
+                setTimeout(typeText, 200);  // Move to next line
+            } else {
+                // Fade in the button after text is typed
+                setTimeout(() => {
+                    button.classList.add('fade-in');
+                }, 200);
+            }
+        }
+
+        typeText(); // Start typing effect
+    });
+</script>
 
 </body>
 </html>
