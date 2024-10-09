@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- Add custom CSS if necessary -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
     <style>
         body {
             background-color: #FFFFFF;
@@ -138,14 +139,69 @@
             padding: 15px;
             font-size: 0.9rem;
         }
-        .typed-text-1 span, .typed-text-2 span, .typed-button {
-            opacity: 0;
-            display: inline-block;
-            transition: opacity 0.3s ease-in;
+        .elevate-slides-container {
+            position: relative;
+            width: 100%;
+            height: 100vh; /* Full viewport height */
+            overflow: hidden;
         }
 
-        .typed-text-1 span.fade-in, .typed-text-2 span.fade-in, .typed-button.fade-in {
+        .elevate-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1s ease, transform 2s ease;
+            z-index: 1;
+        }
+
+        .elevate-slide.active {
             opacity: 1;
+            z-index: 2;
+        }
+
+        .elevate-text {
+            position: absolute;
+            bottom: 30%;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            color: white;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
+        }
+
+        .elevate-text h1 {
+            font-size: 4rem;
+            animation: slideIn 1s ease-out;
+        }
+
+        .elevate-text p {
+            font-size: 1.5rem;
+            margin-top: 1rem;
+            opacity: 0;
+            animation: fadeIn 2s ease-out 1s forwards;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(-100%);
+            }
+            to {
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
         }
     </style>
 </head>
@@ -196,15 +252,44 @@
 
 <!-- Hero Section: Displayed only on the Home route -->
 @if (Route::is('home'))
-    <div class="hero" style="background-image: url('{{ asset('images/KotelBlueSky.png') }}'); background-size: cover; background-position: center; height: 100vh;">
-        <div style="color: white; text-align: center; padding-top: 20vh;">
-            <h1><span class="typed-text-1"></span></h1>
-            <p><span class="typed-text-2"></span></p>
-            <a href="{{ route('about') }}" class="btn btn-primary typed-button">Learn More</a>
+    <div class="elevate-slides-container">
+        <div class="elevate-slide active" style="background-image: url('{{ asset('images/KotelBlueSky.png') }}');">
+            <div class="elevate-text">
+                <h1>Elevate Your Connection</h1>
+                <p>Stay connected to the holy land and its teachings, no matter where you are in the world.</p>
+            </div>
+        </div>
+
+        <div class="elevate-slide" style="background-image: url('{{ asset('images/Seforim.png') }}');">
+            <div class="elevate-text">
+                <h1>Elevate Your Learning</h1>
+                <p>Study with inspiring speakers from Eretz Yisrael and strengthen your understanding of Torah.</p>
+            </div>
+        </div>
+
+        <div class="elevate-slide" style="background-image: url('{{ asset('images/Sunrise.png') }}');">
+            <div class="elevate-text">
+                <h1>Elevate Your Spirit</h1>
+                <p>Gain spiritual depth through deep shiurim and enlightening Torah discussions.</p>
+            </div>
+        </div>
+
+        <div class="elevate-slide"  style="background-image: url('{{ asset('images/Connect.png') }}');">
+            <div class="elevate-text">
+                <h1>Elevate Your Community</h1>
+                <p>Join a global network of learners united by Torah and the teachings of Eretz Yisrael.</p>
+            </div>
+        </div>
+
+        <div class="elevate-slide" style="background-image: url('{{ asset('images/KotelCloseUp.png') }}');">
+            <div class="elevate-text">
+                <h1>Elevate Your Future</h1>
+                <p>Empower your life with the timeless wisdom of Torah, wherever you are.</p>
+            </div>
         </div>
     </div>
-@endif
 
+@endif
 
 <!-- Main Content -->
 <main class="container">
@@ -230,63 +315,37 @@
             <div class="col-lg-3 col-md-6">
                 <h5>Follow Us</h5>
                 <ul class="list-unstyled">
-                    <li><a href="#">Facebook</a></li>
-                    <li><a href="#">Instagram</a></li>
-                    <li><a href="#">YouTube</a></li>
+                    <li><a href="https://www.facebook.com" target="_blank">Facebook</a></li>
+                    <li><a href="https://www.instagram.com" target="_blank">Instagram</a></li>
+                    <li><a href="https://www.twitter.com" target="_blank">Twitter</a></li>
                 </ul>
             </div>
         </div>
     </div>
     <div class="footer-bottom text-center">
-        &copy; {{ date('Y') }} Midreshet Adina. All rights reserved.
+        <p>&copy; {{ date('Y') }} Midreshet Adina. All rights reserved.</p>
     </div>
 </footer>
 
-<!-- Bootstrap and JS -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+<!-- jQuery, Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const texts = [
-            "Welcome to Midreshet Adina",
-            "Explore our enriching shiurim and grow on your spiritual journey"
-        ];
-        const typedElements = [document.querySelector('.typed-text-1'), document.querySelector('.typed-text-2')];
-        const button = document.querySelector('.typed-button'); // Button to fade in
+    document.addEventListener("DOMContentLoaded", function() {
+        const slides = document.querySelectorAll('.elevate-slide');
+        let currentSlide = 0;
+        const slideDuration = 5000; // 5 seconds per slide
 
-        let textIndex = 0;
-        let charIndex = 0;
-
-        function typeText() {
-            if (charIndex < texts[textIndex].length) {
-                const currentChar = texts[textIndex].charAt(charIndex);
-
-                // Create a span for each character or space
-                const span = document.createElement('span');
-                span.textContent = currentChar === ' ' ? '\u00A0' : currentChar; // Handle space explicitly
-                typedElements[textIndex].appendChild(span);
-
-                // Gradually fade in the character or space
-                setTimeout(() => {
-                    span.classList.add('fade-in');
-                }, 20);
-
-                charIndex++;
-                setTimeout(typeText, 50);  // Speed up typing
-            } else if (textIndex < texts.length - 1) {
-                textIndex++;
-                charIndex = 0;
-                setTimeout(typeText, 200);  // Move to next line
-            } else {
-                // Fade in the button after text is typed
-                setTimeout(() => {
-                    button.classList.add('fade-in');
-                }, 200);
-            }
+        function showNextSlide() {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
         }
 
-        typeText(); // Start typing effect
+        setInterval(showNextSlide, slideDuration);
     });
+
 </script>
 
 </body>
