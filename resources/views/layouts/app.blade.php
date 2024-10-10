@@ -119,8 +119,9 @@
             background-position: center;
             opacity: 0;
             z-index: 1;
-            transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out;
+            transition: opacity 3s ease-in-out, transform 3s ease-in-out;
         }
+
 
         .elevate-slide.active {
             opacity: 1;
@@ -227,8 +228,8 @@
         <div class="elevate-slide active" style="background-image: url('{{ asset('images/KotelBlueSky.png') }}');">
             <div class="elevate-text">
                 <h1>Elevate Your Connection</h1>
-                <p>Stay connected to the holy land and its teachings, no matter where you are in the world.</p>
-                <a href="#learn-more" class="btn">Learn More</a>
+                <p>Stay connected to Eretz Yisrael, no matter where you are in the world.</p>
+                <a href="#learn-more" class="btn">Learn about our speakers from Eretz Yisrael</a>
             </div>
         </div>
 
@@ -236,17 +237,18 @@
         <div class="elevate-slide" style="background-image: url('{{ asset('images/Seforim.png') }}');">
             <div class="elevate-text">
                 <h1>Elevate Your Learning</h1>
-                <p>Study with inspiring speakers from Eretz Yisrael and strengthen your understanding of Torah.</p>
-                <a href="#learn-more" class="btn">Learn More</a>
+                <p>Feel disconnected from Torah, Hashkafah, or Halacha? </p>
+                 <p>Elevate is where you can reignite your inner spark.</p>
+                <a href="#learn-more" class="btn">Learn about our Shiurim</a>
             </div>
         </div>
 
         <!-- Third Slide -->
-        <div class="elevate-slide" style="background-image: url('{{ asset('images/Sunrise.png') }}');">
+        <div class="elevate-slide" style="background-image: url('{{ asset('images/beach.png') }}');">
             <div class="elevate-text">
-                <h1>Elevate Your Spirit</h1>
-                <p>Gain spiritual depth through deep shiurim and enlightening Torah discussions.</p>
-                <a href="#learn-more" class="btn">Learn More</a>
+                <h1>Elevate Your Happiness</h1>
+                <p>Grab a cozy spot on your couch, a warm cup of coffee, and your computer—it's time to spark relaxation and happiness.</p>
+                <a href="#learn-more" class="btn">Learn More about our Zoom classes</a>
             </div>
         </div>
 
@@ -254,17 +256,18 @@
         <div class="elevate-slide" style="background-image: url('{{ asset('images/Connect.png') }}');">
             <div class="elevate-text">
                 <h1>Elevate Your Community</h1>
-                <p>Join a global network of learners united by Torah and the teachings of Eretz Yisrael.</p>
-                <a href="#learn-more" class="btn">Learn More</a>
+                <p>Join a community of Frum women like yourselves trying to inspire their daily lives.</p>
+                <a href="#learn-more" class="btn">Learn More about our listeners</a>
             </div>
         </div>
 
         <!-- Fifth Slide -->
-        <div class="elevate-slide" style="background-image: url('{{ asset('images/KotelCloseUp.png') }}');">
+        <div class="elevate-slide" style="background-image: url('{{ asset('images/House.png') }}');">
             <div class="elevate-text">
-                <h1>Elevate Your Future</h1>
-                <p>Empower your life with the timeless wisdom of Torah, wherever you are.</p>
-                <a href="#learn-more" class="btn">Learn More</a>
+                <h1>Elevate Your Day</h1>
+                <p>Ever feel your running so many errands and never have a chance to stop and think? </p>
+                   <p> Join our classes and start each morning with inspiration.</p>
+                <a href="#learn-more" class="btn">See our schedule</a>
             </div>
         </div>
     </div>
@@ -315,7 +318,7 @@
 <script>
     let currentIndex = 0;
     const slides = document.querySelectorAll('.elevate-slide');
-    const slideInterval = 4000;
+    const slideInterval = 7000;
 
     function showSlide(index) {
         slides[currentIndex].classList.remove('active');
