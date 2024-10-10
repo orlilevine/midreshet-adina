@@ -31,6 +31,33 @@
         </div>
     </section>
 
+    <!-- Statistics Section -->
+    <section class="statistics py-5 text-center" style="background-color: #001f3f; color: white;">
+        <h2 class="display-4">Join Our Journey</h2>
+        <p class="lead mb-5">Celebrating our impact in the community!</p>
+        <div class="row justify-content-center">
+            <div class="col-md-4 mb-4">
+                <div class="statistic" style="transition: transform 0.3s; padding: 20px; border-radius: 10px; background-color: #ff007f; color: white;">
+                    <h1 class="count" data-count="2000">0</h1>
+                    <p>Shiurim Downloads</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="statistic" style="transition: transform 0.3s; padding: 20px; border-radius: 10px; background-color: #ff007f; color: white;">
+                    <h1 class="count" data-count="100">0</h1>
+                    <p>Locations</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="statistic" style="transition: transform 0.3s; padding: 20px; border-radius: 10px; background-color: #ff007f; color: white;">
+                    <h1 class="count" data-count="1000">0</h1>
+                    <p>Listeners</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
     <!-- Interactive Learning Path Section -->
     <section class="learning-path my-5 py-5 text-center">
         <h2 class="display-4">Choose Your Path</h2>
@@ -179,4 +206,36 @@
         padding: 10px; /* Add space between cards */
     }
 
+    .statistics .statistic {
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s;
+    }
+
+    .statistics .statistic:hover {
+        transform: scale(1.05);
+    }
+
+    .statistics h1 {
+        font-size: 3rem; /* Larger font size for impact */
+        margin: 0;
+    }
+
+
 </style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const counters = document.querySelectorAll('.count');
+        counters.forEach(counter => {
+            const countTo = parseInt(counter.getAttribute('data-count'));
+            let count = 0;
+            const increment = Math.ceil(countTo / 100); // Adjust increment based on desired speed
+            const interval = setInterval(() => {
+                count += increment;
+                counter.textContent = count > countTo ? countTo : count;
+                if (count >= countTo) clearInterval(interval);
+            }, 50); // Adjust speed of counting
+        });
+    });
+</script>
+
