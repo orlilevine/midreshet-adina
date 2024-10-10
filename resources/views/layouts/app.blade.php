@@ -10,6 +10,14 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
     <style>
+        @if (Route::is('home'))
+.container {
+            padding-left: 0;
+            padding-right: 0;
+            max-width: 100%;
+        }
+        @endif
+
         body {
             background-color: #FFFFFF;
             margin: 0;
