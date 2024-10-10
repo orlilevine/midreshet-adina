@@ -60,31 +60,6 @@
         </div>
     </section>
 
-
-    <section class="learning-path my-5 py-5 text-center container-fluid px-0">
-        <div class="container choose-your-path-container">
-            <h2 class="display-4">Choose Your Path</h2>
-            <p class="lead mb-5">Select a topic that speaks to you and start your journey of spiritual growth.</p>
-            <div class="row justify-content-center">
-                <!-- Path Buttons -->
-                @php
-                    $paths = ['Halacha', 'Shabbos', 'Torah', 'Mussar', 'Hashkafa', 'Tznius', 'Emunah', 'Yom Tov'];
-                @endphp
-
-                @foreach($paths as $path)
-                    <div class="col-md-3 col-sm-6 mb-4">
-                        <div class="card learning-card" style="border: none; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); border-radius: 15px; background-color: #001f3f; color: white;">
-                            <div class="card-body d-flex flex-column justify-content-center align-items-center" style="height: 150px;">
-                                <h5 class="card-title mb-3" style="font-size: 1.5rem;">{{ $path }}</h5>
-                                <a href="#" class="btn btn-light" style="background-color: #ff007f; color: white; padding: 8px 15px; font-size: 1rem;">Recommend a series</a>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-        </div>
-    </section>
-
     <!-- New Section: Why Choose Us -->
     <section class="why-choose-us py-5 text-center" style="background-color: #ff007f;">
         <h2 class="display-4">Why Choose Midreshet Adina?</h2>
@@ -115,38 +90,6 @@
 
 @endsection
 
-<style>
-    .intro {
-        background-position: center;
-        background-size: cover;
-        color: white;
-        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
-        height: 100vh;
-    }
-    .testimonial {
-        transition: transform 0.5s ease;
-    }
-
-    .testimonial:hover {
-        transform: scale(1.05);
-    }
-
-    /* Animation for the cards */
-    @keyframes grow {
-        0%, 100% { transform: scale(0.8); opacity: 0.9; }
-        50% { transform: scale(1); opacity: 1; }
-    }
-
-    /* Apply the animation to each card */
-    .series-card:nth-child(1) { animation: grow 6s infinite; }
-    .series-card:nth-child(2) { animation: grow 6s infinite 2s; }
-    .series-card:nth-child(3) { animation: grow 6s infinite 4s; }
-
-    /* Improved carousel buttons */
-    .carousel-control-prev, .carousel-control-next {
-        filter: brightness(0) invert(1); /* Better visibility on dark backgrounds */
-    }
-</style>
 
 <style>
     .card-container {
@@ -195,16 +138,7 @@
         background-color: #ff007f;
         color: white;
     }
-    .learning-card {
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        height: 150px; /* Make the card smaller */
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    }
 
-    .learning-card:hover {
-        transform: scale(1.05);
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-    }
 
     .row .col-md-3, .col-sm-6 {
         padding: 10px; /* Add space between cards */
@@ -223,16 +157,14 @@
         font-size: 3rem; /* Larger font size for impact */
         margin: 0;
     }
-    .featured-shiurim-container,
-    .choose-your-path-container {
+    .featured-shiurim-container{
         max-width: 1200px;
         margin-left: auto;
         margin-right: auto;
     }
 
     @media (min-width: 992px) {
-        .featured-shiurim-container,
-        .choose-your-path-container {
+        .featured-shiurim-container{
             padding-left: 20px;
             padding-right: 20px;
         }
