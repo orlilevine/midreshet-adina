@@ -69,44 +69,7 @@
             font-size: 3rem;
         }
 
-        .hero {
-            background-image: url('path-to-your-image.jpg'); /* Add a beautiful background image */
-            background-size: cover;
-            background-position: center;
-            height: 80vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: white;
-            box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.4);
-        }
 
-        .hero h1 {
-            font-size: 4rem;
-            font-weight: 700;
-            text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
-        }
-
-        .hero p {
-            font-size: 1.5rem;
-            margin-top: 20px;
-        }
-
-        .hero .btn {
-            background-color: #ff007f;
-            color: white;
-            font-size: 1.2rem;
-            padding: 15px 30px;
-            border-radius: 50px;
-            margin-top: 20px;
-            transition: transform 0.3s, background-color 0.3s;
-        }
-
-        .hero .btn:hover {
-            background-color: #001f3f;
-            transform: translateY(-5px);
-        }
 
         main {
             padding: 60px 0;
@@ -142,7 +105,7 @@
         .elevate-slides-container {
             position: relative;
             width: 100%;
-            height: 100vh; /* Full viewport height */
+            height: 100vh;
             overflow: hidden;
         }
 
@@ -155,18 +118,19 @@
             background-size: cover;
             background-position: center;
             opacity: 0;
-            transition: opacity 1s ease, transform 2s ease;
             z-index: 1;
+            transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out;
         }
 
         .elevate-slide.active {
             opacity: 1;
             z-index: 2;
+            transform: scale(1.05); /* Zoom effect for active slide */
         }
 
         .elevate-text {
             position: absolute;
-            bottom: 30%;
+            bottom: 20%;
             left: 50%;
             transform: translateX(-50%);
             text-align: center;
@@ -176,25 +140,31 @@
 
         .elevate-text h1 {
             font-size: 4rem;
-            animation: slideIn 1s ease-out;
         }
 
         .elevate-text p {
             font-size: 1.5rem;
             margin-top: 1rem;
             opacity: 0;
-            animation: fadeIn 2s ease-out 1s forwards;
+            animation: fadeIn 1.5s ease-out 0s forwards; /* Shortened duration */
         }
 
-        @keyframes slideIn {
-            from {
-                transform: translateX(-100%);
-            }
-            to {
-                transform: translateX(0);
-            }
+        .elevate-text .btn {
+            background-color: #ff007f;
+            color: white;
+            font-size: 1.2rem;
+            padding: 15px 30px;
+            border-radius: 50px;
+            margin-top: 20px;
+            transition: transform 0.3s, background-color 0.3s;
         }
 
+        .elevate-text .btn:hover {
+            background-color: #001f3f;
+            transform: translateY(-5px);
+        }
+
+        /* Keyframes for fade-in and slide-in effects */
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -253,41 +223,52 @@
 <!-- Hero Section: Displayed only on the Home route -->
 @if (Route::is('home'))
     <div class="elevate-slides-container">
+        <!-- First Slide -->
         <div class="elevate-slide active" style="background-image: url('{{ asset('images/KotelBlueSky.png') }}');">
             <div class="elevate-text">
                 <h1>Elevate Your Connection</h1>
                 <p>Stay connected to the holy land and its teachings, no matter where you are in the world.</p>
+                <a href="#learn-more" class="btn">Learn More</a>
             </div>
         </div>
 
+        <!-- Second Slide -->
         <div class="elevate-slide" style="background-image: url('{{ asset('images/Seforim.png') }}');">
             <div class="elevate-text">
                 <h1>Elevate Your Learning</h1>
                 <p>Study with inspiring speakers from Eretz Yisrael and strengthen your understanding of Torah.</p>
+                <a href="#learn-more" class="btn">Learn More</a>
             </div>
         </div>
 
+        <!-- Third Slide -->
         <div class="elevate-slide" style="background-image: url('{{ asset('images/Sunrise.png') }}');">
             <div class="elevate-text">
                 <h1>Elevate Your Spirit</h1>
                 <p>Gain spiritual depth through deep shiurim and enlightening Torah discussions.</p>
+                <a href="#learn-more" class="btn">Learn More</a>
             </div>
         </div>
 
-        <div class="elevate-slide"  style="background-image: url('{{ asset('images/Connect.png') }}');">
+        <!-- Fourth Slide -->
+        <div class="elevate-slide" style="background-image: url('{{ asset('images/Connect.png') }}');">
             <div class="elevate-text">
                 <h1>Elevate Your Community</h1>
                 <p>Join a global network of learners united by Torah and the teachings of Eretz Yisrael.</p>
+                <a href="#learn-more" class="btn">Learn More</a>
             </div>
         </div>
 
+        <!-- Fifth Slide -->
         <div class="elevate-slide" style="background-image: url('{{ asset('images/KotelCloseUp.png') }}');">
             <div class="elevate-text">
                 <h1>Elevate Your Future</h1>
                 <p>Empower your life with the timeless wisdom of Torah, wherever you are.</p>
+                <a href="#learn-more" class="btn">Learn More</a>
             </div>
         </div>
     </div>
+
 
 @endif
 
@@ -332,19 +313,21 @@
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const slides = document.querySelectorAll('.elevate-slide');
-        let currentSlide = 0;
-        const slideDuration = 5000; // 5 seconds per slide
+    let currentIndex = 0;
+    const slides = document.querySelectorAll('.elevate-slide');
+    const slideInterval = 4000;
 
-        function showNextSlide() {
-            slides[currentSlide].classList.remove('active');
-            currentSlide = (currentSlide + 1) % slides.length;
-            slides[currentSlide].classList.add('active');
-        }
+    function showSlide(index) {
+        slides[currentIndex].classList.remove('active');
+        currentIndex = (index + slides.length) % slides.length; // Wrap around
+        slides[currentIndex].classList.add('active');
+    }
 
-        setInterval(showNextSlide, slideDuration);
-    });
+    function nextSlide() {
+        showSlide(currentIndex + 1);
+    }
+
+    setInterval(nextSlide, slideInterval);
 
 </script>
 
