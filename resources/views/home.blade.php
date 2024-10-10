@@ -3,38 +3,41 @@
 @section('content')
 
     <!-- Featured Shiurim Section -->
-    <section class="explore-shiurim my-5">
-        <h2 class="text-center display-4">Featured Shiurim</h2>
-        <p class="text-center lead">Join our most popular Series.</p>
-        <div class="row justify-content-center" id="shiurContainer">
-            @foreach($featuredSeries as $index => $series)
-                <div class="col-md-4 mb-4">
-                    <div class="card-container" style="perspective: 1000px;">
-                        <div class="card-flip" style="transition: transform 0.8s; transform-style: preserve-3d;">
-                            <!-- Front Side of the Card -->
-                            <div class="card front" style="position: relative; width: 100%; height: 350px; backface-visibility: hidden; background-color: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);">
-                                <img src="{{ asset('storage/' . $series->image_path) }}" alt="{{ $series->title }}" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.8;">
-                                <div class="card-content text-center" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgba(0, 0, 0, 0.5); color: white; padding: 10px; border-radius: 10px;">
-                                    <h5>{{ $series->title }}</h5>
+    <section class="explore-shiurim my-5 container-fluid px-0">
+        <div class="container featured-shiurim-container">
+            <h2 class="text-center display-4">Featured Shiurim</h2>
+            <p class="text-center lead">Join our most popular Series.</p>
+            <div class="row justify-content-center" id="shiurContainer">
+                @foreach($featuredSeries as $index => $series)
+                    <div class="col-md-4 mb-4">
+                        <div class="card-container" style="perspective: 1000px;">
+                            <div class="card-flip" style="transition: transform 0.8s; transform-style: preserve-3d;">
+                                <!-- Front Side of the Card -->
+                                <div class="card front" style="position: relative; width: 100%; height: 350px; backface-visibility: hidden; background-color: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);">
+                                    <img src="{{ asset('storage/' . $series->image_path) }}" alt="{{ $series->title }}" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.8;">
+                                    <div class="card-content text-center" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgba(0, 0, 0, 0.5); color: white; padding: 10px; border-radius: 10px;">
+                                        <h5>{{ $series->title }}</h5>
+                                    </div>
                                 </div>
-                            </div>
-                            <!-- Back Side of the Card -->
-                            <div class="card back" style="position: absolute; width: 100%; height: 100%; backface-visibility: hidden; background-color: #001f3f; color: white; border-radius: 10px; padding: 20px; transform: rotateY(180deg);">
-                                <h5>{{ $series->title }}</h5>
-                                <p>{{ Str::limit($series->description, 100) }}</p>
-                                <a href="{{ route('series.show', ['id' => $series->id]) }}" class="btn btn-light btn-block">View this series</a>
+                                <!-- Back Side of the Card -->
+                                <div class="card back" style="position: absolute; width: 100%; height: 100%; backface-visibility: hidden; background-color: #001f3f; color: white; border-radius: 10px; padding: 20px; transform: rotateY(180deg);">
+                                    <h5>{{ $series->title }}</h5>
+                                    <p>{{ Str::limit($series->description, 100) }}</p>
+                                    <a href="{{ route('series.show', ['id' => $series->id]) }}" class="btn btn-light btn-block">View this series</a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            @endforeach
+                @endforeach
+            </div>
         </div>
     </section>
 
+
     <!-- Statistics Section -->
     <section class="statistics py-5 text-center" style="background-color: #001f3f; color: white;">
-        <h2 class="display-4">Join Our Journey</h2>
-        <p class="lead mb-5">Celebrating our impact in the community!</p>
+        <h2 class="display-4">Elevate</h2>
+        <p class="lead mb-5">Join our community!</p>
         <div class="row justify-content-center">
             <div class="col-md-4 mb-4">
                 <div class="statistic" style="transition: transform 0.3s; padding: 20px; border-radius: 10px; background-color: #ff007f; color: white;">
@@ -58,26 +61,27 @@
     </section>
 
 
-    <!-- Interactive Learning Path Section -->
-    <section class="learning-path my-5 py-5 text-center">
-        <h2 class="display-4">Choose Your Path</h2>
-        <p class="lead mb-5">Select a topic that speaks to you and start your journey of spiritual growth.</p>
-        <div class="row justify-content-center">
-            <!-- Path Buttons -->
-            @php
-                $paths = ['Halacha', 'Shabbos', 'Torah', 'Mussar', 'Hashkafa', 'Tznius', 'Emunah', 'Yom Tov'];
-            @endphp
+    <section class="learning-path my-5 py-5 text-center container-fluid px-0">
+        <div class="container choose-your-path-container">
+            <h2 class="display-4">Choose Your Path</h2>
+            <p class="lead mb-5">Select a topic that speaks to you and start your journey of spiritual growth.</p>
+            <div class="row justify-content-center">
+                <!-- Path Buttons -->
+                @php
+                    $paths = ['Halacha', 'Shabbos', 'Torah', 'Mussar', 'Hashkafa', 'Tznius', 'Emunah', 'Yom Tov'];
+                @endphp
 
-            @foreach($paths as $path)
-                <div class="col-md-3 col-sm-6 mb-4">
-                    <div class="card learning-card" style="border: none; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); border-radius: 15px; background-color: #001f3f; color: white;">
-                        <div class="card-body d-flex flex-column justify-content-center align-items-center" style="height: 150px;">
-                            <h5 class="card-title mb-3" style="font-size: 1.5rem;">{{ $path }}</h5>
-                            <a href="#" class="btn btn-light" style="background-color: #ff007f; color: white; padding: 8px 15px; font-size: 1rem;">Recommend a series</a>
+                @foreach($paths as $path)
+                    <div class="col-md-3 col-sm-6 mb-4">
+                        <div class="card learning-card" style="border: none; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); border-radius: 15px; background-color: #001f3f; color: white;">
+                            <div class="card-body d-flex flex-column justify-content-center align-items-center" style="height: 150px;">
+                                <h5 class="card-title mb-3" style="font-size: 1.5rem;">{{ $path }}</h5>
+                                <a href="#" class="btn btn-light" style="background-color: #ff007f; color: white; padding: 8px 15px; font-size: 1rem;">Recommend a series</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-            @endforeach
+                @endforeach
+            </div>
         </div>
     </section>
 
@@ -219,6 +223,21 @@
         font-size: 3rem; /* Larger font size for impact */
         margin: 0;
     }
+    .featured-shiurim-container,
+    .choose-your-path-container {
+        max-width: 1200px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    @media (min-width: 992px) {
+        .featured-shiurim-container,
+        .choose-your-path-container {
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+    }
+
 
 
 </style>
