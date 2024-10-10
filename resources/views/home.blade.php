@@ -237,12 +237,52 @@
             padding-right: 20px;
         }
     }
+    /* Add 3D rotation animation */
+    @keyframes rotateCard {
+        0% {
+            transform: rotateY(0deg);
+        }
+        100% {
+            transform: rotateY(360deg);
+        }
+    }
 
+    /* Apply animation to the card-flip */
+    .card-flip {
+        animation: rotateCard 6s infinite linear; /* Continuous rotation every 6 seconds */
+        transform-style: preserve-3d;
+    }
 
+    .card-container {
+        perspective: 1000px; /* Gives the 3D perspective */
+        width: 100%;
+        height: 100%;
+        position: relative;
+    }
 
+    /* Style the front and back of the cards */
+    .front, .back {
+        width: 100%;
+        height: 350px;
+        position: absolute;
+        backface-visibility: hidden;
+        border-radius: 10px;
+        transition: all 0.8s ease;
+    }
+
+    .front {
+        background-color: #fff;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .back {
+        transform: rotateY(180deg); /* Flip the back of the card */
+        background-color: #001f3f;
+        color: white;
+    }
 </style>
 
-<script>
+    <script>
     document.addEventListener('DOMContentLoaded', function () {
         const counters = document.querySelectorAll('.count');
         counters.forEach(counter => {
