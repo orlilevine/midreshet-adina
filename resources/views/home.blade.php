@@ -34,52 +34,51 @@
     </section>
 
 
-    <!-- Statistics Section -->
-    <section class="statistics py-5 text-center" style="background-color: #001f3f; color: white;">
-        <h2 class="display-4">Elevate</h2>
-        <p class="lead mb-5">Join our community!</p>
-        <div class="row justify-content-center">
-            <div class="col-md-4 mb-4">
-                <div class="statistic" style="transition: transform 0.3s; padding: 20px; border-radius: 10px; background-color: #ff007f; color: white;">
-                    <h1 class="count" data-count="2000">0</h1>
-                    <p>Shiurim Downloads</p>
-                </div>
-            </div>
-            <div class="col-md-4 mb-4">
-                <div class="statistic" style="transition: transform 0.3s; padding: 20px; border-radius: 10px; background-color: #ff007f; color: white;">
-                    <h1 class="count" data-count="100">0</h1>
-                    <p>Locations</p>
-                </div>
-            </div>
-            <div class="col-md-4 mb-4">
-                <div class="statistic" style="transition: transform 0.3s; padding: 20px; border-radius: 10px; background-color: #ff007f; color: white;">
-                    <h1 class="count" data-count="1000">0</h1>
-                    <p>Listeners</p>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- New Section: Why Choose Us -->
+        <!-- Statistics Section -->
+        <section class="statistics py-5 text-center" style="background-color: #001f3f; color: white;">
+            <h2 class="display-4">Elevate</h2>
+            <p class="lead mb-5">Join our community!</p>
+            <div class="row justify-content-center">
+                <div class="col-md-4 mb-4">
+                    <div class="statistic" style="transition: transform 0.3s; padding: 20px; border-radius: 10px; background-color: #ff007f; color: white;">
+                        <h1 class="count" data-count="2000">0</h1>
+                        <p>Shiurim Downloads</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="statistic" style="transition: transform 0.3s; padding: 20px; border-radius: 10px; background-color: #ff007f; color: white;">
+                        <h1 class="count" data-count="100">0</h1>
+                        <p>Locations</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="statistic" style="transition: transform 0.3s; padding: 20px; border-radius: 10px; background-color: #ff007f; color: white;">
+                        <h1 class="count" data-count="1000">0</h1>
+                        <p>Listeners</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    <br><br><br><br>
+
+    <!-- Why Choose Us Section -->
     <section class="why-choose-us py-5 text-center" style="background-color: #ff007f;">
         <h2 class="display-4">Why Choose Midreshet Adina?</h2>
-        <div class="row mt-5">
-            <div class="col-md-4">
-                <div class="p-4" style="background-color: white; border-radius: 10px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
+        <div class="slide-container mt-5">
+            <div class="slides">
+                <div class="slide-item p-4" style="background-color: white;">
                     <i class="fas fa-lightbulb fa-3x text-warning mb-3"></i>
                     <h4>Inspiring Classes</h4>
                     <p>Engage with our deep and inspiring Torah teachings. Learn from renowned speakers and gain new insights every day.</p>
                 </div>
-            </div>
-            <div class="col-md-4">
-                <div class="p-4" style="background-color: white; border-radius: 10px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
+                <div class="slide-item p-4" style="background-color: white;">
                     <i class="fas fa-users fa-3x text-success mb-3"></i>
                     <h4>Vibrant Community</h4>
                     <p>Join a supportive, like-minded community of women dedicated to learning and spiritual growth. You’ll feel right at home!</p>
                 </div>
-            </div>
-            <div class="col-md-4">
-                <div class="p-4" style="background-color: white; border-radius: 10px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
+                <div class="slide-item p-4" style="background-color: white;">
                     <i class="fas fa-torah fa-3x text-primary mb-3"></i>
                     <h4>Flexible Learning</h4>
                     <p>Access our shiurim at your own pace, whenever you’re ready. Learn Torah on your terms, with courses designed to fit your life.</p>
@@ -87,6 +86,8 @@
             </div>
         </div>
     </section>
+
+
 
 @endsection
 
@@ -139,7 +140,6 @@
         color: white;
     }
 
-
     .row .col-md-3, .col-sm-6 {
         padding: 10px; /* Add space between cards */
     }
@@ -157,76 +157,135 @@
         font-size: 3rem; /* Larger font size for impact */
         margin: 0;
     }
-    .featured-shiurim-container{
+
+    .featured-shiurim-container {
         max-width: 1200px;
         margin-left: auto;
         margin-right: auto;
     }
 
     @media (min-width: 992px) {
-        .featured-shiurim-container{
+        .featured-shiurim-container {
             padding-left: 20px;
             padding-right: 20px;
         }
     }
-    /* Add 3D rotation animation */
-    @keyframes rotateCard {
+
+    /* Sliding animation for boxes */
+    .sliding-box {
+        position: relative;
+        animation: slide-in 0.5s forwards;
+        opacity: 0; /* Start invisible */
+    }
+
+    @keyframes slide-in {
         0% {
-            transform: rotateY(0deg);
+            transform: translateX(-100%);
+            opacity: 0; /* Start invisible */
         }
         100% {
-            transform: rotateY(360deg);
+            transform: translateX(0);
+            opacity: 1; /* Fade in */
         }
     }
 
-    /* Apply animation to the card-flip */
-    .card-flip {
-        animation: rotateCard 6s infinite linear; /* Continuous rotation every 6 seconds */
-        transform-style: preserve-3d;
+    .sliding-box:nth-child(1) {
+        animation-delay: 0s; /* No delay for the first box */
     }
 
-    .card-container {
-        perspective: 1000px; /* Gives the 3D perspective */
-        width: 100%;
-        height: 100%;
+    .sliding-box:nth-child(2) {
+        animation-delay: 0.2s; /* Slight delay for the second box */
+    }
+
+    .sliding-box:nth-child(3) {
+        animation-delay: 0.4s; /* More delay for the third box */
+    }
+    .why-choose-us {
         position: relative;
+        overflow: hidden;
     }
 
-    /* Style the front and back of the cards */
-    .front, .back {
-        width: 100%;
-        height: 350px;
-        position: absolute;
-        backface-visibility: hidden;
-        border-radius: 10px;
-        transition: all 0.8s ease;
+    .slide-container {
+        width: 100%; /* Make the container span the entire width */
+        margin: 0 auto;
+        position: relative;
+        overflow: hidden;
     }
 
-    .front {
-        background-color: #fff;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    .slides {
+        display: flex;
+        animation: slide-continuous 10s linear infinite; /* Faster sliding effect */
     }
 
-    .back {
-        transform: rotateY(180deg); /* Flip the back of the card */
-        background-color: #001f3f;
-        color: white;
+    .slide-item {
+        flex-shrink: 0;
+        width: 33.33%; /* Adjust width as needed */
+        margin-right: 20px;
+        opacity: 1;
+        transition: opacity 0.5s ease-in-out;
     }
+
+    /* Keyframes for continuous sliding with overlap */
+    @keyframes slide-continuous {
+        0% {
+            transform: translateX(0); /* Start at the beginning */
+        }
+        30% {
+            transform: translateX(-50%); /* Midway through the transition */
+        }
+        60% {
+            transform: translateX(-50%); /* Hold the position with overlap */
+        }
+        100% {
+            transform: translateX(-100%); /* Fully off-screen */
+        }
+    }
+
+
+    @media screen and (max-width: 768px) {
+        .slide-item {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .slides {
+            flex-direction: column;
+            animation: none; /* No sliding on smaller screens */
+        }
+    }
+
+
 </style>
 
-    <script>
+<script>
     document.addEventListener('DOMContentLoaded', function () {
         const counters = document.querySelectorAll('.count');
-        counters.forEach(counter => {
-            const countTo = parseInt(counter.getAttribute('data-count'));
-            let count = 0;
-            const increment = Math.ceil(countTo / 100); // Adjust increment based on desired speed
-            const interval = setInterval(() => {
-                count += increment;
-                counter.textContent = count > countTo ? countTo : count;
-                if (count >= countTo) clearInterval(interval);
-            }, 50); // Adjust speed of counting
-        });
-    });
-</script>
+        let observerOptions = {
+            root: null,  // Use the viewport as the root
+            threshold: 0.5  // Trigger when 50% of the element is visible
+        };
 
+        let observer = new IntersectionObserver(function (entries, observer) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const counter = entry.target;
+                    const countTo = parseInt(counter.getAttribute('data-count'));
+                    let count = 0;
+                    const increment = Math.ceil(countTo / 100);
+                    const interval = setInterval(() => {
+                        count += increment;
+                        counter.textContent = count > countTo ? countTo : count;
+                        if (count >= countTo) clearInterval(interval);
+                    }, 50);
+                    observer.unobserve(counter);  // Stop observing once the animation is done
+                }
+            });
+        }, observerOptions);
+
+        counters.forEach(counter => {
+            observer.observe(counter);  // Start observing each counter
+        });
+
+    });
+
+</script>
