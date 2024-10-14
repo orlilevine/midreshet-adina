@@ -96,37 +96,102 @@
 
     <br><br><br><br>
 
-    <!-- Why Choose Us Section -->
-    <section class="why-choose-us py-5 text-center" style="background-color: #ff007f;">
-        <h2 class="display-4">Why Choose Midreshet Adina?</h2>
-        <div class="slide-container mt-5">
-            <div class="slides">
-                <div class="slide-item p-4" style="background-color: white;">
-                    <i class="fas fa-lightbulb fa-3x text-warning mb-3"></i>
-                    <h4>Inspiring Classes</h4>
-                    <p>Engage with our deep and inspiring Torah teachings. Learn from renowned speakers and gain new insights every day.</p>
+    <section class="why-choose-us py-5 text-center" style="background-color: #001f3f;">
+        <h2 class="display-4 text-light">Discover the Midreshet Adina Difference</h2>
+        <p class="lead text-light mb-5">Experience Learning Like Never Before</p>
+        <div class="carousel">
+            <div class="grid-item" style="background-image: url('/path/to/image1.jpg');">
+                <div class="overlay">
+                    <i class="fas fa-lightbulb fa-3x mb-3"></i>
+                    <h4>Inspiring Shiurim</h4>
+                    <p>Learn from top-tier Teachers and gain profound insights.</p>
                 </div>
-                <div class="slide-item p-4" style="background-color: white;">
-                    <i class="fas fa-users fa-3x text-success mb-3"></i>
-                    <h4>Vibrant Community</h4>
-                    <p>Join a supportive, like-minded community of women dedicated to learning and spiritual growth. You’ll feel right at home!</p>
+            </div>
+            <div class="grid-item" style="background-image: url('/path/to/image2.jpg');">
+                <div class="overlay">
+                    <i class="fas fa-users fa-3x mb-3"></i>
+                    <h4>Supportive Community</h4>
+                    <p>Be part of a vibrant, growth-focused women's community.</p>
                 </div>
-                <div class="slide-item p-4" style="background-color: white;">
-                    <i class="fas fa-torah fa-3x text-primary mb-3"></i>
-                    <h4>Flexible Learning</h4>
-                    <p>Access our shiurim at your own pace, whenever you’re ready. Learn Torah on your terms, with courses designed to fit your life.</p>
+            </div>
+            <div class="grid-item" style="background-image: url('/path/to/image3.jpg');">
+                <div class="overlay">
+                    <i class="fas fa-laptop-code fa-3x mb-3"></i>
+                    <h4>Accessible Anywhere</h4>
+                    <p>Our online platform brings Torah learning to you, wherever you are.</p>
+                </div>
+            </div>
+            <div class="grid-item" style="background-image: url('/path/to/image4.jpg');">
+                <div class="overlay">
+                    <i class="fas fa-calendar-alt fa-3x mb-3"></i>
+                    <h4>Flexible Schedule</h4>
+                    <p>Watch shiurim anytime that fits into your busy life.</p>
                 </div>
             </div>
         </div>
     </section>
 
-
-
 @endsection
 
 
 <style>
-    /* Countdown Timer Styling */
+    .why-choose-us {
+        perspective: 1000px; /* Adds depth for the 3D effect */
+        overflow: hidden;
+    }
+
+    .carousel {
+        position: relative;
+        width: 100%;
+        height: 300px;
+        transform-style: preserve-3d;
+        transform: rotateY(0deg);
+        transition: transform 1s;
+        animation: rotateCarousel 10s infinite linear;
+    }
+
+
+    .grid-item {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 200px;
+        height: 200px;
+        margin: -100px 0 0 -100px;
+        background-size: cover;
+        background-position: center;
+        transform-style: preserve-3d;
+        backface-visibility: hidden; /* Prevents items from being visible when they're behind */
+        border-radius: 15px;
+        transition: transform 1s;
+    }
+
+    .grid-item .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(255, 0, 127, 0.8); /* Changed to #ff007f with some opacity */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: white;
+    }
+
+    .grid-item .overlay h4, .grid-item .overlay p {
+        color: white;
+    }
+
+    @keyframes rotateCarousel {
+        from {
+            transform: rotateY(0deg);
+        }
+        to {
+            transform: rotateY(-360deg); /* Full circle rotation */
+        }
+    }
     .countdown-box {
         background-color: #fff;
         color: #001f3f;
@@ -226,10 +291,6 @@
         }
     }
 
-    .why-choose-us {
-        position: relative;
-        overflow: hidden;
-    }
 
     .slide-container {
         width: 100%; /* Make the container span the entire width */
@@ -284,6 +345,30 @@
 </style>
 
 <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const gridItems = document.querySelectorAll('.grid-item');
+        const totalItems = gridItems.length;
+        const angleStep = 360 / totalItems;
+
+        function positionItemsInCircle() {
+            gridItems.forEach((item, index) => {
+                const angle = angleStep * index;
+                const theta = angle * (Math.PI / 180); // Convert degrees to radians
+
+                // Decrease the radius values to make the circle smaller
+                const radius = 200; // Adjust the radius size here (smaller value for a smaller circle)
+                const x = radius * Math.sin(theta); // X position in the circle
+                const z = radius * Math.cos(theta); // Z depth for the 3D effect
+
+                item.style.transform = `rotateY(${angle}deg) translateZ(${z}px) translateX(${x}px)`;
+            });
+        }
+
+        // Call the function to position items
+        positionItemsInCircle();
+    });
+
+
     document.addEventListener('DOMContentLoaded', function () {
         const counters = document.querySelectorAll('.count');
         let observerOptions = {
