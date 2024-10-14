@@ -33,7 +33,34 @@
         </div>
     </section>
 
+    <!-- Event Countdown Timer -->
+    <section class="event-countdown py-5 text-center" style="background-color: #ff007f;">
+        <h2 class="text-light">Upcoming Event: Mrs. Schoonmaker Live Shiur in...</h2>
+        <div id="countdown" class="d-flex justify-content-center">
+            <div class="countdown-box mx-3">
+                <span id="days" class="display-4">00</span>
+                <p>Days</p>
+            </div>
+            <div class="countdown-box mx-3">
+                <span id="hours" class="display-4">00</span>
+                <p>Hours</p>
+            </div>
+            <div class="countdown-box mx-3">
+                <span id="minutes" class="display-4">00</span>
+                <p>Minutes</p>
+            </div>
+            <div class="countdown-box mx-3">
+                <span id="seconds" class="display-4">00</span>
+                <p>Seconds</p>
+            </div>
+        </div>
+        <div class="shiur-info mt-4">
+            <h3 class="text-light">Date: December 15, 2024</h3>
+            <h4 class="text-light">Location: Kew Gardens Hills</h4>
+        </div>
+    </section>
 
+    <br><br><br><br>
 
         <!-- Statistics Section -->
         <section class="statistics py-5 text-center" style="background-color: #001f3f; color: white;">
@@ -93,6 +120,16 @@
 
 
 <style>
+    /* Countdown Timer Styling */
+    .countdown-box {
+        background-color: #fff;
+        color: #001f3f;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        text-align: center;
+    }
+
     .card-container {
         perspective: 1000px;
     }
@@ -171,12 +208,6 @@
         }
     }
 
-    /* Sliding animation for boxes */
-    .sliding-box {
-        position: relative;
-        animation: slide-in 0.5s forwards;
-        opacity: 0; /* Start invisible */
-    }
 
     @keyframes slide-in {
         0% {
@@ -189,17 +220,6 @@
         }
     }
 
-    .sliding-box:nth-child(1) {
-        animation-delay: 0s; /* No delay for the first box */
-    }
-
-    .sliding-box:nth-child(2) {
-        animation-delay: 0.2s; /* Slight delay for the second box */
-    }
-
-    .sliding-box:nth-child(3) {
-        animation-delay: 0.4s; /* More delay for the third box */
-    }
     .why-choose-us {
         position: relative;
         overflow: hidden;
@@ -287,5 +307,35 @@
         });
 
     });
+    document.addEventListener('DOMContentLoaded', function () {
+        // Pass the PHP variable to JavaScript by embedding it within the script
+        const eventDate = new Date("{{ $eventDate }}"); // Set event date from backend
 
+        const countdownElement = document.getElementById('countdown');
+        const daysElement = document.getElementById('days');
+        const hoursElement = document.getElementById('hours');
+        const minutesElement = document.getElementById('minutes');
+        const secondsElement = document.getElementById('seconds');
+
+        function updateCountdown() {
+            const now = new Date();
+            const timeDiff = eventDate - now;
+
+            if (timeDiff > 0) {
+                const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+
+                daysElement.textContent = days.toString().padStart(2, '0');
+                hoursElement.textContent = hours.toString().padStart(2, '0');
+                minutesElement.textContent = minutes.toString().padStart(2, '0');
+                secondsElement.textContent = seconds.toString().padStart(2, '0');
+            } else {
+                countdownElement.textContent = "Event Started!";
+            }
+        }
+
+        setInterval(updateCountdown, 1000);
+    });
 </script>
