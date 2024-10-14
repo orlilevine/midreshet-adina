@@ -60,42 +60,6 @@
         </div>
     </section>
 
-    <br><br><br><br>
-
-        <!-- Statistics Section -->
-        <section class="statistics py-5 text-center" style="background-color: #001f3f; color: white;">
-            <h2 class="display-4">Elevate</h2>
-            <p class="lead mb-5">Join our community!</p>
-            <div class="row justify-content-center">
-                <div class="col-md-3 mb-4">
-                    <div class="statistic" style="transition: transform 0.3s; padding: 20px; border-radius: 10px; background-color: #ff007f; color: white;">
-                        <h1 class="count" data-count="2000">0</h1>
-                        <p>Shiurim Downloads</p>
-                    </div>
-                </div>
-                <div class="col-md-3 mb-4">
-                    <div class="statistic" style="transition: transform 0.3s; padding: 20px; border-radius: 10px; background-color: #ff007f; color: white;">
-                        <h1 class="count" data-count="100">0</h1>
-                        <p>Global Locations</p>
-                    </div>
-                </div>
-                <div class="col-md-3 mb-4">
-                    <div class="statistic" style="transition: transform 0.3s; padding: 20px; border-radius: 10px; background-color: #ff007f; color: white;">
-                        <h1 class="count" data-count="1000">0</h1>
-                        <p>Active Listeners</p>
-                    </div>
-                </div>
-                <div class="col-md-3 mb-4">
-                    <div class="statistic" style="transition: transform 0.3s; padding: 20px; border-radius: 10px; background-color: #ff007f; color: white;">
-                        <h1 class="count" data-count="600">0</h1>
-                        <p>Series Completed</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-    <br><br><br><br>
-
     <section class="why-choose-us py-5 text-center" style="background-color: #001f3f;">
         <h2 class="display-4 text-light">Discover the Midreshet Adina Difference</h2>
         <p class="lead text-light mb-5">Experience Learning Like Never Before</p>
@@ -130,6 +94,39 @@
             </div>
         </div>
     </section>
+
+
+        <!-- Statistics Section -->
+    <section class="statistics py-5 text-center" style="background-color: #ff007f; color: white;">
+            <h2 class="display-4">Elevate</h2>
+            <p class="lead mb-5">Join our community!</p>
+            <div class="row justify-content-center">
+                <div class="col-md-3 mb-4">
+                    <div class="statistic" style="transition: transform 0.3s; padding: 20px; border-radius: 10px; background-color: #001f3f; color: white;">
+                        <h1 class="count" data-count="2000">0</h1>
+                        <p>Shiurim Downloads</p>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <div class="statistic" style="transition: transform 0.3s; padding: 20px; border-radius: 10px; background-color: #001f3f; color: white;">
+                        <h1 class="count" data-count="100">0</h1>
+                        <p>Global Locations</p>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <div class="statistic" style="transition: transform 0.3s; padding: 20px; border-radius: 10px; background-color: #001f3f; color: white;">
+                        <h1 class="count" data-count="1000">0</h1>
+                        <p>Active Listeners</p>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <div class="statistic" style="transition: transform 0.3s; padding: 20px; border-radius: 10px; background-color: #001f3f; color: white;">
+                        <h1 class="count" data-count="600">0</h1>
+                        <p>Series Completed</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
 @endsection
 
