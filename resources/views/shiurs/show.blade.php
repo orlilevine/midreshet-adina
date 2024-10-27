@@ -1,140 +1,167 @@
 @extends('layouts.app')
 
-@section('title', $shiur->title . ' | ' . $series->title)
+@section('title', $shiur->title.' | '. $series->title)
 
 @section('content')
-    <div style="text-align: center; padding: 30px; background: linear-gradient(to bottom right, #f0f8ff, #e6f7ff); border-radius: 10px;">
-        <h1 style="font-size: 2.5em; color: #003366; margin-bottom: 20px;">{{ $shiur->title }}</h1>
-        <p style="font-size: 1.2em; color: #555;">{{ $shiur->description }}</p>
-        <p style="font-size: 1.5em; color: #003366;">Price: <strong>${{ $shiur->price }}</strong></p>
-        <p style="font-size: 1.2em; color: #555;">Date: {{ \Carbon\Carbon::parse($shiur->shiur_date)->format('F j, Y') }}</p>
+    <div class="series-page-container">
+        @if(session('success'))
+            <div class="alert alert-success">{{ session('success') }}</div>
+        @endif
 
-        <div style="margin-bottom: 20px;">
+        <!-- Shiur Header -->
+        <div class="series-header">
+            <h1 class="series-title">{{ $shiur->title }}</h1>
+        </div>
+
+        <!-- Shiur Details and Purchase Section -->
+        <div class="series-details">
+            <p class="series-description">{{ $shiur->description }}</p>
+            <p class="series-price">Price: <strong>${{ $shiur->price }}</strong></p>
+            <p>Date: {{ \Carbon\Carbon::parse($shiur->shiur_date)->format('F j, Y') }}</p>
+
             @auth
                 @if($hasPurchasedShiur || $hasPurchasedSeries)
-                    <!-- Purchased button -->
-                    <a href="{{ route('user.purchases') }}" class="hover-button" style="padding: 15px 30px; background-color: #ff007f; color: white; border-radius: 10px; text-decoration: none; transition: transform 0.3s, box-shadow 0.3s;">
+                    <!-- Purchased Button -->
+                    <a href="{{ route('user.purchases') }}" class="cta-button purchased-button">
                         Shiur Purchased - Go to My Shiurim
                     </a>
                 @else
                     <form id="checkoutForm" action="{{ route('payment.createSession.shiur', ['shiurId' => $shiur->id]) }}" method="GET">
-                        <!-- Coupon Section -->
-                        <div id="couponSection" style="display: none; margin-bottom: 15px;">
-                            <input type="text" name="coupon_code" id="coupon_code" placeholder="Enter coupon code" style="padding: 10px; width: 250px; border-radius: 5px;">
-                            <button type="button" id="applyCoupon" class="hover-button" style="padding: 10px 20px; background-color: #001f3f; color: white; border-radius: 10px;">
-                                Apply Coupon
-                            </button>
+                        <div id="couponSection" class="coupon-section">
+                            <input type="text" name="coupon_code" id="coupon_code" placeholder="Enter coupon code" class="input-field">
+                            <button type="submit" id="applyCoupon" class="cta-button apply-coupon-button">Apply Coupon</button>
                         </div>
 
-                        <!-- Purchase Button -->
-                        <button type="submit" class="hover-button" style="padding: 15px 30px; background-color: #28a745; color: white; border-radius: 10px;">
-                            Purchase this Shiur for ${{ $shiur->price }}
-                        </button>
-
-                        <!-- Other Payment Options Link -->
-                        <p style="margin-top: 15px;">
-                            <a href="#" id="showOtherPaymentOptions" style="font-size: 14px; text-decoration: underline; color: #001f3f;">Other Payment Options</a>
-                        </p>
+                        <button type="submit" class="cta-button purchase-button">Purchase this Shiur for ${{ $shiur->price }}</button>
+                        <p class="other-options-link"><a href="#" id="showOtherPaymentOptions">Other Payment Options</a></p>
                     </form>
 
-                    <!-- Hidden Payment Options -->
-                    <div id="paymentOptions" style="display: none; margin-top: 20px;">
-                        <button id="couponButton" class="hover-button" style="padding: 15px 30px; background-color: #001f3f; color: white; border-radius: 10px; margin: 10px;">
-                            Coupon
-                        </button>
-                        <button id="zelleButton" class="hover-button" style="padding: 15px 30px; background-color: #001f3f; color: white; border-radius: 10px; margin: 10px;">
-                            Zelle
-                        </button>
-                        <button id="checkButton" class="hover-button" style="padding: 15px 30px; background-color: #001f3f; color: white; border-radius: 10px; margin: 10px;">
-                            Check
-                        </button>
+                    <!-- Other Payment Options -->
+                    <div id="paymentOptions" class="payment-options">
+                        <button class="cta-button payment-option" id="couponButton">Coupon</button>
+                        <button class="cta-button payment-option" id="zelleButton">Zelle</button>
+                        <button class="cta-button payment-option" id="checkButton">Check</button>
                     </div>
 
-                    <!-- Zelle Payment Form (Initially Hidden) -->
-                    <div id="zellePaymentForm" style="display: none; text-align: center; margin-top: 10px;">
+                    <!-- Zelle and Check Payment Forms -->
+                    <div id="zellePaymentForm" class="payment-form zelle-form">
                         <p><strong>Please don't fill this out until after you submit your Zelle.</strong></p>
                         <p>Zelle Account: 9176035614</p>
                         <p>Price of shiur: ${{ $shiur->price }}</p>
                         <form action="{{ route('payment.zelle.shiur') }}" method="POST">
                             @csrf
                             <input type="hidden" name="shiur_id" value="{{ $shiur->id }}">
-                            <input type="text" name="zelle_account_from" placeholder="Zelle Account Name" required style="padding: 5px; margin: 5px;">
-                            <input type="number" name="zelle_amount" placeholder="Amount I Zelled" required style="padding: 5px; margin: 5px;">
-                            <input type="date" name="zelle_date" required style="padding: 5px; margin: 5px;">
-                            <button type="submit" style="padding: 10px 20px; background-color: #28a745; color: white; border: none; cursor: pointer; border-radius: 5px;">
-                                Submit Zelle Payment
-                            </button>
+                            <input type="text" name="zelle_account_from" placeholder="Zelle Account Name" class="input-field" required>
+                            <input type="number" name="zelle_amount" placeholder="Amount I Zelled" class="input-field" required>
+                            <input type="date" name="zelle_date" class="input-field" required>
+                            <button type="submit" class="cta-button">Submit Zelle Payment</button>
                         </form>
                     </div>
 
-                    <!-- Check Payment Form (Initially Hidden) -->
-                    <div id="checkPaymentForm" style="display: none; text-align: center; margin-top: 10px;">
+                    <div id="checkPaymentForm" class="payment-form check-form">
                         <p><strong>Please don't fill this out until after you mail your check.</strong></p>
-                        <p>Check mail address:
-                            136-05 72nd Road,
-                            Flushing, NY 11367
-                        </p>
+                        <p>Check mail address: 136-05 72nd Road, Flushing, NY 11367</p>
                         <p>Price of shiur: ${{ $shiur->price }}</p>
                         <form action="{{ route('payment.check.shiur') }}" method="POST">
                             @csrf
                             <input type="hidden" name="shiur_id" value="{{ $shiur->id }}">
-                            <input type="text" name="check_name" placeholder="Check Name" required style="padding: 5px; margin: 5px;">
-                            <input type="number" name="check_amount" placeholder="Check Amount" required style="padding: 5px; margin: 5px;">
-                            <input type="date" name="check_date" required style="padding: 5px; margin: 5px;">
-                            <button type="submit" style="padding: 10px 20px; background-color: #28a745; color: white; border: none; cursor: pointer; border-radius: 5px;">
-                                Submit Check Payment
-                            </button>
+                            <input type="text" name="check_name" placeholder="Check Name" class="input-field" required>
+                            <input type="number" name="check_amount" placeholder="Check Amount" class="input-field" required>
+                            <input type="date" name="check_date" class="input-field" required>
+                            <button type="submit" class="cta-button">Submit Check Payment</button>
                         </form>
                     </div>
                 @endif
             @else
-                <p style="font-size: 1.2em; color: #003366;">Please <a href="{{ route('login') }}" style="color: #001f3f;">log in</a> or <a href="{{ route('register') }}" style="color: #001f3f;">register</a> to purchase this Shiur.</p>
+                <p>Please <a href="{{ route('login') }}">log in</a> or <a href="{{ route('register') }}">register</a> to purchase this Shiur.</p>
             @endauth
         </div>
     </div>
 
+    <!-- Styles -->
     <style>
-        .hover-button {
-            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-            font-size: 1.1em;
+        .series-page-container {
+            padding: 40px;
+            background: linear-gradient(135deg, #ff007f, #001f3f);
+            color: white;
+            text-align: center;
+            border-radius: 15px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
         }
-        .hover-button:hover {
-            background-color: #45a049; /* Hover green effect */
-            transform: scale(1.1); /* Slight zoom */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
+        .alert {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #28a745;
+            margin-bottom: 20px;
+        }
+        .series-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .series-title {
+            font-size: 2.8em;
+            margin-top: 15px;
+        }
+        .series-description,.series-price {
+            font-size: 1.2em;
+            margin-bottom: 15px;
+        }
+        .cta-button {
+            padding: 15px 30px;
+            font-size: 1.1em;
+            color: white;
+            background-color: #001f3f;
+            border: none;
+            border-radius: 10px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            margin: 10px;
+        }
+        .cta-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        .purchased-button {
+            background-color: #28a745;
+        }
+        .coupon-section,.payment-options,.payment-form {
+            display: none;
+        }
+        .input-field {
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            width: 250px;
+            margin: 5px;
+        }
+        .other-options-link a {
+            color: #001f3f;
+            text-decoration: underline;
+            cursor: pointer;
         }
     </style>
 
+    <!-- JavaScript -->
     <script>
-        document.getElementById('showOtherPaymentOptions').onclick = function(event) {
-            event.preventDefault();
-            var paymentOptions = document.getElementById('paymentOptions');
-            paymentOptions.style.display = paymentOptions.style.display === 'none' ? 'block' : 'none';
-        };
-
-        document.getElementById('applyCoupon').addEventListener('click', function(event) {
-            event.preventDefault();
-            var couponCode = document.getElementById('coupon_code').value;
-
-            if (couponCode.trim() === '') {
-                alert('Please enter a valid coupon code.');
-            } else {
-                document.getElementById('checkoutForm').submit();
-            }
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('showOtherPaymentOptions').addEventListener('click', function(event) {
+                event.preventDefault();
+                document.getElementById('paymentOptions').style.display = 'block';
+            });
+            document.getElementById('couponButton').addEventListener('click', function() {
+                document.getElementById('couponSection').style.display = 'block';
+            });
+            document.getElementById('zelleButton').addEventListener('click', function() {
+                document.getElementById('zellePaymentForm').style.display = 'block';
+                document.getElementById('checkPaymentForm').style.display = 'none';
+            });
+            document.getElementById('checkButton').addEventListener('click', function() {
+                document.getElementById('checkPaymentForm').style.display = 'block';
+                document.getElementById('zellePaymentForm').style.display = 'none';
+            });
         });
-
-        document.getElementById('couponButton').onclick = function() {
-            document.getElementById('couponSection').style.display = 'block';
-        };
-
-        document.getElementById('zelleButton').onclick = function() {
-            var zelleForm = document.getElementById('zellePaymentForm');
-            zelleForm.style.display = zelleForm.style.display === 'none' ? 'block' : 'none';
-        };
-
-        document.getElementById('checkButton').onclick = function() {
-            var checkForm = document.getElementById('checkPaymentForm');
-            checkForm.style.display = checkForm.style.display === 'none' ? 'block' : 'none';
-        };
     </script>
 @endsection
