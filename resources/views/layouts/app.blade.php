@@ -87,7 +87,17 @@
         footer {
             background-color: #f8f9fa;
             padding: 4rem 0;
+            margin-bottom: 0;
         }
+        footer {
+            margin-bottom: 0 !important;
+        }
+
+        .footer-bottom {
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+
 
         footer h5 {
             font-size: 1.5rem;
@@ -104,12 +114,7 @@
             text-decoration: none;
         }
 
-        .footer-bottom {
-            background-color: #ff007f;
-            color: white;
-            padding: 15px;
-            font-size: 0.9rem;
-        }
+
         .elevate-slides-container {
             position: relative;
             width: 100%;
@@ -182,6 +187,29 @@
                 opacity: 1;
             }
         }
+        /* Custom styles for the Join Our Community button */
+        .btn-join {
+            background-color: #001f3f; /* Dark blue */
+            color: white;
+            padding: 12px 24px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 8px;
+            border: 2px solid transparent;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-join:hover {
+            background-color: #003366; /* Slightly lighter shade for hover effect */
+            color: #ffffff;
+            border-color: #001f3f; /* Blue border on hover */
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); /* Enhance shadow on hover */
+            transform: translateY(-2px); /* Lift the button slightly on hover */
+        }
+
+
+
     </style>
 </head>
 <body>
@@ -289,35 +317,45 @@
 </main>
 
 <!-- Footer -->
-<footer>
+<footer class="text-white" style="background: linear-gradient(45deg, #ff007f, #001f3f); padding: 4rem 0;">
     <div class="container">
         <div class="row">
-            <div class="col-lg-6 col-md-12">
-                <h5>Midreshet Adina</h5>
-                <p>Helping women grow in their spiritual journey through deep Torah learning and inspiring shiurim.</p>
+            <!-- About Section -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <h5 class="font-weight-bold mb-3">Midreshet Adina</h5>
+                <p class="text-white">Helping women grow in their spiritual journey.</p>
             </div>
-            <div class="col-lg-3 col-md-6">
-                <h5>Quick Links</h5>
+            <!-- Quick Links Section -->
+            <div class="col-lg-3 col-md-6 mb-4">
+                <h5 class="font-weight-bold mb-3">Quick Links</h5>
                 <ul class="list-unstyled">
-                    <li><a href="{{ route('home') }}">Home</a></li>
-                    <li><a href="{{ route('about') }}">About Us</a></li>
-                    <li><a href="{{ route('contact') }}">Contact Us</a></li>
+                    <li><a href="{{ route('home') }}" class="text-white">Home</a></li>
+                    <li><a href="{{ route('about') }}" class="text-white">About Us</a></li>
+                    <li><a href="{{ route('contact') }}" class="text-white">Contact</a></li>
                 </ul>
             </div>
-            <div class="col-lg-3 col-md-6">
-                <h5>Follow Us</h5>
-                <ul class="list-unstyled">
-                    <li><a href="https://www.facebook.com" target="_blank">Facebook</a></li>
-                    <li><a href="https://www.instagram.com" target="_blank">Instagram</a></li>
-                    <li><a href="https://www.twitter.com" target="_blank">Twitter</a></li>
-                </ul>
+            <!-- Newsletter Section -->
+            <div class="col-lg-2 col-md-6 mb-4">
+                <h5 class="font-weight-bold mb-3">Newsletter</h5>
+                <form>
+                    <div class="form-group">
+                        <input type="email" class="form-control" placeholder="Your Email" />
+                    </div>
+                    <button type="submit" class="btn btn-outline-light btn-block">Subscribe</button>
+                </form>
             </div>
         </div>
     </div>
-    <div class="footer-bottom text-center">
-        <p>&copy; {{ date('Y') }} Midreshet Adina. All rights reserved.</p>
+    <div class="footer-bottom text-center py-3 mt-4" style="margin: 0;">
+        <p class="mb-0 text-white">&copy; 2024 Midreshet Adina. All rights reserved.</p>
     </div>
 </footer>
+
+
+
+<!-- FontAwesome for icons -->
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+
 
 <!-- jQuery, Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
