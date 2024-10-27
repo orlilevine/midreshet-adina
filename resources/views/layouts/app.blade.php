@@ -208,7 +208,25 @@
             transform: translateY(-2px); /* Lift the button slightly on hover */
         }
 
+        .btn-subscribe {
+            background-color: #05122d; /* Dark turquoise */
+            color: #FFFFFF;
+            font-size: 1.1rem;
+            font-weight: bold;
+            padding: 12px 30px;
+            border-radius: 50px;
+            border: 2px solid transparent;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
 
+        .btn-subscribe:hover {
+            background-color: #030D22; /* Slightly darker shade for hover */
+            color: #ffffff;
+            border-color: #030D22;
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+            transform: translateY(-2px); /* Lift the button slightly on hover */
+        }
 
     </style>
 </head>
@@ -334,14 +352,17 @@
                     <li><a href="{{ route('contact') }}" class="text-white">Contact</a></li>
                 </ul>
             </div>
-            <!-- Newsletter Section -->
-            <div class="col-lg-2 col-md-6 mb-4">
-                <h5 class="font-weight-bold mb-3">Newsletter</h5>
-                <form>
+            <!-- Subscription Section -->
+            <div class="col-md-4">
+                <h5>Subscribe to Our Newsletter</h5>
+                <form id="subscriptionForm" onsubmit="showSubscriptionMessage(event)">
                     <div class="form-group">
-                        <input type="email" class="form-control" placeholder="Your Email" />
+                        <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
                     </div>
-                    <button type="submit" class="btn btn-outline-light btn-block">Subscribe</button>
+                    <button class="btn btn-subscribe">Subscribe</button>
+                    <p id="subscriptionMessage" style="color: #ff007f; font-weight: bold; display: none; margin-top: 10px;">
+                        Sorry, subscription is not set up yet. Try again later.
+                    </p>
                 </form>
             </div>
         </div>
@@ -379,6 +400,12 @@
     setInterval(nextSlide, slideInterval);
 
 </script>
-
+<script>
+    function showSubscriptionMessage(event) {
+        event.preventDefault(); // Prevents form submission
+        const message = document.getElementById("subscriptionMessage");
+        message.style.display = "block"; // Show the message
+    }
+</script>
 </body>
 </html>
