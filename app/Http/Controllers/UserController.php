@@ -11,18 +11,20 @@ class UserController extends Controller
     {
         $user = auth()->user();
 
-        // Get the series the user has purchased directly
+        // Get the series the user has purchased, ordered by the latest purchase date
         $purchasedSeries = Series::whereHas('purchases', function ($query) use ($user) {
             $query->where('user_id', $user->id)
                 ->whereNotNull('series_id'); // Ensures it's a series purchase
         })->orWhereHas('shiurs.purchases', function ($query) use ($user) {
             // Also get series where user has purchased individual shiurs
             $query->where('user_id', $user->id);
-        })->get();
+        })->orderBy('created_at', 'desc') // Ensure you have a 'created_at' column in the purchases table
+        ->get();
 
         // Pass the variable to the view
         return view('user.purchasedseries', compact('purchasedSeries'));
     }
+
 
 
 
