@@ -85,6 +85,7 @@ Route::post('/payment/check/shiur', [PaymentController::class, 'handleCheckPayme
 Route::get('/register', [RegisteredUserController::class, 'create'])->name('register');
 Route::post('/register', [RegisteredUserController::class, 'store']);
 
-Route::get('/user/join-daily', [DailyController::class, 'joinDailyMeeting'])->name('user.series.join');
+/*Route::get('/user/join-daily', [DailyController::class, 'joinDailyMeeting'])->name('user.series.join');*/
+Route::get('/daily-meeting/{id}', [DailyController::class, 'joinDailyMeeting'])->name('daily.meeting');
 
 require __DIR__.'/auth.php';

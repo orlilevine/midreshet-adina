@@ -18,9 +18,10 @@
                         </a>
                         @if($series->daily_link)
                             <div style="margin-top: 10px; text-align: center; width: 100%; max-width: 300px;">
-                                <a href="{{ route('user.series.join', ['url' => urlencode($series->daily_link)]) }}"
+                                <a href="{{ route('daily.meeting', ['id' => $series->id, 'url' => urlencode($series->daily_link)]) }}"
                                    class="btn"
-                                   style="background-color: #007bff; color: white; text-decoration: none; display: block; padding: 10px; text-align: center;">
+                                   style="background-color: #007bff; color: white; text-decoration: none; display: block; padding: 10px; text-align: center;"
+                                   onclick="console.log('{{ route('daily.meeting', ['id' => $series->id, 'url' => urlencode($series->daily_link)]) }}')">
                                     Join Daily Meeting
                                 </a>
                             </div>

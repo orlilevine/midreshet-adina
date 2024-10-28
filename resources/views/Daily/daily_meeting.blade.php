@@ -8,7 +8,7 @@
         <div style="display: flex; justify-content: center; align-items: center; height: 80vh;">
             <iframe
                 src="{{ $dailyLink }}"
-                allow="camera; microphone; fullscreen; display-capture"
+                allow="camera; microphone; fullscreen; display-capture{{ Auth::user()->is_admin ? '; recording' : '' }}"
                 style="width: 100%; height: 100%; border: none;">
             </iframe>
         </div>

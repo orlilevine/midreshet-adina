@@ -8,6 +8,7 @@ use App\Models\Message;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Http;
 
 
 
@@ -69,41 +70,46 @@ class AdminController extends Controller
 
     public function storeSeries(Request $request)
     {
-        // Validate the request
+        // Validate inputs as usual
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
             'series_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'speaker_id' => 'required|exists:speakers,id',
-            'zoom_link' => 'nullable|string',
-            'zoom_id' => 'nullable|string',
-            'zoom_password' => 'nullable|string',
-            'price' => 'required|numeric|min:0',  // Validate the price input
+            'price' => 'required|numeric|min:0',
         ]);
 
-        // Handle the file upload
-        $imagePath = null;
-        if ($request->hasFile('series_image')) {
-            try {
-                $imagePath = $request->file('series_image')->store('series_images', 'public');
-            } catch (\Exception $e) {
-                return redirect()->back()->withErrors(['series_image' => 'Image upload failed.']);
-            }
+        // Create the Daily.co room
+        $dailyApiKey = env('DAILY_API_KEY');
+        $response = Http::withToken($dailyApiKey)->post('https://api.daily.co/v1/rooms', [
+            'properties' => [
+                'exp' => strtotime('+1 year'),
+            ],
+        ]);
+
+        if ($response->failed()) {
+            return redirect()->back()->withErrors(['message' => 'Failed to create meeting room.']);
         }
 
-        // Create the series
+// Log the response
+        \Log::info($response->json());
+
+        // Handle image upload if necessary
+        $imagePath = $request->hasFile('series_image')
+            ? $request->file('series_image')->store('series_images', 'public')
+            : null;
+
+        // Create the series with Daily.co room URL
         Series::create([
             'title' => $validated['title'],
             'description' => $validated['description'],
             'image_path' => $imagePath,
             'speaker_id' => $validated['speaker_id'],
-            'zoom_link' => $validated['zoom_link'],
-            'zoom_id' => $validated['zoom_id'],
-            'zoom_password' => $validated['zoom_password'],
-            'price' => $validated['price'], // Save the price
+            'daily_link' => $response->json('url'), // Store the room URL
+            'price' => $validated['price'],
         ]);
 
-        return redirect()->route('admin.dashboard')->with('success', 'Series created successfully.');
+        return redirect()->route('admin.dashboard')->with('success', 'Series created successfully with Daily.co room.');
     }
 
 

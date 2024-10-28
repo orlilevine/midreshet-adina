@@ -12,10 +12,8 @@ class Series extends Model
         'description',
         'image_path',
         'speaker_id',
-        'zoom_link',
-        'zoom_id',
-        'zoom_password',
         'price',
+        'daily_link',
     ];
     public function speaker()
     {
