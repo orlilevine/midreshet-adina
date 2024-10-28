@@ -10,6 +10,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\DailyController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 
 
@@ -83,5 +84,7 @@ Route::post('/payment/check/shiur', [PaymentController::class, 'handleCheckPayme
 
 Route::get('/register', [RegisteredUserController::class, 'create'])->name('register');
 Route::post('/register', [RegisteredUserController::class, 'store']);
+
+Route::get('/user/join-daily', [DailyController::class, 'joinDailyMeeting'])->name('user.series.join');
 
 require __DIR__.'/auth.php';

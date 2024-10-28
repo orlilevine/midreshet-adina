@@ -16,24 +16,13 @@
                                  alt="{{ $series->title }}"
                                  style="width: 100%; height: auto; display: block;"/>
                         </a>
-                        @if($series->zoom_link)
+                        @if($series->daily_link)
                             <div style="margin-top: 10px; text-align: center; width: 100%; max-width: 300px;">
-                                <a href="{{ $series->zoom_link }}" target="_blank" class="btn"
-                                   style="background-color: #007bff; color: white; text-decoration: none; display: block; padding: 10px; text-align: center;"
-                                   onmouseover="this.style.transform='scale(1.05)';"
-                                   onmouseout="this.style.transform='scale(1)';">
-                                    Join Zoom Meeting
+                                <a href="{{ route('user.series.join', ['url' => urlencode($series->daily_link)]) }}"
+                                   class="btn"
+                                   style="background-color: #007bff; color: white; text-decoration: none; display: block; padding: 10px; text-align: center;">
+                                    Join Daily Meeting
                                 </a>
-                                @if($series->zoom_id || $series->zoom_password)
-                                    <div style="margin-top: 5px; text-align: center;">
-                                        @if($series->zoom_id)
-                                            <p>Zoom ID: {{ $series->zoom_id }}</p>
-                                        @endif
-                                        @if($series->zoom_password)
-                                            <p>Zoom Password: {{ $series->zoom_password }}</p>
-                                        @endif
-                                    </div>
-                                @endif
                             </div>
                         @endif
                     </div>
