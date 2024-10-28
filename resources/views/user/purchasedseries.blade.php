@@ -4,6 +4,11 @@
 
 @section('content')
     <div class="container">
+        @if (session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
         <div class="row">
             @if(!$purchasedSeries->isEmpty())
                 @foreach($purchasedSeries as $series)
@@ -22,7 +27,7 @@
                                    class="btn"
                                    style="background-color: #007bff; color: white; text-decoration: none; display: block; padding: 10px; text-align: center;"
                                    onclick="console.log('{{ route('daily.meeting', ['id' => $series->id, 'url' => urlencode($series->daily_link)]) }}')">
-                                    Join Daily Meeting
+                                    Join Live Class
                                 </a>
                             </div>
                         @endif

@@ -13,20 +13,50 @@ class DailyController extends Controller
         \Log::info("Joining daily meeting for series ID: {$id}");
 
         $series = Series::findOrFail($id);
-        $startTime = \Carbon\Carbon::parse($series->starting_time);
+        $shiurDates = [
+            $series->shiur_date_1,
+            $series->shiur_date_2,
+            $series->shiur_date_3,
+            $series->shiur_date_4,
+            $series->shiur_date_5,
+            $series->shiur_date_6,
+            $series->shiur_date_7,
+            $series->shiur_date_8,
+        ];
 
-        // Clone $startTime to preserve the original value
-        $allowedStartTime = (clone $startTime)->subMinutes(15);
-        $allowedEndTime = (clone $startTime)->addHours(2);
+        $shiurTime = \Carbon\Carbon::parse($series->starting_time);
 
-        \Log::info("Allowed start time: {$allowedStartTime} to {$allowedEndTime}");
-        \Log::info("Current time: " . now());
+        // Create an array to hold allowed time ranges
+        $allowedTimes = [];
 
-        if (now()->between($allowedStartTime, $allowedEndTime)) {
+        foreach ($shiurDates as $date) {
+            if ($date) { // Ensure the date is not null
+                $shiurDateTime = \Carbon\Carbon::parse($date)->setTimeFromTimeString($shiurTime->toTimeString());
+                $allowedStartTime = (clone $shiurDateTime)->subMinutes(15);
+                $allowedEndTime = (clone $shiurDateTime)->addHours(2);
+                $allowedTimes[] = [$allowedStartTime, $allowedEndTime];
+            }
+        }
+
+        $currentDateTime = now();
+        $canJoin = false;
+
+        // Check if current time is within any allowed time range
+        foreach ($allowedTimes as [$start, $end]) {
+            if ($currentDateTime->between($start, $end)) {
+                $canJoin = true;
+                break;
+            }
+        }
+
+        \Log::info("Current time: " . $currentDateTime);
+        \Log::info("Allowed time ranges: " . json_encode($allowedTimes));
+
+        if ($canJoin) {
             $dailyLink = urldecode($request->query('url'));
             return view('Daily.daily_meeting', ['dailyLink' => $dailyLink]);
         } else {
-            return redirect()->back()->with('error', 'You can only join the meeting 15 minutes before the class until 2 hours after it starts.');
+            return redirect()->back()->with('error', 'You can only join the meeting 15 minutes before the class.');
         }
     }
 

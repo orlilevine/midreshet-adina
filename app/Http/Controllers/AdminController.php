@@ -70,15 +70,23 @@ class AdminController extends Controller
 
     public function storeSeries(Request $request)
     {
-        // Validate inputs as usual
+        // Validate inputs
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
             'series_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'speaker_id' => 'required|exists:speakers,id',
             'price' => 'required|numeric|min:0',
+            'shiur_time' => 'required',
+            'shiur_date_1' => 'nullable|date',
+            'shiur_date_2' => 'nullable|date',
+            'shiur_date_3' => 'nullable|date',
+            'shiur_date_4' => 'nullable|date',
+            'shiur_date_5' => 'nullable|date',
+            'shiur_date_6' => 'nullable|date',
+            'shiur_date_7' => 'nullable|date',
+            'shiur_date_8' => 'nullable|date',
         ]);
-
         // Create the Daily.co room
         $dailyApiKey = env('DAILY_API_KEY');
         $response = Http::withToken($dailyApiKey)->post('https://api.daily.co/v1/rooms', [
@@ -91,15 +99,15 @@ class AdminController extends Controller
             return redirect()->back()->withErrors(['message' => 'Failed to create meeting room.']);
         }
 
-// Log the response
-        \Log::info($response->json());
+        // Get the Shiur time
+        $shiurTime = $validated['shiur_time'];
 
         // Handle image upload if necessary
         $imagePath = $request->hasFile('series_image')
             ? $request->file('series_image')->store('series_images', 'public')
             : null;
 
-        // Create the series with Daily.co room URL
+        // Create the series with the specified Shiur dates
         Series::create([
             'title' => $validated['title'],
             'description' => $validated['description'],
@@ -107,9 +115,18 @@ class AdminController extends Controller
             'speaker_id' => $validated['speaker_id'],
             'daily_link' => $response->json('url'), // Store the room URL
             'price' => $validated['price'],
+            'starting_time' => $shiurTime,
+            'shiur_date_1' => $validated['shiur_date_1'],
+            'shiur_date_2' => $validated['shiur_date_2'],
+            'shiur_date_3' => $validated['shiur_date_3'],
+            'shiur_date_4' => $validated['shiur_date_4'],
+            'shiur_date_5' => $validated['shiur_date_5'],
+            'shiur_date_6' => $validated['shiur_date_6'],
+            'shiur_date_7' => $validated['shiur_date_7'],
+            'shiur_date_8' => $validated['shiur_date_8'],
         ]);
 
-        return redirect()->route('admin.dashboard')->with('success', 'Series created successfully with Daily.co room.');
+        return redirect()->route('admin.dashboard')->with('success', 'Series created successfully.');
     }
 
 

@@ -14,6 +14,15 @@ class Series extends Model
         'speaker_id',
         'price',
         'daily_link',
+        'starting_time',
+        'shiur_date_1',
+        'shiur_date_2',
+        'shiur_date_3',
+        'shiur_date_4',
+        'shiur_date_5',
+        'shiur_date_6',
+        'shiur_date_7',
+        'shiur_date_8',
     ];
     public function speaker()
     {

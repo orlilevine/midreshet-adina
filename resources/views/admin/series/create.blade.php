@@ -51,19 +51,16 @@
             </div>
 
             <div class="form-group">
-                <label for="zoom_link">Zoom Link</label>
-                <input type="text" class="form-control" id="zoom_link" name="zoom_link" value="{{ old('zoom_link') }}">
+                <label for="shiur_time">Shiur Time</label>
+                <input type="time" class="form-control" id="shiur_time" name="shiur_time" required>
             </div>
 
-            <div class="form-group">
-                <label for="zoom_id">Zoom ID</label>
-                <input type="text" class="form-control" id="zoom_id" name="zoom_id" value="{{ old('zoom_id') }}">
-            </div>
-
-            <div class="form-group">
-                <label for="zoom_password">Zoom Password</label>
-                <input type="text" class="form-control" id="zoom_password" name="zoom_password" value="{{ old('zoom_password') }}">
-            </div>
+            @for ($i = 1; $i <= 8; $i++)
+                <div class="form-group">
+                    <label for="shiur_date_{{ $i }}">Shiur Date {{ $i }}</label>
+                    <input type="date" class="form-control" id="shiur_date_{{ $i }}" name="shiur_date_{{ $i }}">
+                </div>
+            @endfor
 
             <!-- Add price input with default value of 100 -->
             <div class="form-group">
