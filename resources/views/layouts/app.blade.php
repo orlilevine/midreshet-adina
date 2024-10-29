@@ -227,7 +227,20 @@
             box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
             transform: translateY(-2px); /* Lift the button slightly on hover */
         }
+        .page-title {
+            font-family: 'Delius';
+            color: #ff007f;
+            text-align: center;
+            font-size: 3rem;
+            margin: 20px 0;
+            animation: popIn 0.6s ease-in-out forwards;
+            opacity: 0;
+        }
 
+        @keyframes popIn {
+            0% { transform: scale(0.7); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
     </style>
 </head>
 <body>
@@ -274,6 +287,11 @@
         </ul>
     </div>
 </nav>
+
+<!-- Dynamic Page Title -->
+@if(View::hasSection('title'))
+    <h1 class="page-title">@yield('title')</h1>
+@endif
 
 <!-- Hero Section: Displayed only on the Home route -->
 @if (Route::is('home'))
