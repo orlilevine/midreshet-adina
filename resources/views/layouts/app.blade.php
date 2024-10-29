@@ -248,7 +248,7 @@
 <body>
 
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-light sticky-top">
+<nav class="navbar navbar-expand-lg navbar-light">
     <a class="navbar-brand" href="#">
         <img src="{{ asset('images/MAlogo.jpg') }}" alt="Logo" style="height: 80px; width: auto;" />
     </a>
@@ -289,6 +289,7 @@
         </ul>
     </div>
 </nav>
+
 
 <!-- Dynamic Page Title -->
 @if(View::hasSection('title'))
