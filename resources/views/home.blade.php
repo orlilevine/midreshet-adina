@@ -1,6 +1,88 @@
 @extends('layouts.app')
 
 @section('content')
+    <!-- Weekly Shiurim Schedule -->
+    <section class="weekly-schedule py-5 text-center">
+        <h2 class="display-4">Weekly Shiurim Schedule</h2>
+        <p class="lead mb-4">Join our weekly learning sessions!</p>
+        <div class="schedule-row d-flex justify-content-center flex-wrap">
+
+            <!-- Monday -->
+            <div class="schedule-card mx-3 mb-3" style="background-color: #001f3f;">
+                <h3 class="day-title text-light">Monday</h3>
+                <div class="shiur-details">
+                    <p class="speaker text-light">Shira Smiles</p>
+                    <p class="time text-light">9:00 - 10:00 AM</p>
+                    <p class="class-title text-light">Birkas Krias Shma</p>
+                </div>
+                <div class="shiur-details">
+                    <p class="speaker text-light">Dina Schoonmaker</p>
+                    <p class="time text-light">10:15 - 11:15 AM</p>
+                </div>
+            </div>
+
+            <!-- Tuesday -->
+            <div class="schedule-card mx-3 mb-3" style="background-color: #ff007f;">
+                <h3 class="day-title text-light">Tuesday</h3>
+                <div class="shiur-details">
+                    <p class="speaker text-light">Dina Schoonmaker</p>
+                    <p class="time text-light">10:15 - 11:15 AM</p>
+                </div>
+                <div class="shiur-details">
+                    <p class="speaker text-light">Shira Smiles</p>
+                    <p class="time text-light">1:00 - 2:00 PM</p>
+                    <p class="class-title text-light">Sefer Bereishis</p>
+                </div>
+            </div>
+
+            <!-- Wednesday -->
+            <div class="schedule-card mx-3 mb-3" style="background-color: #001f3f;">
+                <h3 class="day-title text-light">Wednesday</h3>
+                <div class="shiur-details">
+                    <p class="speaker text-light">Shira Smiles</p>
+                    <p class="time text-light">9:15 - 10:15 AM</p>
+                    <p class="class-title text-light">Mussar</p>
+                </div>
+            </div>
+
+            <!-- Thursday -->
+            <div class="schedule-card mx-3 mb-3" style="background-color: #ff007f;">
+                <h3 class="day-title text-light">Thursday</h3>
+                <div class="shiur-details">
+                    <p class="speaker text-light">Rabbi Avi Slansky</p>
+                    <p class="time text-light">9:00 - 9:50 AM</p>
+                    <p class="class-title text-light">Hilchos Shabbos</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Event Countdown Timer -->
+    <section class="event-countdown py-5 text-center" style="background-color: #ff007f;">
+        <h2 class="text-light">Upcoming Event: Mrs. Schoonmaker Live Shiur in...</h2>
+        <div id="countdown" class="d-flex justify-content-center">
+            <div class="countdown-box mx-3">
+                <span id="days" class="display-4">00</span>
+                <p>Days</p>
+            </div>
+            <div class="countdown-box mx-3">
+                <span id="hours" class="display-4">00</span>
+                <p>Hours</p>
+            </div>
+            <div class="countdown-box mx-3">
+                <span id="minutes" class="display-4">00</span>
+                <p>Minutes</p>
+            </div>
+            <div class="countdown-box mx-3">
+                <span id="seconds" class="display-4">00</span>
+                <p>Seconds</p>
+            </div>
+        </div>
+        <div class="shiur-info mt-4">
+            <h3 class="text-light">Date: December 15, 2024</h3>
+            <h4 class="text-light">Location: Kew Gardens Hills</h4>
+        </div>
+    </section>
+
 
     <!-- Featured Shiurim Section -->
     <section class="explore-shiurim my-5 container-fluid px-0">
@@ -33,32 +115,6 @@
         </div>
     </section>
 
-    <!-- Event Countdown Timer -->
-    <section class="event-countdown py-5 text-center" style="background-color: #ff007f;">
-        <h2 class="text-light">Upcoming Event: Mrs. Schoonmaker Live Shiur in...</h2>
-        <div id="countdown" class="d-flex justify-content-center">
-            <div class="countdown-box mx-3">
-                <span id="days" class="display-4">00</span>
-                <p>Days</p>
-            </div>
-            <div class="countdown-box mx-3">
-                <span id="hours" class="display-4">00</span>
-                <p>Hours</p>
-            </div>
-            <div class="countdown-box mx-3">
-                <span id="minutes" class="display-4">00</span>
-                <p>Minutes</p>
-            </div>
-            <div class="countdown-box mx-3">
-                <span id="seconds" class="display-4">00</span>
-                <p>Seconds</p>
-            </div>
-        </div>
-        <div class="shiur-info mt-4">
-            <h3 class="text-light">Date: December 15, 2024</h3>
-            <h4 class="text-light">Location: Kew Gardens Hills</h4>
-        </div>
-    </section>
 
     <section class="why-choose-us py-5 text-center" style="background-color: #001f3f;">
         <h2 class="display-4 text-light">Discover the Midreshet Adina Difference</h2>
@@ -337,8 +393,55 @@
             animation: none; /* No sliding on smaller screens */
         }
     }
+    .weekly-schedule {
+        background-color: #f9f9f9;
+    }
 
+    .schedule-row {
+        max-width: 1200px;
+        display: flex;
+        justify-content: center; /* Center the cards */
+        flex-wrap: wrap;
+        gap: 1.5rem;
+        margin: 0 auto; /* Center the row within the parent */
+    }
 
+    .schedule-card {
+        width: 250px;
+        padding: 1.5rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        transition: transform 0.3s;
+        text-align: center; /* Center the text inside cards */
+    }
+
+    .schedule-card:hover {
+        transform: scale(1.05);
+    }
+
+    .day-title {
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+    }
+
+    .shiur-details {
+        margin-bottom: 1rem;
+    }
+
+    .speaker {
+        font-weight: bold;
+        font-size: 1.1rem;
+    }
+
+    .time {
+        font-style: italic;
+        font-size: 1rem;
+    }
+
+    .class-title {
+        font-size: 1rem;
+        color: #ffddb3;
+    }
 </style>
 
 <script>
