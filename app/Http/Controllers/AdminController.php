@@ -19,6 +19,7 @@ class AdminController extends Controller
         // Return view for admin dashboard
         return view('admin.dashboard');
     }
+
     public function createShiur()
     {
         // Retrieve all speakers to populate the dropdown
@@ -30,7 +31,6 @@ class AdminController extends Controller
         // Pass the speakers and series to the view
         return view('admin.shiur.create', compact('speakers', 'series'));
     }
-
 
 
     public function storeShiur(Request $request)
@@ -130,7 +130,6 @@ class AdminController extends Controller
     }
 
 
-
     public function createSpeaker()
     {
         return view('admin.speaker.create');
@@ -186,7 +185,7 @@ class AdminController extends Controller
     public function getShiurStats($shiur_id)
     {
         // Ensure shiur_id is an integer
-        $shiur_id = (int) $shiur_id;
+        $shiur_id = (int)$shiur_id;
 
         // Get the shiur to find its series_id
         $shiur = Shiur::findOrFail($shiur_id);
@@ -198,7 +197,7 @@ class AdminController extends Controller
             ->where('purchases.shiur_id', $shiur_id)
             ->select(DB::raw("CONCAT(users.first_name, ' ', users.last_name) as full_name"), 'purchases.created_at')
             ->get()
-            ->map(function($purchase) {
+            ->map(function ($purchase) {
                 $purchase->created_at = Carbon::parse($purchase->created_at)->format('F j, Y g:i A');
                 return $purchase;
             });
@@ -209,7 +208,7 @@ class AdminController extends Controller
             ->where('purchases.series_id', $series_id)
             ->select(DB::raw("CONCAT(users.first_name, ' ', users.last_name) as full_name"), 'purchases.created_at')
             ->get()
-            ->map(function($purchase) {
+            ->map(function ($purchase) {
                 $purchase->created_at = Carbon::parse($purchase->created_at)->format('F j, Y g:i A');
                 return $purchase;
             });
@@ -232,6 +231,7 @@ class AdminController extends Controller
         $shiur = Shiur::findOrFail($id);
         return view('admin.shiur.editForm', compact('shiur'));
     }
+
     public function updateShiur(Request $request, $id)
     {
         $shiur = Shiur::findOrFail($id);
@@ -257,7 +257,6 @@ class AdminController extends Controller
 
         return redirect()->route('admin.dashboard')->with('success', 'Shiur updated successfully.');
     }
-
 
 
     public function showMessages()
@@ -288,9 +287,17 @@ class AdminController extends Controller
             'description' => 'nullable|string',
             'series_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'speaker_id' => 'required|exists:speakers,id',
-            'zoom_link' => 'nullable|string|max:255',
-            'zoom_id' => 'nullable|string|max:255',
-            'zoom_password' => 'nullable|string|max:255',
+            'shiur_time' => 'required|date_format:H:i', // Validate time format
+            'price' => 'required|numeric|min:0',
+            // Add validation for shiur dates if needed
+            'shiur_date_1' => 'nullable|date',
+            'shiur_date_2' => 'nullable|date',
+            'shiur_date_3' => 'nullable|date',
+            'shiur_date_4' => 'nullable|date',
+            'shiur_date_5' => 'nullable|date',
+            'shiur_date_6' => 'nullable|date',
+            'shiur_date_7' => 'nullable|date',
+            'shiur_date_8' => 'nullable|date',
         ]);
 
         // Find the series to update
@@ -299,20 +306,24 @@ class AdminController extends Controller
         // Handle the file upload
         if ($request->hasFile('series_image')) {
             $imagePath = $request->file('series_image')->store('series_images', 'public');
-            $series->image_path = $imagePath; // Update the image path
+            $series->image_path = $imagePath;
         }
 
-        // Update other fields
+        // Update fields
         $series->title = $validated['title'];
         $series->description = $validated['description'];
         $series->speaker_id = $validated['speaker_id'];
-        $series->zoom_link = $validated['zoom_link'];
-        $series->zoom_id = $validated['zoom_id'];
-        $series->zoom_password = $validated['zoom_password'];
+        $series->starting_time = $validated['shiur_time'];
+        $series->price = $validated['price'];
+
+        // Update shiur dates
+        for ($i = 1; $i <= 8; $i++) {
+            $dateField = 'shiur_date_' . $i;
+            $series->$dateField = $request->input($dateField);
+        }
 
         $series->save(); // Save changes
 
         return redirect()->route('admin.series.edit', $id)->with('success', 'Series updated successfully.');
     }
-
 }
