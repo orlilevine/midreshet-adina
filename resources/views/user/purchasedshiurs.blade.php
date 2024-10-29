@@ -4,7 +4,6 @@
 
 @section('content')
     <div class="container">
-        <h1 class="text-center my-4" style="color: #001f3f;">Your Purchased Shiurim</h1>
         <div class="row">
             @foreach($series->shiurs as $shiur)
                 <div class="col-md-4 mb-4">
@@ -13,18 +12,6 @@
                             <h5 class="card-title" style="font-weight: bold; font-size: 18px; color: #001f3f;">{{ $shiur->title }}</h5>
                             <p class="card-text">{{ $shiur->description }}</p>
                             <p class="text-muted">{{ \Carbon\Carbon::parse($shiur->shiur_date)->format('F j, Y') }}</p>
-
-                            @if($series->zoom_link)
-                                <p><strong style="color: #ff007f;">Zoom Link:</strong> <a href="{{ $series->zoom_link }}" target="_blank" style="color: #001f3f;">{{ $series->zoom_link }}</a></p>
-                            @endif
-
-                            @if($series->zoom_id)
-                                <p><strong style="color: #ff007f;">Zoom ID:</strong> {{ $series->zoom_id }}</p>
-                            @endif
-
-                            @if($series->zoom_password)
-                                <p><strong style="color: #ff007f;">Zoom Password:</strong> {{ $series->zoom_password }}</p>
-                            @endif
 
                             <audio controls style="width: 100%; margin-top: 10px;">
                                 <source src="{{ Storage::url($shiur->recording_path) }}" type="audio/mpeg">

@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="container my-5">
-        <p>Welcome to the gallery page! You can add your images here later.</p>
+        <p>Welcome to the gallery page! Come back later to see more.</p>
 
         <div class="row">
             <div class="col-md-4">

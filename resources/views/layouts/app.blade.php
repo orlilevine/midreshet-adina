@@ -229,13 +229,15 @@
         }
         .page-title {
             font-family: 'Delius';
-            color: #ff007f;
+            color: #001f3f; /* Existing color */
             text-align: center;
-            font-size: 3rem;
-            margin: 20px 0;
+            font-size: 3rem; /* Existing font size */
+            margin: 20px 0 0 0; /* Existing margin */
             animation: popIn 0.6s ease-in-out forwards;
             opacity: 0;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2); /* Added text shadow */
         }
+
 
         @keyframes popIn {
             0% { transform: scale(0.7); opacity: 0; }

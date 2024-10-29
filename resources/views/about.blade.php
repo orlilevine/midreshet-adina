@@ -1,6 +1,5 @@
 @extends('layouts.app')
 
-@section('title', 'About Us')
 
 @section('content')
     <div class="container-fluid" style="background: linear-gradient(to bottom, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)), url('{{ asset('images/KotelCloseUp.png') }}'); background-size: cover; background-position: center; height: 100vh; display: flex; align-items: center;">
