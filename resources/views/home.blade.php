@@ -56,6 +56,7 @@
             </div>
         </div>
     </section>
+
     <!-- Event Countdown Timer -->
     <section class="event-countdown py-5 text-center" style="background-color: #ff007f;">
         <h2 class="text-light">Upcoming Event: Mrs. Schoonmaker Live Shiur in...</h2>
@@ -76,10 +77,6 @@
                 <span id="seconds" class="display-4">00</span>
                 <p>Seconds</p>
             </div>
-        </div>
-        <div class="shiur-info mt-4">
-            <h3 class="text-light">Date: December 15, 2024</h3>
-            <h4 class="text-light">Location: Kew Gardens Hills</h4>
         </div>
     </section>
 
@@ -165,8 +162,8 @@
                 </div>
                 <div class="col-md-3 mb-4">
                     <div class="statistic" style="transition: transform 0.3s; padding: 20px; border-radius: 10px; background-color: #001f3f; color: white;">
-                        <h1 class="count" data-count="100">0</h1>
-                        <p>Global Locations</p>
+                        <h1 class="count" data-count="30">0</h1>
+                        <p>Communities</p>
                     </div>
                 </div>
                 <div class="col-md-3 mb-4">
