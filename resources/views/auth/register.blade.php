@@ -33,6 +33,20 @@
                                 <input id="last_name" type="text" class="form-control" name="last_name" value="{{ old('last_name') }}" required>
                             </div>
 
+                            <!-- Full Hebrew Name -->
+                            <div class="form-group">
+                                <label for="full_hebrew_name">Full Hebrew Name</label>
+                                <input
+                                    id="full_hebrew_name"
+                                    type="text"
+                                    class="form-control"
+                                    name="full_hebrew_name"
+                                    value="{{ old('full_hebrew_name') }}"
+                                    required
+                                    pattern="[\u0590-\u05FF\s]+"
+                                    title="Please enter Hebrew characters only">
+                            </div>
+
                             <!-- Email -->
                             <div class="form-group">
                                 <label for="email">Email Address</label>

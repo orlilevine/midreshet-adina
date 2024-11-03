@@ -23,6 +23,7 @@ class RegisteredUserController extends Controller
         $request->validate([
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
+            'full_hebrew_name' => ['required', 'string', 'max:255'],
             'street_address' => ['required', 'string', 'max:255'],
             'city' => ['required', 'string', 'max:255'],
             'state' => ['required', 'string', 'max:255'],
@@ -40,6 +41,7 @@ class RegisteredUserController extends Controller
         $user = User::create([
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
+            'full_hebrew_name' => $request->full_hebrew_name,
             'street_address' => $request->street_address,
             'city' => $request->city,
             'state' => $request->state,
