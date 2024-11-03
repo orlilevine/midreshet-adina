@@ -3,8 +3,8 @@
 @section('content')
     <!-- Weekly Shiurim Schedule -->
     <section class="weekly-schedule py-5 text-center">
-        <h2 class="display-4">Weekly Shiurim Schedule</h2>
-        <p class="lead mb-4">Join our weekly learning sessions!</p>
+        <h2 class="display-4">Shiurim Schedule</h2>
+        <p class="lead mb-4">Join our weekly online classes!</p>
         <div class="schedule-row d-flex justify-content-center flex-wrap">
 
             <!-- Monday -->

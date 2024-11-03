@@ -258,7 +258,6 @@
     <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
         <ul class="navbar-nav mx-auto">
             <li class="nav-item"><a class="nav-link" href="{{ route('home') }}">Home</a></li>
-            <li class="nav-item"><a class="nav-link" href="{{ route('about') }}">About Us</a></li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="shiursDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Shiurim
@@ -269,7 +268,8 @@
                     <a class="dropdown-item" href="{{ route('speakers.show', ['speakerId' => 3]) }}">Rabbi Avi Slansky</a>
                 </div>
             </li>
-            <li class="nav-item"><a class="nav-link" href="{{ route('gallery') }}">Gallery</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ route('schedule') }}">Schedule</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ route('about') }}">About Us</a></li>
             <li class="nav-item"><a class="nav-link" href="{{ route('contact') }}">Contact Us</a></li>
         </ul>
         <ul class="navbar-nav">

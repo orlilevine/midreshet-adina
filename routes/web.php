@@ -27,7 +27,7 @@ Route::get('/about', function () {return view('about');})->name('about');
 
 Route::get('/series/{seriesId}/shiur/{shiurId}', [ShiurController::class, 'show'])->name('shiur.show');
 
-Route::get('/gallery', function () {return view('gallery');})->name('gallery');
+Route::get('/schedule', function () {return view('schedule');})->name('schedule');
 
 Route::get('/contact', function () {return view('contact');})->name('contact');
 Route::post('/contact', [ContactController::class, 'submitMessage'])->name('contact.submit');
