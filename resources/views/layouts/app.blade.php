@@ -362,7 +362,7 @@
             <!-- About Section -->
             <div class="col-lg-4 col-md-6 mb-4">
                 <h5 class="font-weight-bold mb-3">Midreshet Adina</h5>
-                <p class="text-white">Helping women grow in their spiritual journey.</p>
+                <p class="text-white">Helping women grow in their spiritual journey through learning.</p>
             </div>
             <!-- Quick Links Section -->
             <div class="col-lg-3 col-md-6 mb-4">
