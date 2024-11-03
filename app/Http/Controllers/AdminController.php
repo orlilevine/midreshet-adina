@@ -108,7 +108,7 @@ class AdminController extends Controller
             : null;
 
         // Create the series with the specified Shiur dates
-        Series::create([
+        $series = Series::create([
             'title' => $validated['title'],
             'description' => $validated['description'],
             'image_path' => $imagePath,
@@ -126,8 +126,23 @@ class AdminController extends Controller
             'shiur_date_8' => $validated['shiur_date_8'],
         ]);
 
+        // Retrieve the user ID of the speaker
+        $speaker = Speaker::find($validated['speaker_id']);
+        $speakerUserId = $speaker->user_id;
+
+        // Insert a purchase record for the speaker
+        DB::table('purchases')->insert([
+            'user_id' => $speakerUserId,
+            'series_id' => $series->id,
+            'amount' => $series->price,
+            'payment_method' => 'speaker',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
         return redirect()->route('admin.dashboard')->with('success', 'Series created successfully.');
     }
+
 
 
     public function createSpeaker()

@@ -22,4 +22,10 @@ class Shiur extends Model
         return $this->hasMany(Purchase::class);
     }
 
+    public function speaker()
+    {
+        return $this->belongsTo(User::class, 'speaker_id');
+    }
+
+
 }
