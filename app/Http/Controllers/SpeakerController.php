@@ -14,7 +14,7 @@ class SpeakerController extends Controller
         $speaker = Speaker::findOrFail($speakerId);
 
         // Get series related to the speaker
-        $series = Series::where('speaker_id', $speakerId)->get();
+        $series = Series::where('speaker_id', $speakerId)->orderBy('id', 'desc')->get();
 
         return view('speakers/show', compact('speaker', 'series'));
     }
