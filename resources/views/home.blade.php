@@ -117,28 +117,28 @@
         <h2 class="display-4 text-light">Discover the Midreshet Adina Difference</h2>
         <p class="lead text-light mb-5">Experience Learning Like Never Before</p>
         <div class="carousel">
-            <div class="grid-item" style="background-image: url('/path/to/image1.jpg');">
+            <div class="grid-item" style="background-image: url('/images/Smiles.png'); background-size: cover; background-position: center;">
                 <div class="overlay">
                     <i class="fas fa-lightbulb fa-3x mb-3"></i>
                     <h4>Inspiring Shiurim</h4>
                     <p>Learn from top-tier Teachers and gain profound insights.</p>
                 </div>
             </div>
-            <div class="grid-item" style="background-image: url('/path/to/image2.jpg');">
+            <div class="grid-item" style="background-image: url('/images/Community.png'); background-size: cover; background-position: center;">
                 <div class="overlay">
                     <i class="fas fa-users fa-3x mb-3"></i>
                     <h4>Supportive Community</h4>
                     <p>Be part of a vibrant, growth-focused women's community.</p>
                 </div>
             </div>
-            <div class="grid-item" style="background-image: url('/path/to/image3.jpg');">
+            <div class="grid-item" style="background-image: url('/images/ComputerNew.png'); background-size: cover; background-position: center;">
                 <div class="overlay">
                     <i class="fas fa-laptop-code fa-3x mb-3"></i>
                     <h4>Accessible Anywhere</h4>
                     <p>Our online platform brings Torah learning to you, wherever you are.</p>
                 </div>
             </div>
-            <div class="grid-item" style="background-image: url('/path/to/image4.jpg');">
+            <div class="grid-item" style="background-image: url('/images/Calendar.png'); background-size: cover; background-position: center;">
                 <div class="overlay">
                     <i class="fas fa-calendar-alt fa-3x mb-3"></i>
                     <h4>Flexible Schedule</h4>
@@ -149,7 +149,7 @@
     </section>
 
 
-        <!-- Statistics Section -->
+    <!-- Statistics Section -->
     <section class="statistics py-5 text-center" style="background-color: #ff007f; color: white;">
             <h2 class="display-4">Elevate</h2>
             <p class="lead mb-5">Join our community!</p>
@@ -186,7 +186,7 @@
 
 <style>
     .why-choose-us {
-        perspective: 1000px; /* Adds depth for the 3D effect */
+        perspective: 1000px;
         overflow: hidden;
     }
 
@@ -200,7 +200,6 @@
         animation: rotateCarousel 10s infinite linear;
     }
 
-
     .grid-item {
         position: absolute;
         top: 50%;
@@ -211,7 +210,7 @@
         background-size: cover;
         background-position: center;
         transform-style: preserve-3d;
-        backface-visibility: hidden; /* Prevents items from being visible when they're behind */
+        backface-visibility: hidden;
         border-radius: 15px;
         transition: transform 1s;
     }
@@ -222,12 +221,14 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background-color: rgba(255, 0, 127, 0.8); /* Changed to #ff007f with some opacity */
+        background-color: rgba(0, 0, 0, 0.4); /* Soft dark overlay for subtle contrast */
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         color: white;
+        padding: 10px;
+        border-radius: 15px;
     }
 
     .grid-item .overlay h4, .grid-item .overlay p {
@@ -239,7 +240,7 @@
             transform: rotateY(0deg);
         }
         to {
-            transform: rotateY(-360deg); /* Full circle rotation */
+            transform: rotateY(-360deg);
         }
     }
     .countdown-box {
