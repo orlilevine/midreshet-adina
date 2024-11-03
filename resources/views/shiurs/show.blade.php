@@ -147,21 +147,35 @@
     <!-- JavaScript -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Show or hide "Other Payment Options" section
             document.getElementById('showOtherPaymentOptions').addEventListener('click', function(event) {
                 event.preventDefault();
-                document.getElementById('paymentOptions').style.display = 'block';
+                const paymentOptions = document.getElementById('paymentOptions');
+                paymentOptions.style.display = paymentOptions.style.display === 'block' ? 'none' : 'block';
             });
+
+            // Toggle the Coupon section
             document.getElementById('couponButton').addEventListener('click', function() {
-                document.getElementById('couponSection').style.display = 'block';
+                const couponSection = document.getElementById('couponSection');
+                couponSection.style.display = couponSection.style.display === 'block' ? 'none' : 'block';
             });
+
+            // Toggle the Zelle Payment section and hide the Check section
             document.getElementById('zelleButton').addEventListener('click', function() {
-                document.getElementById('zellePaymentForm').style.display = 'block';
-                document.getElementById('checkPaymentForm').style.display = 'none';
+                const zelleForm = document.getElementById('zellePaymentForm');
+                const checkForm = document.getElementById('checkPaymentForm');
+                zelleForm.style.display = zelleForm.style.display === 'block' ? 'none' : 'block';
+                checkForm.style.display = 'none'; // Ensure Check form is hidden if Zelle is open
             });
+
+            // Toggle the Check Payment section and hide the Zelle section
             document.getElementById('checkButton').addEventListener('click', function() {
-                document.getElementById('checkPaymentForm').style.display = 'block';
-                document.getElementById('zellePaymentForm').style.display = 'none';
+                const checkForm = document.getElementById('checkPaymentForm');
+                const zelleForm = document.getElementById('zellePaymentForm');
+                checkForm.style.display = checkForm.style.display === 'block' ? 'none' : 'block';
+                zelleForm.style.display = 'none'; // Ensure Zelle form is hidden if Check is open
             });
         });
     </script>
+
 @endsection

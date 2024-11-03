@@ -182,21 +182,32 @@
     <!-- JavaScript -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            const paymentOptions = document.getElementById('paymentOptions');
+            const couponSection = document.getElementById('couponSection');
+            const zellePaymentForm = document.getElementById('zellePaymentForm');
+            const checkPaymentForm = document.getElementById('checkPaymentForm');
+
             document.getElementById('showOtherPaymentOptions').addEventListener('click', function(event) {
                 event.preventDefault();
-                document.getElementById('paymentOptions').style.display = 'block';
+                paymentOptions.style.display = (paymentOptions.style.display === 'block') ? 'none' : 'block';
             });
+
             document.getElementById('couponButton').addEventListener('click', function() {
-                document.getElementById('couponSection').style.display = 'block';
+                couponSection.style.display = (couponSection.style.display === 'block') ? 'none' : 'block';
             });
+
             document.getElementById('zelleButton').addEventListener('click', function() {
-                document.getElementById('zellePaymentForm').style.display = 'block';
-                document.getElementById('checkPaymentForm').style.display = 'none';
+                const isVisible = zellePaymentForm.style.display === 'block';
+                zellePaymentForm.style.display = isVisible ? 'none' : 'block';
+                checkPaymentForm.style.display = 'none';
             });
+
             document.getElementById('checkButton').addEventListener('click', function() {
-                document.getElementById('checkPaymentForm').style.display = 'block';
-                document.getElementById('zellePaymentForm').style.display = 'none';
+                const isVisible = checkPaymentForm.style.display === 'block';
+                checkPaymentForm.style.display = isVisible ? 'none' : 'block';
+                zellePaymentForm.style.display = 'none';
             });
         });
     </script>
+
 @endsection
