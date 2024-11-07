@@ -269,7 +269,15 @@
                 </div>
             </li>
             <li class="nav-item"><a class="nav-link" href="{{ route('schedule') }}">Schedule</a></li>
-            <li class="nav-item"><a class="nav-link" href="{{ route('about') }}">About Us</a></li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="aboutDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    About Us
+                </a>
+                <div class="dropdown-menu" aria-labelledby="aboutDropdown">
+                    <a class="dropdown-item" href="{{ route('about') }}">About Us</a>
+                    <a class="dropdown-item" href="{{ route('mission') }}">Our Mission Statement</a>
+                </div>
+            </li>
             <li class="nav-item"><a class="nav-link" href="{{ route('contact') }}">Contact Us</a></li>
         </ul>
         <ul class="navbar-nav">

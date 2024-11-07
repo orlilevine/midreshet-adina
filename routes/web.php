@@ -23,13 +23,13 @@ Route::get('/dashboard', function () {return view('dashboard');})->name('dashboa
 Route::get('/home',[HomeController::class, 'index'])->name('home');
 
 
-Route::get('/about', function () {return view('about');})->name('about');
+Route::get('/about', function () {return view('navbar.about');})->name('about');
 
 Route::get('/series/{seriesId}/shiur/{shiurId}', [ShiurController::class, 'show'])->name('shiur.show');
 
-Route::get('/schedule', function () {return view('schedule');})->name('schedule');
+Route::get('/schedule', function () {return view('navbar.schedule');})->name('schedule');
 
-Route::get('/contact', function () {return view('contact');})->name('contact');
+Route::get('/contact', function () {return view('navbar.contact');})->name('contact');
 Route::post('/contact', [ContactController::class, 'submitMessage'])->name('contact.submit');
 
 Route::get('/speakers/{speakerId}', [SpeakerController::class, 'showSpeaker'])->name('speakers.show');
@@ -87,5 +87,7 @@ Route::post('/register', [RegisteredUserController::class, 'store']);
 
 /*Route::get('/user/join-daily', [DailyController::class, 'joinDailyMeeting'])->name('user.series.join');*/
 Route::get('/daily-meeting/{id}', [DailyController::class, 'joinDailyMeeting'])->name('daily.meeting');
+
+Route::get('/mission', function () {return view('navbar.mission');})->name('mission');
 
 require __DIR__.'/auth.php';
