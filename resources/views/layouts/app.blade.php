@@ -27,7 +27,7 @@
         }
 
         .navbar {
-            background-color: #ff007f;
+            background-color: #BADFC5;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             transition: background-color 0.3s;
         }
@@ -250,7 +250,7 @@
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-light">
     <a class="navbar-brand" href="#">
-        <img src="{{ asset('images/MAlogo.jpg') }}" alt="Logo" style="height: 80px; width: auto;" />
+        <img src="{{ asset('images/logo.png') }}" alt="Logo" style="height: 100px; width: auto;" />
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
