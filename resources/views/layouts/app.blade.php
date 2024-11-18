@@ -57,7 +57,7 @@
         }
 
         .nav-link:hover {
-            color: #E6E6FA !important;
+            color: #51786F !important;
         }
 
         .nav-link.login, .nav-link.register {
@@ -172,7 +172,7 @@
         }
 
         .elevate-text .btn {
-            background-color: #ff007f;
+            background-color: #51786F;
             color: white;
             font-size: 1.2rem;
             padding: 15px 30px;
@@ -182,7 +182,7 @@
         }
 
         .elevate-text .btn:hover {
-            background-color: #001f3f;
+            background-color: #2F3D46;
             transform: translateY(-5px);
         }
 
