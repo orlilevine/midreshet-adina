@@ -109,7 +109,7 @@
 
         footer h5 {
             font-size: 1.5rem;
-            color: #ff007f;
+            color: white;
         }
 
         footer p, footer a {
@@ -195,29 +195,9 @@
                 opacity: 1;
             }
         }
-        /* Custom styles for the Join Our Community button */
-        .btn-join {
-            background-color: #001f3f; /* Dark blue */
-            color: white;
-            padding: 12px 24px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            border-radius: 8px;
-            border: 2px solid transparent;
-            transition: all 0.3s ease-in-out;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .btn-join:hover {
-            background-color: #003366; /* Slightly lighter shade for hover effect */
-            color: #ffffff;
-            border-color: #001f3f; /* Blue border on hover */
-            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); /* Enhance shadow on hover */
-            transform: translateY(-2px); /* Lift the button slightly on hover */
-        }
 
         .btn-subscribe {
-            background-color: #05122d; /* Dark turquoise */
+            background-color: #2F3D46;
             color: #FFFFFF;
             font-size: 1.1rem;
             font-weight: bold;
@@ -229,7 +209,7 @@
         }
 
         .btn-subscribe:hover {
-            background-color: #030D22; /* Slightly darker shade for hover */
+            background-color: black;
             color: #ffffff;
             border-color: #030D22;
             box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
@@ -372,7 +352,7 @@
 </main>
 
 <!-- Footer -->
-<footer class="text-white" style="background: linear-gradient(45deg, #ff007f, #001f3f); padding: 4rem 0;">
+<footer class="text-white" style="background: linear-gradient(45deg, #BADFC5, #2F3D46); padding: 3rem 0;">
     <div class="container">
         <div class="row">
             <!-- About Section -->
@@ -397,7 +377,7 @@
                         <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
                     </div>
                     <button class="btn btn-subscribe">Subscribe</button>
-                    <p id="subscriptionMessage" style="color: #ff007f; font-weight: bold; display: none; margin-top: 10px;">
+                    <p id="subscriptionMessage" style="color: #BADFC5; font-weight: bold; display: none; margin-top: 10px;">
                         Sorry, subscription is not set up yet. Try again later.
                     </p>
                 </form>
