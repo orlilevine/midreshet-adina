@@ -30,6 +30,14 @@
             background-color: #BADFC5;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             transition: background-color 0.3s;
+            height: 100px; /* Adjust this to your desired navbar height */
+            display: flex;
+            align-items: center; /* Centers content vertically */
+        }
+
+        .navbar-brand img {
+            max-height: 100%; /* Ensures the image doesn't exceed the navbar height */
+            object-fit: contain; /* Keeps the aspect ratio intact */
         }
 
         .navbar-nav {
@@ -53,7 +61,7 @@
         }
 
         .nav-link.login, .nav-link.register {
-            background-color: #001f3f;
+            background-color: #2F3D46;
             color: white !important;
             border-radius: 50px;
             font-size: 1.2rem;
@@ -62,7 +70,7 @@
         }
 
         .nav-link.login:hover, .nav-link.register:hover {
-            background-color: #006666;
+            background-color: black;
             transform: scale(1.05);
         }
 
@@ -250,7 +258,7 @@
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-light">
     <a class="navbar-brand" href="#">
-        <img src="{{ asset('images/logo.png') }}" alt="Logo" style="height: 100px; width: auto;" />
+        <img src="{{ asset('images/logo.png') }}" alt="Logo" style="height: 120px; width: auto;" />
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
