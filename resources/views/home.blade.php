@@ -8,7 +8,7 @@
         <div class="schedule-row d-flex justify-content-center flex-wrap">
 
             <!-- Monday -->
-            <div class="schedule-card mx-3 mb-3" style="background-color: #001f3f;">
+            <div class="schedule-card mx-3 mb-3" style="background-color: #51786F;">
                 <h3 class="day-title text-light">Monday</h3>
                 <div class="shiur-details">
                     <p class="speaker text-light">Shira Smiles</p>
@@ -22,7 +22,7 @@
             </div>
 
             <!-- Tuesday -->
-            <div class="schedule-card mx-3 mb-3" style="background-color: #ff007f;">
+            <div class="schedule-card mx-3 mb-3" style="background-color: #51786F;">
                 <h3 class="day-title text-light">Tuesday</h3>
                 <div class="shiur-details">
                     <p class="speaker text-light">Dina Schoonmaker</p>
@@ -36,7 +36,7 @@
             </div>
 
             <!-- Wednesday -->
-            <div class="schedule-card mx-3 mb-3" style="background-color: #001f3f;">
+            <div class="schedule-card mx-3 mb-3" style="background-color: #51786F;">
                 <h3 class="day-title text-light">Wednesday</h3>
                 <div class="shiur-details">
                     <p class="speaker text-light">Shira Smiles</p>
@@ -46,7 +46,7 @@
             </div>
 
             <!-- Thursday -->
-            <div class="schedule-card mx-3 mb-3" style="background-color: #ff007f;">
+            <div class="schedule-card mx-3 mb-3" style="background-color: #51786F;">
                 <h3 class="day-title text-light">Thursday</h3>
                 <div class="shiur-details">
                     <p class="speaker text-light">Rabbi Avi Slansky</p>
@@ -58,8 +58,8 @@
     </section>
 
     <!-- Event Countdown Timer -->
-    <section class="event-countdown py-5 text-center" style="background-color: #ff007f;">
-        <h2 class="text-light">Upcoming Event: Mrs. Schoonmaker Live Shiur in...</h2>
+    <section class="event-countdown py-5 text-center" style="background-color: #BADFC5;">
+        <h2 class="text-dark">Upcoming Event: Mrs. Schoonmaker Live Shiur in...</h2>
         <div id="countdown" class="d-flex justify-content-center">
             <div class="countdown-box mx-3">
                 <span id="days" class="display-4">00</span>
@@ -99,7 +99,7 @@
                                     </div>
                                 </div>
                                 <!-- Back Side of the Card -->
-                                <div class="card back" style="position: absolute; width: 100%; height: 100%; backface-visibility: hidden; background-color: #001f3f; color: white; border-radius: 10px; padding: 20px; transform: rotateY(180deg);">
+                                <div class="card back" style="position: absolute; width: 100%; height: 100%; backface-visibility: hidden; background-color: #2F3D46; color: white; border-radius: 10px; padding: 20px; transform: rotateY(180deg);">
                                     <h5>{{ $series->title }}</h5>
                                     <p>{{ Str::limit($series->description, 100) }}</p>
                                     <a href="{{ route('series.show', ['id' => $series->id]) }}" class="btn btn-light btn-block">View this series</a>
@@ -149,7 +149,7 @@
     </section>
 
 
-    <!-- Statistics Section -->
+   {{-- <!-- Statistics Section -->
     <section class="statistics py-5 text-center" style="background-color: #ff007f; color: white;">
             <h2 class="display-4">Elevate</h2>
             <p class="lead mb-5">Join our community!</p>
@@ -180,7 +180,7 @@
                 </div>
             </div>
         </section>
-
+--}}
 @endsection
 
 
@@ -288,14 +288,14 @@
     }
 
     .back {
-        background-color: #001f3f;
+        background-color: #2F3D46;
         color: white;
         padding: 20px;
         border-radius: 10px;
     }
 
     .back .btn {
-        background-color: #ff007f;
+        background-color: #BADFC5;
         color: white;
     }
 
@@ -392,7 +392,7 @@
         }
     }
     .weekly-schedule {
-        background-color: #f9f9f9;
+        background-color: white;
     }
 
     .schedule-row {

@@ -356,9 +356,9 @@
         <div class="elevate-slide" style="background-image: url('{{ asset('images/House.png') }}');">
             <div class="elevate-text">
                 <h1>Elevate Your Day</h1>
-                <p>Ever feel your running so many errands and never have a chance to stop and think? </p>
-                   <p> Join our classes and start each morning with inspiration.</p>
-                <a href="#learn-more" class="btn">See our schedule</a>
+                <p>Ever feel your running so many errands and never have a chance to stop and think?</p>
+                <p>Join our classes and start each morning with inspiration.</p>
+                <a href="{{ url('/schedule') }}" class="btn">See our schedule</a>
             </div>
         </div>
     </div>
