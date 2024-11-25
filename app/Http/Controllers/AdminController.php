@@ -87,35 +87,55 @@ class AdminController extends Controller
             'shiur_date_7' => 'nullable|date',
             'shiur_date_8' => 'nullable|date',
         ]);
-        // Create the Daily.co room
-        $dailyApiKey = env('DAILY_API_KEY');
-        $response = Http::withToken($dailyApiKey)->post('https://api.daily.co/v1/rooms', [
-            'properties' => [
-                'exp' => strtotime('+1 year'),
-            ],
-        ]);
-
-        if ($response->failed()) {
-            return redirect()->back()->withErrors(['message' => 'Failed to create meeting room.']);
-        }
-
-        // Get the Shiur time
-        $shiurTime = $validated['shiur_time'];
 
         // Handle image upload if necessary
         $imagePath = $request->hasFile('series_image')
             ? $request->file('series_image')->store('series_images', 'public')
             : null;
 
-        // Create the series with the specified Shiur dates
+        // Get Zoom access token
+        $zoomController = new ZoomController();
+        $accessToken = $zoomController->getZoomAccessToken();
+
+        // Format the start time to UTC ISO 8601 format
+        $startTime = \Carbon\Carbon::parse($validated['shiur_date_1'] . ' ' . $validated['shiur_time'])->toISOString();
+
+        // Call Zoom API to create a meeting
+        $response = Http::withToken($accessToken)->post(env('ZOOM_BASE_URL') . '/users/me/meetings', [
+            'topic' => $validated['title'],
+            'type' => 2, // Scheduled meeting
+            'start_time' => $startTime,
+            'duration' => 120,
+            'settings' => [
+                'join_before_host' => true,
+                'mute_upon_entry' => true,
+                'waiting_room' => false,
+                'approval_type' => 2, // Automatically approve participants
+            ],
+        ]);
+
+        // Check if Zoom API call was successful
+        if ($response->failed()) {
+            \Log::error('Zoom meeting creation failed: ' . $response->body());
+            return redirect()->back()->withErrors(['message' => 'Failed to create Zoom meeting: ' . $response->body()]);
+        }
+
+        // Retrieve Zoom meeting details
+        $zoomMeeting = $response->json();
+
+
+        // Format the start time to a valid datetime format (Y-m-d H:i:s)
+        $startTime = \Carbon\Carbon::parse($validated['shiur_date_1'] . ' ' . $validated['shiur_time'])->format('Y-m-d H:i:s');
+
+        // Create the series record
         $series = Series::create([
             'title' => $validated['title'],
             'description' => $validated['description'],
             'image_path' => $imagePath,
             'speaker_id' => $validated['speaker_id'],
-            'daily_link' => $response->json('url'), // Store the room URL
+            'zoom_link' => $zoomMeeting['join_url'],
             'price' => $validated['price'],
-            'starting_time' => $shiurTime,
+            'starting_time' => $startTime,  // Use the properly formatted datetime
             'shiur_date_1' => $validated['shiur_date_1'],
             'shiur_date_2' => $validated['shiur_date_2'],
             'shiur_date_3' => $validated['shiur_date_3'],
@@ -126,11 +146,12 @@ class AdminController extends Controller
             'shiur_date_8' => $validated['shiur_date_8'],
         ]);
 
-        // Retrieve the user ID of the speaker
+
+
+        // Insert purchase record for speaker
         $speaker = Speaker::find($validated['speaker_id']);
         $speakerUserId = $speaker->user_id;
 
-        // Insert a purchase record for the speaker
         DB::table('purchases')->insert([
             'user_id' => $speakerUserId,
             'series_id' => $series->id,
@@ -142,7 +163,6 @@ class AdminController extends Controller
 
         return redirect()->route('admin.dashboard')->with('success', 'Series created successfully.');
     }
-
 
 
     public function createSpeaker()

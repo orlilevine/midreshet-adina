@@ -19,7 +19,7 @@
                                      alt="{{ $series->title }}"
                                      style="width: 100%; height: auto; display: block;"/>
                             </a>
-                            @if($series->daily_link)
+                            @if($series->zoom_link)
                                 @php
                                     $shiurDates = [
                                         $series->shiur_date_1,
@@ -44,8 +44,10 @@
                                     }
 
                                     $currentDateTime = now();
-                                    $canJoin = false;
 
+
+
+                                    $canJoin = false;
                                     foreach ($allowedTimes as [$start, $end]) {
                                         if ($currentDateTime->between($start, $end)) {
                                             $canJoin = true;
@@ -54,8 +56,9 @@
                                     }
                                 @endphp
 
-                                @if($canJoin)
-                                    <a href="{{ route('daily.meeting', ['id' => $series->id, 'url' => urlencode($series->daily_link)]) }}"
+
+                            @if($canJoin)
+                                    <a href="{{ $series->zoom_link }}" target="_blank" class="join-live-btn">
                                        class="join-live-btn">
                                         Join Live Class
                                     </a>

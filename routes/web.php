@@ -10,7 +10,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ContactController;
-use App\Http\Controllers\DailyController;
+use App\Http\Controllers\ZoomController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 
 
@@ -85,9 +85,13 @@ Route::post('/payment/check/shiur', [PaymentController::class, 'handleCheckPayme
 Route::get('/register', [RegisteredUserController::class, 'create'])->name('register');
 Route::post('/register', [RegisteredUserController::class, 'store']);
 
-/*Route::get('/user/join-daily', [DailyController::class, 'joinDailyMeeting'])->name('user.series.join');*/
-Route::get('/daily-meeting/{id}', [DailyController::class, 'joinDailyMeeting'])->name('daily.meeting');
+/*Route::get('/user/join-daily', [ZoomController::class, 'joinDailyMeeting'])->name('user.series.join');*/
+Route::get('/daily-meeting/{id}', [ZoomController::class, 'joinDailyMeeting'])->name('daily.meeting');
 
 Route::get('/mission', function () {return view('navbar.mission');})->name('mission');
+
+Route::post('/admin/series', [AdminController::class, 'storeSeries'])->name('admin.series.store');
+Route::get('/series/{id}/join', [ZoomController::class, 'joinZoomMeeting'])->name('zoom.meeting');
+
 
 require __DIR__.'/auth.php';
