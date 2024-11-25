@@ -11,11 +11,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('purchases', function (Blueprint $table) {
+        Schema::create('roles', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');  // Instead of foreignId
-            $table->unsignedBigInteger('shiur_id');  // Instead of foreignId
-            $table->decimal('amount', 8, 2);
+            $table->string('name')->unique();
             $table->timestamps();
         });
     }
@@ -23,8 +21,8 @@ return new class extends Migration
     /**
      * Reverse the migrations.
      */
-    public function down(): void
+    public function down()
     {
-        Schema::dropIfExists('purchases');
+        Schema::dropIfExists('roles');
     }
 };
