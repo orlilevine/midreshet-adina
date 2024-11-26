@@ -496,35 +496,35 @@
         });
 
     });
-    document.addEventListener('DOMContentLoaded', function () {
-        // Pass the PHP variable to JavaScript by embedding it within the script
-        const eventDate = new Date("{{ $eventDate }}"); // Set event date from backend
+        document.addEventListener('DOMContentLoaded', function () {
+        const nextShiurTime = "{{ $nextShiur }}";
+        if (!nextShiurTime) return;
 
         const countdownElement = document.getElementById('countdown');
-        const daysElement = document.getElementById('days');
-        const hoursElement = document.getElementById('hours');
-        const minutesElement = document.getElementById('minutes');
-        const secondsElement = document.getElementById('seconds');
+        const shiurDate = new Date(nextShiurTime);
 
         function updateCountdown() {
-            const now = new Date();
-            const timeDiff = eventDate - now;
+        const now = new Date();
+        const diff = shiurDate - now;
 
-            if (timeDiff > 0) {
-                const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+        if (diff <= 0) {
+        countdownElement.innerHTML = '<p>Shiur is live now!</p>';
+        return;
+    }
 
-                daysElement.textContent = days.toString().padStart(2, '0');
-                hoursElement.textContent = hours.toString().padStart(2, '0');
-                minutesElement.textContent = minutes.toString().padStart(2, '0');
-                secondsElement.textContent = seconds.toString().padStart(2, '0');
-            } else {
-                countdownElement.textContent = "Event Started!";
-            }
-        }
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
+        document.getElementById('days').textContent = days;
+        document.getElementById('hours').textContent = hours;
+        document.getElementById('minutes').textContent = minutes;
+        document.getElementById('seconds').textContent = seconds;
+    }
+
+        updateCountdown();
         setInterval(updateCountdown, 1000);
     });
+
 </script>
