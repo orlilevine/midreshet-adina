@@ -100,16 +100,20 @@ class AdminController extends Controller
         // Format the start time to UTC ISO 8601 format
         $startTime = \Carbon\Carbon::parse($validated['shiur_date_1'] . ' ' . $validated['shiur_time'])->toISOString();
 
+        // Generate a random passcode
+        $passcode = bin2hex(random_bytes(4)); // Generates an 8-character alphanumeric passcode
+
         // Call Zoom API to create a meeting
         $response = Http::withToken($accessToken)->post(env('ZOOM_BASE_URL') . '/users/me/meetings', [
             'topic' => $validated['title'],
             'type' => 2, // Scheduled meeting
             'start_time' => $startTime,
             'duration' => 120,
+            'password' => '123456', // Set password here
             'settings' => [
                 'join_before_host' => true,
                 'mute_upon_entry' => true,
-                'waiting_room' => false,
+                'waiting_room' => false, // Disable waiting room
                 'approval_type' => 2, // Automatically approve participants
             ],
         ]);
@@ -123,6 +127,9 @@ class AdminController extends Controller
         // Retrieve Zoom meeting details
         $zoomMeeting = $response->json();
 
+        // NEW: Log meeting details to verify settings
+        $meetingDetails = Http::withToken($accessToken)->get(env('ZOOM_BASE_URL') . "/meetings/{$zoomMeeting['id']}");
+        \Log::info('Meeting Details: ' . $meetingDetails->body());
 
         // Format the start time to a valid datetime format (Y-m-d H:i:s)
         $startTime = \Carbon\Carbon::parse($validated['shiur_date_1'] . ' ' . $validated['shiur_time'])->format('Y-m-d H:i:s');
@@ -134,8 +141,9 @@ class AdminController extends Controller
             'image_path' => $imagePath,
             'speaker_id' => $validated['speaker_id'],
             'zoom_link' => $zoomMeeting['join_url'],
+            'zoom_password' => $passcode, // Save the generated passcode
             'price' => $validated['price'],
-            'starting_time' => $startTime,  // Use the properly formatted datetime
+            'starting_time' => $startTime, // Use the properly formatted datetime
             'shiur_date_1' => $validated['shiur_date_1'],
             'shiur_date_2' => $validated['shiur_date_2'],
             'shiur_date_3' => $validated['shiur_date_3'],
@@ -145,8 +153,6 @@ class AdminController extends Controller
             'shiur_date_7' => $validated['shiur_date_7'],
             'shiur_date_8' => $validated['shiur_date_8'],
         ]);
-
-
 
         // Insert purchase record for speaker
         $speaker = Speaker::find($validated['speaker_id']);
@@ -163,7 +169,6 @@ class AdminController extends Controller
 
         return redirect()->route('admin.dashboard')->with('success', 'Series created successfully.');
     }
-
 
     public function createSpeaker()
     {
