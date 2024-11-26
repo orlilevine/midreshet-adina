@@ -125,7 +125,7 @@
     </section>
 
 
-    <section class="why-choose-us py-5 text-center" style="background-color: #001f3f;">
+   {{-- <section class="why-choose-us py-5 text-center" style="background-color: #001f3f;">
         <h2 class="display-4 text-light">Discover the Midreshet Adina Difference</h2>
         <p class="lead text-light mb-5">Experience Learning Like Never Before</p>
         <div class="carousel">
@@ -159,7 +159,7 @@
             </div>
         </div>
     </section>
-
+--}}
 
    {{-- <!-- Statistics Section -->
     <section class="statistics py-5 text-center" style="background-color: #ff007f; color: white;">
