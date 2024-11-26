@@ -80,6 +80,16 @@
                 <p>Seconds</p>
             </div>
         </div>
+
+        <!-- Display Series Title and Description -->
+        <div class="series-info mt-4 text-center">
+            <h3 style="font-family: 'Poppins', sans-serif; font-size: 2.5rem; color: #2c3e50; font-weight: 700;">
+                {{ $nextShiurTitle }}
+            </h3>
+            <p style="font-family: 'Roboto', sans-serif; font-size: 1.25rem; color: #34495e; font-style: italic;">
+                {{ $nextShiurDescription ? $nextShiurDescription : '' }}
+            </p>
+        </div>
     </section>
 
 

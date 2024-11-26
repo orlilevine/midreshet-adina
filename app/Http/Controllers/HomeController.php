@@ -9,13 +9,15 @@ use App\Models\Series;
 class HomeController extends Controller
 {
 
-    public function index() {
+    public function index()
+    {
         $featuredSeries = Series::where('is_featured', true)->get();
         $eventDate = '2024-11-03 09:15:00';
-        ['nextShiur' => $nextShiur, 'nextShiurSpeaker' => $nextShiurSpeaker] = $this->getNextShiurTime();
+        ['nextShiur' => $nextShiur, 'nextShiurSpeaker' => $nextShiurSpeaker, 'nextShiurTitle' => $nextShiurTitle, 'nextShiurDescription' => $nextShiurDescription] = $this->getNextShiurTime();
 
-        return view('Home', compact('featuredSeries', 'eventDate', 'nextShiur', 'nextShiurSpeaker'));
+        return view('Home', compact('featuredSeries', 'eventDate', 'nextShiur', 'nextShiurSpeaker', 'nextShiurTitle', 'nextShiurDescription'));
     }
+
 
 
     public function getNextShiurTime()
@@ -25,7 +27,9 @@ class HomeController extends Controller
         $now = now();
 
         $nextShiur = null;
-        $nextShiurSpeaker = null;  // Variable to hold the speaker's name
+        $nextShiurSpeaker = null;
+        $nextShiurTitle = null;
+        $nextShiurDescription = null;
 
         foreach ($series as $s) {
             for ($i = 1; $i <= 8; $i++) {
@@ -51,6 +55,10 @@ class HomeController extends Controller
                             } else {
                                 $nextShiurSpeaker = 'Speaker Name';  // Fallback in case speaker info is missing
                             }
+
+                            // Get the title and description of the series
+                            $nextShiurTitle = $s->title;
+                            $nextShiurDescription = $s->description;
                         }
                     } catch (\Exception $e) {
                         \Log::error('Error creating Carbon instance for: ' . $shiurDateTimeString . ' with error: ' . $e->getMessage());
@@ -65,8 +73,7 @@ class HomeController extends Controller
             \Log::debug('No upcoming Shiur found.');
         }
 
-        return compact('nextShiur', 'nextShiurSpeaker');
+        return compact('nextShiur', 'nextShiurSpeaker', 'nextShiurTitle', 'nextShiurDescription');
     }
-
 }
 
