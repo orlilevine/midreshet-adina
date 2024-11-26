@@ -296,7 +296,7 @@
 @if (Route::is('home'))
     <div class="elevate-slides-container">
         <!-- First Slide -->
-        <div class="elevate-slide active" style="background-image: url('{{ asset('images/KotelBlueSky.png') }}');">
+        <div class="elevate-slide active" style="background-image: url('{{ asset('images/KotelBlue.png') }}');">
             <div class="elevate-text">
                 <h1>Elevate Your Connection</h1>
                 <p>Stay connected to Eretz Yisrael, no matter where you are in the world.</p>
