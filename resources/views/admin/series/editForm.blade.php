@@ -53,7 +53,9 @@
 
             <div class="form-group">
                 <label for="shiur_time">Shiur Time</label>
-                <input type="time" name="shiur_time" class="form-control" id="shiur_time" value="{{ old('shiur_time', $series->starting_time) }}" required>
+                <input type="time" name="shiur_time" class="form-control" id="shiur_time"
+                       value="{{ old('shiur_time', $series->starting_time ? \Carbon\Carbon::parse($series->starting_time)->format('H:i') : '') }}"
+                       required>
             </div>
 
         @for ($i = 1; $i <= 8; $i++)

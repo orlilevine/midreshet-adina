@@ -329,10 +329,10 @@ class AdminController extends Controller
             'description' => 'nullable|string',
             'series_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'speaker_id' => 'required|exists:speakers,id',
-            'shiur_time' => 'required|date_format:H:i', // Validate time format
+            'shiur_time' => 'required|date_format:H:i',
             'price' => 'required|numeric|min:0',
-            // Add validation for shiur dates if needed
-            'shiur_date_1' => 'nullable|date',
+            'shiur_date_1' => 'required|date', // Ensure the first shiur date is provided
+            // Validate additional shiur dates if needed
             'shiur_date_2' => 'nullable|date',
             'shiur_date_3' => 'nullable|date',
             'shiur_date_4' => 'nullable|date',
@@ -342,7 +342,6 @@ class AdminController extends Controller
             'shiur_date_8' => 'nullable|date',
         ]);
 
-        // Find the series to update
         $series = Series::findOrFail($id);
 
         // Handle the file upload
@@ -355,8 +354,10 @@ class AdminController extends Controller
         $series->title = $validated['title'];
         $series->description = $validated['description'];
         $series->speaker_id = $validated['speaker_id'];
-        $series->starting_time = $validated['shiur_time'];
         $series->price = $validated['price'];
+
+        // Combine date and time for starting_time
+        $series->starting_time = \Carbon\Carbon::parse($validated['shiur_date_1'] . ' ' . $validated['shiur_time']);
 
         // Update shiur dates
         for ($i = 1; $i <= 8; $i++) {
