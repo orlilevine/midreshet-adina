@@ -263,6 +263,7 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="aboutDropdown">
                     <a class="dropdown-item" href="{{ route('about') }}">About Us</a>
+                    <a class="dropdown-item" href="{{ route('speakers') }}">About Our Speakers</a>
                     <a class="dropdown-item" href="{{ route('mission') }}">Our Mission Statement</a>
                 </div>
             </li>

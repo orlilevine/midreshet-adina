@@ -24,6 +24,7 @@ Route::get('/home',[HomeController::class, 'index'])->name('home');
 
 
 Route::get('/about', function () {return view('navbar.about');})->name('about');
+Route::get('/speakers', function () {return view('navbar.speakers');})->name('speakers');
 
 Route::get('/series/{seriesId}/shiur/{shiurId}', [ShiurController::class, 'show'])->name('shiur.show');
 
