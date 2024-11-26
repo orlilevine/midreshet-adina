@@ -109,12 +109,14 @@ class AdminController extends Controller
             'type' => 2, // Scheduled meeting
             'start_time' => $startTime,
             'duration' => 120,
-            'password' => '123456', // Set password here
+            'password' => '123456',
             'settings' => [
                 'join_before_host' => true,
                 'mute_upon_entry' => true,
-                'waiting_room' => false, // Disable waiting room
+                'waiting_room' => false,
                 'approval_type' => 2, // Automatically approve participants
+                'auto_recording' => 'none', // Disable auto-recording for everyone
+                'recording_privileges' => 'host', // Ensure only the host can record
             ],
         ]);
 
@@ -141,7 +143,7 @@ class AdminController extends Controller
             'image_path' => $imagePath,
             'speaker_id' => $validated['speaker_id'],
             'zoom_link' => $zoomMeeting['join_url'],
-            'zoom_password' => $passcode, // Save the generated passcode
+            'zoom_password' => '123456', // Save the generated passcode
             'price' => $validated['price'],
             'starting_time' => $startTime, // Use the properly formatted datetime
             'shiur_date_1' => $validated['shiur_date_1'],
