@@ -301,7 +301,7 @@
             <div class="elevate-text">
                 <h1>Elevate Your Connection</h1>
                 <p>Stay connected to Eretz Yisrael, no matter where you are in the world.</p>
-                <a href="#learn-more" class="btn">Learn about our speakers from Eretz Yisrael</a>
+                <a href="{{ url('/speakers') }}" class="btn">Learn about our speakers from Eretz Yisrael</a>
             </div>
         </div>
 
@@ -311,7 +311,7 @@
                 <h1>Elevate Your Learning</h1>
                 <p>Feel disconnected from Torah, Hashkafah, or Halacha? </p>
                  <p>Elevate is where you can reignite your inner spark.</p>
-                <a href="#learn-more" class="btn">Learn about our Shiurim</a>
+                <a href="{{ url('/speakers/2') }}" class="btn">Discover our Shiurim</a>
             </div>
         </div>
 
@@ -320,7 +320,7 @@
             <div class="elevate-text">
                 <h1>Elevate Your Happiness</h1>
                 <p>Grab a cozy spot on your couch, a warm cup of coffee, and your computer—it's time to spark relaxation and happiness.</p>
-                <a href="#learn-more" class="btn">Learn More about our Zoom classes</a>
+                <a href="{{ url('/mission') }}" class="btn">Learn More about our Zoom classes</a>
             </div>
         </div>
 
@@ -329,7 +329,7 @@
             <div class="elevate-text">
                 <h1>Elevate Your Community</h1>
                 <p>Join a community of Frum women like yourselves trying to inspire their daily lives.</p>
-                <a href="#learn-more" class="btn">Learn More about our listeners</a>
+                <a href="{{ url('/about') }}" class="btn">Learn More about our vision</a>
             </div>
         </div>
 
