@@ -12,17 +12,20 @@ class HomeController extends Controller
     public function index() {
         $featuredSeries = Series::where('is_featured', true)->get();
         $eventDate = '2024-11-03 09:15:00';
-        $nextShiur = $this->getNextShiurTime();
+        ['nextShiur' => $nextShiur, 'nextShiurSpeaker' => $nextShiurSpeaker] = $this->getNextShiurTime();
 
-        return view('Home', compact('featuredSeries', 'eventDate', 'nextShiur'));
+        return view('Home', compact('featuredSeries', 'eventDate', 'nextShiur', 'nextShiurSpeaker'));
     }
+
 
     public function getNextShiurTime()
     {
+        // Get all series
         $series = \DB::table('series')->get();
         $now = now();
 
         $nextShiur = null;
+        $nextShiurSpeaker = null;  // Variable to hold the speaker's name
 
         foreach ($series as $s) {
             for ($i = 1; $i <= 8; $i++) {
@@ -30,35 +33,39 @@ class HomeController extends Controller
                 $shiurDate = $s->$shiurDateColumn;
 
                 if ($shiurDate) {
-                    // Extract the time from the full starting time
                     $startingTime = \Carbon\Carbon::parse($s->starting_time)->format('H:i:s');
-
-                    // Combine the date and extracted time
                     $shiurDateTimeString = $shiurDate . ' ' . $startingTime;
 
                     try {
-                        // Create a valid Carbon instance
                         $shiurDateTime = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $shiurDateTimeString);
 
-                        // Check if the time is in the future and if it is the next upcoming shiur
                         if ($shiurDateTime->isFuture() && (!$nextShiur || $shiurDateTime->lt($nextShiur))) {
                             $nextShiur = $shiurDateTime;
+
+                            // Fetch the speaker information using speaker_id
+                            $speaker = \DB::table('speakers')->where('id', $s->speaker_id)->first();
+
+                            if ($speaker) {
+                                // Construct the full name of the speaker
+                                $nextShiurSpeaker = $speaker->salutation . ' ' . $speaker->first_name . ' ' . $speaker->last_name;
+                            } else {
+                                $nextShiurSpeaker = 'Speaker Name';  // Fallback in case speaker info is missing
+                            }
                         }
                     } catch (\Exception $e) {
-                        // Log the error if the format is invalid
                         \Log::error('Error creating Carbon instance for: ' . $shiurDateTimeString . ' with error: ' . $e->getMessage());
                     }
                 }
             }
         }
-        // Log the next Shiur
+
         if ($nextShiur) {
-            \Log::debug('Next Shiur: ' . $nextShiur->toDateTimeString());
+            \Log::debug('Next Shiur: ' . $nextShiur->toDateTimeString() . ' by ' . $nextShiurSpeaker);
         } else {
             \Log::debug('No upcoming Shiur found.');
         }
 
-        return $nextShiur;
+        return compact('nextShiur', 'nextShiurSpeaker');
     }
 
 }

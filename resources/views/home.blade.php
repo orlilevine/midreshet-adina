@@ -59,7 +59,9 @@
 
     <!-- Event Countdown Timer -->
     <section class="event-countdown py-5 text-center" style="background-color: #BADFC5;">
-        <h2 class="text-dark">Upcoming Event: Mrs. Schoonmaker Live Shiur in...</h2>
+        <h2 class="text-dark">
+            Upcoming Event: {{ $nextShiurSpeaker ? $nextShiurSpeaker : 'Speaker Name' }} Live Shiur in...
+        </h2>
         <div id="countdown" class="d-flex justify-content-center">
             <div class="countdown-box mx-3">
                 <span id="days" class="display-4">00</span>
