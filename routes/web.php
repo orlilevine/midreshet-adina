@@ -11,6 +11,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ZoomController;
+use App\Http\Controllers\AboutController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 
 
@@ -94,5 +95,6 @@ Route::get('/mission', function () {return view('navbar.mission');})->name('miss
 Route::post('/admin/series', [AdminController::class, 'storeSeries'])->name('admin.series.store');
 Route::get('/series/{id}/join', [ZoomController::class, 'joinZoomMeeting'])->name('zoom.meeting');
 
+Route::get('/speakers', [AboutController::class, 'showSpeakers'])->name('speakers');
 
 require __DIR__.'/auth.php';

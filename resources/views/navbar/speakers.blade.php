@@ -4,43 +4,20 @@
     <section class="speakers-section text-center py-5">
         <h2 class="section-title mb-4">Meet Our Inspiring Speakers</h2>
 
-        <!-- Speaker 1: Mrs. Shira Smiles -->
-        <div class="speaker-section">
-            <div class="speaker-info">
-                <img src="{{ asset('images/smiles.png') }}" alt="Mrs. Shira Smiles" class="speaker-img">
-                <h3 class="speaker-name">Mrs. Shira Smiles</h3>
-                <p class="speaker-bio">
-                    Mrs. Shira Smiles is a highly sought-after international lecturer, a popular seminary teacher, and an experienced curriculum developer. She is well-known for her unique teaching style, which seeks to bring understanding of Torah texts through analysis of relevant sources, while making the lessons learned from every verse relevant to her students' lives. Mrs. Smiles teaches at Darchei Bina Seminary. In addition, she leads women’s study groups and trains Torah teachers all around the world.
-                </p>
+        @foreach ($speakers as $speaker)
+            <div class="speaker-section">
+                <div class="speaker-info">
+                    <img src="{{ asset($speaker->image_path) }}" alt="{{ $speaker->salutation }} {{ $speaker->first_name }} {{ $speaker->last_name }}" class="speaker-img">
+                    <h3 class="speaker-name">{{ $speaker->salutation }} {{ $speaker->first_name }} {{ $speaker->last_name }}</h3>
+                    <p class="speaker-bio">{{ $speaker->bio }}</p>
+                </div>
             </div>
-        </div>
-
-        <!-- Speaker 2: Mrs. Dina Schoonmaker -->
-        <div class="speaker-section">
-            <div class="speaker-info">
-                <img src="{{ asset('images/Schoonmaker.png') }}" alt="Mrs. Dina Schoonmaker" class="speaker-img">
-                <h3 class="speaker-name">Mrs. Dina Schoonmaker</h3>
-                <p class="speaker-bio">
-                    Mrs. Dina Schoonmaker holds a B.Ed in Tanach and English from Michlalah College, a master’s degree in Jewish history from Touro College. She has been a member of the Michlalah faculty for over 30 years. Mrs. Schoonmaker lectures internationally and gives vaadim for women, live and over zoom. Mrs. Schoonmaker resides in Yerushalayim with her husband, Rosh Yeshiva of Shapell’s/Yeshiva Darché Noam, and their children.
-                </p>
-            </div>
-        </div>
-
-        <!-- Speaker 3: Rabbi Avi Slansky -->
-        <div class="speaker-section">
-            <div class="speaker-info">
-                <img src="{{ asset('images/Slansky.png') }}" alt="Rabbi Avi Slansky" class="speaker-img">
-                <h3 class="speaker-name">Rabbi Avi Slansky</h3>
-                <p class="speaker-bio">
-                    Rabbi Avi Slansky is rapidly making waves in the world of Torah lectures and literature. He currently serves as the Rav of Riverglen Shtieble in Haverstraw, NY, Rosh Kollel of the Cross River Bank Kollel, and Mashpiah/Director of Camp Romimu’s Rom v'Nisah Program.
-                </p>
-            </div>
-        </div>
+        @endforeach
 
     </section>
     <style>
         .speakers-section {
-            padding-top: 50px;
+             padding-top: 50px;
             padding-bottom: 50px;
         }
 
