@@ -9,7 +9,7 @@
         <div class="schedule-row d-flex justify-content-center flex-wrap">
 
             <!-- Monday -->
-            <div class="schedule-card mx-3 mb-3" style="background-color: #51786F;">
+            <div class="schedule-card mx-3 mb-3" style="background-color: #63AADD;">
                 <h3 class="day-title text-light">Monday</h3>
                 <div class="shiur-details">
                     <p class="speaker text-light">Shira Smiles</p>
@@ -24,7 +24,7 @@
             </div>
 
             <!-- Tuesday -->
-            <div class="schedule-card mx-3 mb-3" style="background-color: #51786F;">
+            <div class="schedule-card mx-3 mb-3" style="background-color: #63AADD;">
                 <h3 class="day-title text-light">Tuesday</h3>
                 <div class="shiur-details">
                     <p class="speaker text-light">Dina Schoonmaker</p>
@@ -39,7 +39,7 @@
             </div>
 
             <!-- Wednesday -->
-            <div class="schedule-card mx-3 mb-3" style="background-color: #51786F;">
+            <div class="schedule-card mx-3 mb-3" style="background-color: #63AADD;">
                 <h3 class="day-title text-light">Wednesday</h3>
                 <div class="shiur-details">
                     <p class="speaker text-light">Shira Smiles</p>
@@ -49,7 +49,7 @@
             </div>
 
             <!-- Thursday -->
-            <div class="schedule-card mx-3 mb-3" style="background-color: #51786F;">
+            <div class="schedule-card mx-3 mb-3" style="background-color: #63AADD;">
                 <h3 class="day-title text-light">Thursday</h3>
                 <div class="shiur-details">
                     <p class="speaker text-light">Rabbi Avi Slansky</p>
@@ -59,6 +59,7 @@
             </div>
         </div>
     </section>
+
 
     <!-- Current Shiurim Section -->
     <section class="explore-shiurim my-5 container-fluid px-0">
@@ -85,9 +86,10 @@
         </div>
     </section>
 
+    <br><br><br><br>
 
     <!-- Event Countdown Timer -->
-    <section class="event-countdown py-5 text-center" style="background-color: #BADFC5;">
+    <section class="event-countdown py-5 text-center" style="background-color: #b3e0ff;">
         <h2 class="text-dark">
             Upcoming Event: {{ $nextShiurSpeaker ? $nextShiurSpeaker : 'Speaker Name' }} Live Shiur in...
         </h2>
@@ -122,6 +124,7 @@
     </section>
 
 
+    <br><br><br><br>
 
     {{-- <section class="why-choose-us py-5 text-center" style="background-color: #001f3f;">
          <h2 class="display-4 text-light">Discover the Midreshet Adina Difference</h2>
@@ -260,7 +263,6 @@
     /* Event Countdown Timer */
     .countdown-box {
         background-color: #fff;
-        color: #001f3f;
         padding: 20px;
         border-radius: 10px;
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);

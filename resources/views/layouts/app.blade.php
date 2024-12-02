@@ -27,7 +27,7 @@
         }
 
         .navbar {
-            background-color: #BADFC5;
+            background-color: #B3E0FF;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             transition: background-color 0.3s;
             height: 100px; /* Adjust this to your desired navbar height */
@@ -57,11 +57,11 @@
         }
 
         .nav-link:hover {
-            color: #51786F !important;
+            color: #63AADD !important;
         }
 
         .nav-link.login, .nav-link.register {
-            background-color: #2F3D46;
+            background-color: #63AADD;
             color: white !important;
             border-radius: 50px;
             font-size: 1.2rem;
@@ -160,7 +160,7 @@
         }
 
         .elevate-text .btn {
-            background-color: #51786F;
+            background-color: #63AADD;
             color: white;
             font-size: 1.2rem;
             padding: 15px 30px;
@@ -170,7 +170,7 @@
         }
 
         .elevate-text .btn:hover {
-            background-color: #2F3D46;
+            background-color: #6368AF;
             transform: translateY(-5px);
         }
 
