@@ -1,7 +1,5 @@
 @extends('layouts.app')
 
-@section('title', $series->title)
-
 @section('content')
     <div class="series-page-container">
         @if(session('success'))
@@ -110,9 +108,9 @@
             margin-bottom: 20px;
         }
         .series-image {
-            width: 30%;
+            width: 35%; /* Adjust size as needed */
             height: auto;
-            border-radius: 15px;
+            /* Removed border-radius */
             transition: transform 0.3s ease;
         }
         .series-image:hover {
