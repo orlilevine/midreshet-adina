@@ -74,18 +74,6 @@
             transform: scale(1.05);
         }
 
-        .full-width-title {
-            background-color: #Ff007f;
-            color: white;
-            text-align: center;
-            padding: 40px 0;
-            width: 100vw;
-            margin-left: calc(-50vw + 50%);
-            margin-top: 0;
-            font-size: 3rem;
-        }
-
-
 
         main {
             padding: 60px 0;

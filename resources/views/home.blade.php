@@ -93,22 +93,22 @@
     </section>
 
 
-    <!-- Featured Shiurim Section -->
+    <!-- Current Shiurim Section -->
     <section class="explore-shiurim my-5 container-fluid px-0">
-        <div class="container featured-shiurim-container">
-            <h2 class="text-center display-4">Featured Shiurim</h2>
-            <p class="text-center lead">Join our most popular Series.</p>
+        <div class="container current-shiurim-container">
+            <h2 class="text-center display-4">Current Shiurim</h2>
+            <p class="text-center lead">Explore the shiurim happening now.</p>
             <div class="row justify-content-center" id="shiurContainer">
-                @foreach($featuredSeries as $index => $series)
+                @foreach($currentSeries as $index => $series)
                     <div class="col-md-4 mb-4">
                         <div class="card-container" style="perspective: 1000px;">
                             <div class="card-flip" style="transition: transform 0.8s; transform-style: preserve-3d;">
                                 <!-- Front Side of the Card -->
-                                <div class="card front" style="position: relative; width: 100%; height: 350px; backface-visibility: hidden; background-color: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);">
-                                    <img src="{{ asset('storage/' . $series->image_path) }}" alt="{{ $series->title }}" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.8;">
-                                    <div class="card-content text-center" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgba(0, 0, 0, 0.5); color: white; padding: 10px; border-radius: 10px;">
-                                        <h5>{{ $series->title }}</h5>
-                                    </div>
+                                <div class="card front"
+                                     style="position: relative; width: 100%; height: 350px; backface-visibility: hidden; background-color: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);">
+                                    <img src="{{ asset('storage/' . $series->image_path) }}"
+                                         alt="{{ $series->title }}"
+                                         style="width: 100%; height: 100%; object-fit: cover;">
                                 </div>
                                 <!-- Back Side of the Card -->
                                 <div class="card back" style="position: absolute; width: 100%; height: 100%; backface-visibility: hidden; background-color: #2F3D46; color: white; border-radius: 10px; padding: 20px; transform: rotateY(180deg);">
@@ -125,41 +125,41 @@
     </section>
 
 
-   {{-- <section class="why-choose-us py-5 text-center" style="background-color: #001f3f;">
-        <h2 class="display-4 text-light">Discover the Midreshet Adina Difference</h2>
-        <p class="lead text-light mb-5">Experience Learning Like Never Before</p>
-        <div class="carousel">
-            <div class="grid-item" style="background-image: url('/images/Smiles.png'); background-size: cover; background-position: center;">
-                <div class="overlay">
-                    <i class="fas fa-lightbulb fa-3x mb-3"></i>
-                    <h4>Inspiring Shiurim</h4>
-                    <p>Learn from top-tier Teachers and gain profound insights.</p>
-                </div>
-            </div>
-            <div class="grid-item" style="background-image: url('/images/Community.png'); background-size: cover; background-position: center;">
-                <div class="overlay">
-                    <i class="fas fa-users fa-3x mb-3"></i>
-                    <h4>Supportive Community</h4>
-                    <p>Be part of a vibrant, growth-focused women's community.</p>
-                </div>
-            </div>
-            <div class="grid-item" style="background-image: url('/images/ComputerNew.png'); background-size: cover; background-position: center;">
-                <div class="overlay">
-                    <i class="fas fa-laptop-code fa-3x mb-3"></i>
-                    <h4>Accessible Anywhere</h4>
-                    <p>Our online platform brings Torah learning to you, wherever you are.</p>
-                </div>
-            </div>
-            <div class="grid-item" style="background-image: url('/images/Calendar.png'); background-size: cover; background-position: center;">
-                <div class="overlay">
-                    <i class="fas fa-calendar-alt fa-3x mb-3"></i>
-                    <h4>Flexible Schedule</h4>
-                    <p>Watch shiurim anytime that fits into your busy life.</p>
-                </div>
-            </div>
-        </div>
-    </section>
---}}
+    {{-- <section class="why-choose-us py-5 text-center" style="background-color: #001f3f;">
+         <h2 class="display-4 text-light">Discover the Midreshet Adina Difference</h2>
+         <p class="lead text-light mb-5">Experience Learning Like Never Before</p>
+         <div class="carousel">
+             <div class="grid-item" style="background-image: url('/images/Smiles.png'); background-size: cover; background-position: center;">
+                 <div class="overlay">
+                     <i class="fas fa-lightbulb fa-3x mb-3"></i>
+                     <h4>Inspiring Shiurim</h4>
+                     <p>Learn from top-tier Teachers and gain profound insights.</p>
+                 </div>
+             </div>
+             <div class="grid-item" style="background-image: url('/images/Community.png'); background-size: cover; background-position: center;">
+                 <div class="overlay">
+                     <i class="fas fa-users fa-3x mb-3"></i>
+                     <h4>Supportive Community</h4>
+                     <p>Be part of a vibrant, growth-focused women's community.</p>
+                 </div>
+             </div>
+             <div class="grid-item" style="background-image: url('/images/ComputerNew.png'); background-size: cover; background-position: center;">
+                 <div class="overlay">
+                     <i class="fas fa-laptop-code fa-3x mb-3"></i>
+                     <h4>Accessible Anywhere</h4>
+                     <p>Our online platform brings Torah learning to you, wherever you are.</p>
+                 </div>
+             </div>
+             <div class="grid-item" style="background-image: url('/images/Calendar.png'); background-size: cover; background-position: center;">
+                 <div class="overlay">
+                     <i class="fas fa-calendar-alt fa-3x mb-3"></i>
+                     <h4>Flexible Schedule</h4>
+                     <p>Watch shiurim anytime that fits into your busy life.</p>
+                 </div>
+             </div>
+         </div>
+     </section>
+ --}}
 
    {{-- <!-- Statistics Section -->
     <section class="statistics py-5 text-center" style="background-color: #ff007f; color: white;">
@@ -212,6 +212,7 @@
         animation: rotateCarousel 10s infinite linear;
     }
 
+    /* midreshet adina difference*/
     .grid-item {
         position: absolute;
         top: 50%;
@@ -227,6 +228,7 @@
         transition: transform 1s;
     }
 
+    /* midreshet adina difference*/
     .grid-item .overlay {
         position: absolute;
         top: 0;
@@ -243,6 +245,7 @@
         border-radius: 15px;
     }
 
+    /* midreshet adina difference*/
     .grid-item .overlay h4, .grid-item .overlay p {
         color: white;
     }
@@ -255,6 +258,8 @@
             transform: rotateY(-360deg);
         }
     }
+
+    /* Event Countdown Timer */
     .countdown-box {
         background-color: #fff;
         color: #001f3f;
@@ -264,10 +269,12 @@
         text-align: center;
     }
 
+    /* Current Series */
     .card-container {
         perspective: 1000px;
     }
 
+    /* Current Series */
     .card-flip {
         width: 100%;
         height: 100%;
@@ -276,10 +283,12 @@
         transition: transform 0.8s;
     }
 
+    /* Current Series */
     .card-container:hover .card-flip {
         transform: rotateY(180deg);
     }
 
+    /* Current Series */
     .card {
         width: 100%;
         height: 350px;
@@ -290,15 +299,14 @@
         left: 0;
     }
 
+    /* Current Series */
     .front img {
-        opacity: 0.8;
-        transition: opacity 0.3s ease;
+        opacity: 1; /* Ensure full visibility */
+        transition: none; /* Remove fade transition */
     }
 
-    .card-container:hover .front img {
-        opacity: 1;
-    }
 
+    /* Current Series */
     .back {
         background-color: #2F3D46;
         color: white;
@@ -306,6 +314,7 @@
         border-radius: 10px;
     }
 
+    /* Current Series */
     .back .btn {
         background-color: #BADFC5;
         color: white;
@@ -315,15 +324,18 @@
         padding: 10px; /* Add space between cards */
     }
 
+    /* Statistics section */
     .statistics .statistic {
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         transition: transform 0.3s;
     }
 
+    /* Statistics section */
     .statistics .statistic:hover {
         transform: scale(1.05);
     }
 
+    /* Statistics section */
     .statistics h1 {
         font-size: 3rem; /* Larger font size for impact */
         margin: 0;
@@ -403,10 +415,13 @@
             animation: none; /* No sliding on smaller screens */
         }
     }
+
+    /* Schedule */
     .weekly-schedule {
         background-color: white;
     }
 
+    /* Schedule */
     .schedule-row {
         max-width: 1200px;
         display: flex;
@@ -416,6 +431,7 @@
         margin: 0 auto; /* Center the row within the parent */
     }
 
+    /* Schedule */
     .schedule-card {
         width: 250px;
         padding: 1.5rem;
@@ -425,29 +441,35 @@
         text-align: center; /* Center the text inside cards */
     }
 
+    /* Schedule */
     .schedule-card:hover {
         transform: scale(1.05);
     }
 
+    /* Schedule */
     .day-title {
         font-size: 1.8rem;
         margin-bottom: 1rem;
     }
 
+    /* Schedule */
     .shiur-details {
         margin-bottom: 1rem;
     }
 
+    /* Schedule */
     .speaker {
         font-weight: bold;
         font-size: 1.1rem;
     }
 
+    /* Schedule */
     .time {
         font-style: italic;
         font-size: 1rem;
     }
 
+    /* Schedule */
     .class-title {
         font-size: 1rem;
         color: #ffddb3;
