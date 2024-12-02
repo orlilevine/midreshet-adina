@@ -14,11 +14,12 @@
                 <div class="shiur-details">
                     <p class="speaker text-light">Shira Smiles</p>
                     <p class="time text-light">9:00 - 10:00 AM</p>
-                    <p class="class-title text-light">Birkas Krias Shma</p>
+                    <p class="class-title text-light">Tefilla</p>
                 </div>
                 <div class="shiur-details">
                     <p class="speaker text-light">Dina Schoonmaker</p>
                     <p class="time text-light">10:15 - 11:15 AM</p>
+                    <p class="class-title text-light">Personal Growth</p>
                 </div>
             </div>
 
@@ -28,6 +29,7 @@
                 <div class="shiur-details">
                     <p class="speaker text-light">Dina Schoonmaker</p>
                     <p class="time text-light">10:15 - 11:15 AM</p>
+                    <p class="class-title text-light">Bitachon</p>
                 </div>
                 <div class="shiur-details">
                     <p class="speaker text-light">Shira Smiles</p>
@@ -265,19 +267,6 @@
         text-align: center;
     }
 
-    /* Current Series */
-    .card-container {
-        perspective: 1000px;
-    }
-
-    /* Current Series */
-    .card-flip {
-        width: 100%;
-        height: 100%;
-        position: relative;
-        transform-style: preserve-3d;
-        transition: transform 0.8s;
-    }
 
     /* Current Series */
     .card-container:hover .card-flip {
@@ -308,20 +297,6 @@
         transition: none; /* Remove fade transition */
     }
 
-
-    /* Current Series */
-    .back {
-        background-color: #2F3D46;
-        color: white;
-        padding: 20px;
-        border-radius: 10px;
-    }
-
-    /* Current Series */
-    .back .btn {
-        background-color: #BADFC5;
-        color: white;
-    }
 
     .row .col-md-3, .col-sm-6 {
         padding: 10px; /* Add space between cards */
