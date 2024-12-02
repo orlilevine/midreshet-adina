@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+
     <!-- Weekly Shiurim Schedule -->
     <section class="weekly-schedule py-5 text-center">
         <h2 class="display-4">Shiurim Schedule</h2>
@@ -57,6 +58,32 @@
         </div>
     </section>
 
+    <!-- Current Shiurim Section -->
+    <section class="explore-shiurim my-5 container-fluid px-0">
+        <div class="container current-shiurim-container">
+            <h2 class="text-center display-4">Current Shiurim</h2>
+            <p class="text-center lead">Explore the shiurim happening now.</p>
+            <div class="row justify-content-center" id="shiurContainer">
+                @foreach($currentSeries as $series)
+                    <div class="col-md-4 mb-4">
+                        <a href="{{ route('series.show', ['id' => $series->id]) }}" class="card-link" style="text-decoration: none;">
+                            <div class="card"
+                                 style="width: 100%; height: 350px; background-color: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);">
+                                <img src="{{ asset('storage/' . $series->image_path) }}"
+                                     alt="{{ $series->title }}"
+                                     style="width: 100%; height: 100%; object-fit: cover;">
+                                <div class="card-body text-center" style="padding: 10px;">
+                                    <h5 class="card-title text-dark">{{ $series->title }}</h5>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
+
+
     <!-- Event Countdown Timer -->
     <section class="event-countdown py-5 text-center" style="background-color: #BADFC5;">
         <h2 class="text-dark">
@@ -92,37 +119,6 @@
         </div>
     </section>
 
-
-    <!-- Current Shiurim Section -->
-    <section class="explore-shiurim my-5 container-fluid px-0">
-        <div class="container current-shiurim-container">
-            <h2 class="text-center display-4">Current Shiurim</h2>
-            <p class="text-center lead">Explore the shiurim happening now.</p>
-            <div class="row justify-content-center" id="shiurContainer">
-                @foreach($currentSeries as $index => $series)
-                    <div class="col-md-4 mb-4">
-                        <div class="card-container" style="perspective: 1000px;">
-                            <div class="card-flip" style="transition: transform 0.8s; transform-style: preserve-3d;">
-                                <!-- Front Side of the Card -->
-                                <div class="card front"
-                                     style="position: relative; width: 100%; height: 350px; backface-visibility: hidden; background-color: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);">
-                                    <img src="{{ asset('storage/' . $series->image_path) }}"
-                                         alt="{{ $series->title }}"
-                                         style="width: 100%; height: 100%; object-fit: cover;">
-                                </div>
-                                <!-- Back Side of the Card -->
-                                <div class="card back" style="position: absolute; width: 100%; height: 100%; backface-visibility: hidden; background-color: #2F3D46; color: white; border-radius: 10px; padding: 20px; transform: rotateY(180deg);">
-                                    <h5>{{ $series->title }}</h5>
-                                    <p>{{ Str::limit($series->description, 100) }}</p>
-                                    <a href="{{ route('series.show', ['id' => $series->id]) }}" class="btn btn-light btn-block">View this series</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-        </div>
-    </section>
 
 
     {{-- <section class="why-choose-us py-5 text-center" style="background-color: #001f3f;">
@@ -298,6 +294,13 @@
         top: 0;
         left: 0;
     }
+
+    .card:hover {
+        transform: scale(1.05);
+        transition: transform 0.3s ease-in-out;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    }
+
 
     /* Current Series */
     .front img {
