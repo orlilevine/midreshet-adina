@@ -95,7 +95,7 @@
                 @endif
             @else
                 <p>Please <a href="{{ route('login') }}">log in</a> or <a href="{{ route('register') }}">register</a> to purchase this Series.</p>
-            @endauth
+           @endauth
         </div>
 
         <!-- Shiur List -->
