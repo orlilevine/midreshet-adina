@@ -9,7 +9,7 @@
         <div class="schedule-row d-flex justify-content-center flex-wrap">
 
             <!-- Monday -->
-            <div class="schedule-card mx-3 mb-3" style="background-color: #63AADD;">
+            <div class="schedule-card mx-3 mb-3" style="background-color: #2D6FA3;">
                 <h3 class="day-title text-light">Monday</h3>
                 <div class="shiur-details">
                     <p class="speaker text-light">Shira Smiles</p>
@@ -24,7 +24,7 @@
             </div>
 
             <!-- Tuesday -->
-            <div class="schedule-card mx-3 mb-3" style="background-color: #63AADD;">
+            <div class="schedule-card mx-3 mb-3" style="background-color: #2D6FA3;">
                 <h3 class="day-title text-light">Tuesday</h3>
                 <div class="shiur-details">
                     <p class="speaker text-light">Dina Schoonmaker</p>
@@ -39,7 +39,7 @@
             </div>
 
             <!-- Wednesday -->
-            <div class="schedule-card mx-3 mb-3" style="background-color: #63AADD;">
+            <div class="schedule-card mx-3 mb-3" style="background-color: #2D6FA3;">
                 <h3 class="day-title text-light">Wednesday</h3>
                 <div class="shiur-details">
                     <p class="speaker text-light">Shira Smiles</p>
@@ -49,7 +49,7 @@
             </div>
 
             <!-- Thursday -->
-            <div class="schedule-card mx-3 mb-3" style="background-color: #63AADD;">
+            <div class="schedule-card mx-3 mb-3" style="background-color: #2D6FA3;">
                 <h3 class="day-title text-light">Thursday</h3>
                 <div class="shiur-details">
                     <p class="speaker text-light">Rabbi Avi Slansky</p>
@@ -89,7 +89,7 @@
     <br><br><br><br>
 
     <!-- Event Countdown Timer -->
-    <section class="event-countdown py-5 text-center" style="background-color: #b3e0ff;">
+    <section class="event-countdown py-5 text-center" style="background-color: #2D6FA3;">
         <h2 class="text-dark">
             Upcoming Event: {{ $nextShiurSpeaker ? $nextShiurSpeaker : 'Speaker Name' }} Live Shiur in...
         </h2>

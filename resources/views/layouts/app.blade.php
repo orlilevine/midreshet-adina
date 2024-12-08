@@ -27,7 +27,7 @@
         }
 
         .navbar {
-            background-color: #B3E0FF;
+            background-color: #2D6FA3;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             transition: background-color 0.3s;
             height: 100px; /* Adjust this to your desired navbar height */
@@ -160,7 +160,7 @@
         }
 
         .elevate-text .btn {
-            background-color: #63AADD;
+            background-color: #2D6FA3;
             color: white;
             font-size: 1.2rem;
             padding: 15px 30px;
