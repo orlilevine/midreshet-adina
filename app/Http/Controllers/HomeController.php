@@ -20,7 +20,7 @@ class HomeController extends Controller
         $eventDate = '2024-11-03 09:15:00';
         ['nextShiur' => $nextShiur, 'nextShiurSpeaker' => $nextShiurSpeaker, 'nextShiurTitle' => $nextShiurTitle, 'nextShiurDescription' => $nextShiurDescription] = $this->getNextShiurTime();
 
-        return view('Home', compact('currentSeries', 'eventDate', 'nextShiur', 'nextShiurSpeaker', 'nextShiurTitle', 'nextShiurDescription'));
+        return view('home', compact('currentSeries', 'eventDate', 'nextShiur', 'nextShiurSpeaker', 'nextShiurTitle', 'nextShiurDescription'));
     }
 
 
