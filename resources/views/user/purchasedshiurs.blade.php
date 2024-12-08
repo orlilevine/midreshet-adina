@@ -1,9 +1,17 @@
 @extends('layouts.app')
 
-@section('title', 'Your Purchased Shiurim | ' . $series->title)
+@section('title', 'Your Purchased Shiurim')
 
 @section('content')
     <div class="container">
+        <!-- Series Image at the top -->
+        <div class="row mb-4">
+            <div class="col-12 text-center">
+                    <img src="{{ asset('storage/' . $series->image_path) }}" alt="{{ $series->title }}" class="img-fluid rounded" style="max-height: 300px; object-fit: cover;">
+
+            </div>
+        </div>
+
         <div class="row">
             @foreach($series->shiurs as $shiur)
                 <div class="col-md-4 mb-4">
@@ -29,14 +37,3 @@
     </div>
 @endsection
 
-<style>
-    .card:hover {
-        transform: translateY(-5px);
-        transition: transform 0.3s;
-    }
-
-    .btn:hover {
-        background-color: #ff007f; /* Change button color on hover */
-    }
-
-</style>
