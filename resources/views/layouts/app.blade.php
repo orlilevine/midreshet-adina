@@ -60,7 +60,9 @@
         }
 
         .nav-link:hover {
-            color: #63AADD !important;
+            color: #2D6FA3 !important; /* Text turns to your desired color */
+            text-shadow: 0 0 3px white, 0 0 10px white; /* Creates a white outline effect */
+            transition: color 0.3s ease, text-shadow 0.3s ease; /* Smooth transition */
         }
 
         .navbar .nav-link.login, .navbar .nav-link.register {
@@ -75,7 +77,6 @@
 
         .navbar .nav-link.login:hover, .navbar .nav-link.register:hover {
             background-color: white; /* Highlight with a contrasting background */
-            color: hotpink; /* Match the navbar theme color */
             text-decoration: none; /* Remove underline */
         }
 
