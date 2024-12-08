@@ -183,7 +183,7 @@
         }
         .page-title {
             font-family: 'Delius';
-            color: #001f3f; /* Existing color */
+            color: #2D6FA3;
             text-align: center;
             font-size: 3rem; /* Existing font size */
             margin: 20px 0 0 0; /* Existing margin */
