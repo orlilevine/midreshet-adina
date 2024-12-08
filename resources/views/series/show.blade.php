@@ -12,27 +12,50 @@
             <h1 class="series-title">{{ $series->title }}</h1>
         </div>
 
-        <!-- Series Details and Purchase Section -->
-        <div class="series-details">
-            <p class="series-description">{{ $series->description }}</p>
-            <p class="series-price">Price: <strong>${{ $series->price }}</strong></p>
+            <!-- Series Details and Purchase Section -->
+            <div class="series-details">
+                <p class="series-description">{{ $series->description }}</p>
+                <p class="series-price">Price: <strong>${{ $series->price }}</strong></p>
 
-            @auth
-                @if ($hasPurchasedSeries)
-                    <!-- Purchased Button -->
-                    <a href="{{ route('user.purchases') }}" class="cta-button purchased-button">
-                        Series Purchased - Go to My Shiurim
-                    </a>
-                @else
-                    <form id="checkoutForm" action="{{ route('payment.createSession.series', ['seriesId' => $series->id]) }}" method="GET">
-                        <div id="couponSection" class="coupon-section">
-                            <input type="text" name="coupon_code" id="coupon_code" placeholder="Enter coupon code" class="input-field">
-                            <button type="submit" id="applyCoupon" class="cta-button apply-coupon-button">Apply Coupon</button>
-                        </div>
+                @if ($series->starting_time)
+                    <p class="series-time">
+                        Time: <strong>{{ \Carbon\Carbon::parse($series->starting_time)->format('g:i A') }} </strong>
+                    </p>
+                @endif
 
-                        <button type="submit" class="cta-button purchase-button">Purchase Entire Series for ${{ $series->price }}</button>
-                        <p class="other-options-link"><a href="#" id="showOtherPaymentOptions">Other Payment Options</a></p>
-                    </form>
+                <div class="shiur-dates">
+                    @php
+                        $dates = [];
+                        for ($i = 1; $i <= 8; $i++) {
+                            $dateField = 'shiur_date_' . $i;
+                            if ($series->$dateField) {
+                                $dates[] = \Carbon\Carbon::parse($series->$dateField)->format('M j');
+                            }
+                        }
+                    @endphp
+                    @if (!empty($dates))
+                        <p>Dates:<strong> {{ implode(', ', $dates) }}</strong></p>
+                    @else
+                        <p>Dates: <span class="no-dates">TBA</span></p>
+                    @endif
+                </div>
+
+                @auth
+                    @if ($hasPurchasedSeries)
+                        <!-- Purchased Button -->
+                        <a href="{{ route('user.purchases') }}" class="cta-button purchased-button">
+                            Series Purchased - Go to My Shiurim
+                        </a>
+                    @else
+                        <form id="checkoutForm" action="{{ route('payment.createSession.series', ['seriesId' => $series->id]) }}" method="GET">
+                            <div id="couponSection" class="coupon-section">
+                                <input type="text" name="coupon_code" id="coupon_code" placeholder="Enter coupon code" class="input-field">
+                                <button type="submit" id="applyCoupon" class="cta-button apply-coupon-button">Apply Coupon</button>
+                            </div>
+
+                            <button type="submit" class="cta-button purchase-button">Purchase Entire Series for ${{ $series->price }}</button>
+                            <p class="other-options-link"><a href="#" id="showOtherPaymentOptions">Other Payment Options</a></p>
+                        </form>
 
                     <!-- Other Payment Options -->
                     <div id="paymentOptions" class="payment-options">
@@ -120,7 +143,7 @@
             font-size: 2.8em;
             margin-top: 15px;
         }
-        .series-description, .series-price {
+        .series-description, .series-price, .series-time, .shiur-dates {
             font-size: 1.2em;
             margin-bottom: 15px;
         }
