@@ -12,50 +12,50 @@
             <h1 class="series-title">{{ $series->title }}</h1>
         </div>
 
-            <!-- Series Details and Purchase Section -->
-            <div class="series-details">
-                <p class="series-description">{{ $series->description }}</p>
-                <p class="series-price">Price: <strong>${{ $series->price }}</strong></p>
+        <!-- Series Details and Purchase Section -->
+        <div class="series-details">
+            <p class="series-description">{{ $series->description }}</p>
+            <p class="series-price">Price: <strong>${{ $series->price }}</strong></p>
 
-                @if ($series->starting_time)
-                    <p class="series-time">
-                        Time: <strong>{{ \Carbon\Carbon::parse($series->starting_time)->format('g:i A') }} </strong>
-                    </p>
-                @endif
+            @if ($series->starting_time)
+                <p class="series-time">
+                    Time: <strong>{{ \Carbon\Carbon::parse($series->starting_time)->format('g:i A') }} </strong>
+                </p>
+            @endif
 
-                <div class="shiur-dates">
-                    @php
-                        $dates = [];
-                        for ($i = 1; $i <= 8; $i++) {
-                            $dateField = 'shiur_date_' . $i;
-                            if ($series->$dateField) {
-                                $dates[] = \Carbon\Carbon::parse($series->$dateField)->format('M j');
-                            }
+            <div class="shiur-dates">
+                @php
+                    $dates = [];
+                    for ($i = 1; $i <= 8; $i++) {
+                        $dateField = 'shiur_date_' . $i;
+                        if ($series->$dateField) {
+                            $dates[] = \Carbon\Carbon::parse($series->$dateField)->format('M j');
                         }
-                    @endphp
-                    @if (!empty($dates))
-                        <p>Dates:<strong> {{ implode(', ', $dates) }}</strong></p>
-                    @else
-                        <p>Dates: <span class="no-dates">TBA</span></p>
-                    @endif
-                </div>
+                    }
+                @endphp
+                @if (!empty($dates))
+                    <p>Dates:<strong> {{ implode(', ', $dates) }}</strong></p>
+                @else
+                    <p>Dates: <span class="no-dates">TBA</span></p>
+                @endif
+            </div>
 
-                @auth
-                    @if ($hasPurchasedSeries)
-                        <!-- Purchased Button -->
-                        <a href="{{ route('user.purchases') }}" class="cta-button purchased-button">
-                            Series Purchased - Go to My Shiurim
-                        </a>
-                    @else
-                        <form id="checkoutForm" action="{{ route('payment.createSession.series', ['seriesId' => $series->id]) }}" method="GET">
-                            <div id="couponSection" class="coupon-section">
-                                <input type="text" name="coupon_code" id="coupon_code" placeholder="Enter coupon code" class="input-field">
-                                <button type="submit" id="applyCoupon" class="cta-button apply-coupon-button">Apply Coupon</button>
-                            </div>
+            @auth
+                @if ($hasPurchasedSeries)
+                    <!-- Purchased Button -->
+                    <a href="{{ route('user.purchases') }}" class="cta-button purchased-button">
+                        Series Purchased - Go to My Shiurim
+                    </a>
+                @else
+                    <form id="checkoutForm" action="{{ route('payment.createSession.series', ['seriesId' => $series->id]) }}" method="GET">
+                        <div id="couponSection" class="coupon-section">
+                            <input type="text" name="coupon_code" id="coupon_code" placeholder="Enter coupon code" class="input-field">
+                            <button type="submit" id="applyCoupon" class="cta-button apply-coupon-button">Apply Coupon</button>
+                        </div>
 
-                            <button type="submit" class="cta-button purchase-button">Purchase Entire Series for ${{ $series->price }}</button>
-                            <p class="other-options-link"><a href="#" id="showOtherPaymentOptions">Other Payment Options</a></p>
-                        </form>
+                        <button type="submit" class="cta-button purchase-button">Purchase Entire Series for ${{ $series->price }}</button>
+                        <p class="other-options-link"><a href="#" id="showOtherPaymentOptions">Other Payment Options</a></p>
+                    </form>
 
                     <!-- Other Payment Options -->
                     <div id="paymentOptions" class="payment-options">
@@ -112,8 +112,8 @@
     <style>
         .series-page-container {
             padding: 40px;
-            background: linear-gradient(135deg, #ff007f, #001f3f);
-            color: white;
+            background: white; /* Changed to white */
+            color: black; /* Changed text to black */
             text-align: center;
             border-radius: 15px;
             box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
@@ -151,7 +151,7 @@
             padding: 15px 30px;
             font-size: 1.1em;
             color: white;
-            background-color: #001f3f;
+            background-color: #2D6FA3;
             border: none;
             border-radius: 10px;
             transition: transform 0.3s, box-shadow 0.3s;
@@ -194,7 +194,7 @@
             margin: 5px;
         }
         .other-options-link a {
-            color: #001f3f;
+            color: #2D6FA3;
             text-decoration: underline;
             cursor: pointer;
         }
@@ -207,28 +207,33 @@
             const couponSection = document.getElementById('couponSection');
             const zellePaymentForm = document.getElementById('zellePaymentForm');
             const checkPaymentForm = document.getElementById('checkPaymentForm');
+            const showOtherPaymentOptionsBtn = document.getElementById('showOtherPaymentOptions');
 
-            document.getElementById('showOtherPaymentOptions').addEventListener('click', function(event) {
-                event.preventDefault();
-                paymentOptions.style.display = (paymentOptions.style.display === 'block') ? 'none' : 'block';
+            // Show payment options
+            showOtherPaymentOptionsBtn.addEventListener('click', function() {
+                paymentOptions.style.display = 'block';
             });
 
-            document.getElementById('couponButton').addEventListener('click', function() {
-                couponSection.style.display = (couponSection.style.display === 'block') ? 'none' : 'block';
-            });
-
+            // Show Zelle form
             document.getElementById('zelleButton').addEventListener('click', function() {
-                const isVisible = zellePaymentForm.style.display === 'block';
-                zellePaymentForm.style.display = isVisible ? 'none' : 'block';
+                zellePaymentForm.style.display = 'block';
                 checkPaymentForm.style.display = 'none';
+                couponSection.style.display = 'none';
             });
 
+            // Show Check form
             document.getElementById('checkButton').addEventListener('click', function() {
-                const isVisible = checkPaymentForm.style.display === 'block';
-                checkPaymentForm.style.display = isVisible ? 'none' : 'block';
+                checkPaymentForm.style.display = 'block';
                 zellePaymentForm.style.display = 'none';
+                couponSection.style.display = 'none';
+            });
+
+            // Show Coupon section
+            document.getElementById('couponButton').addEventListener('click', function() {
+                couponSection.style.display = 'block';
+                zellePaymentForm.style.display = 'none';
+                checkPaymentForm.style.display = 'none';
             });
         });
     </script>
-
 @endsection
