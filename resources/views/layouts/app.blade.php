@@ -149,7 +149,6 @@
         }
 
         .elevate-text .btn:hover {
-            background-color: #6368AF;
             transform: translateY(-5px);
         }
 
