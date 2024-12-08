@@ -90,7 +90,7 @@
 
     <!-- Event Countdown Timer -->
     <section class="event-countdown py-5 text-center" style="background-color: #2D6FA3;">
-        <h2 class="text-dark">
+        <h2 class="text-dark" style="color: black !important;">
             Upcoming Event: {{ $nextShiurSpeaker ? $nextShiurSpeaker : 'Speaker Name' }} Live Shiur in...
         </h2>
         <div id="countdown" class="d-flex justify-content-center">
@@ -114,14 +114,15 @@
 
         <!-- Display Series Title and Description -->
         <div class="series-info mt-4 text-center">
-            <h3 style="font-family: 'Poppins', sans-serif; font-size: 2.5rem; color: #2c3e50; font-weight: 700;">
+            <h3 style="font-family: 'Poppins', sans-serif; font-size: 2.5rem; color: black; font-weight: 700;">
                 {{ $nextShiurTitle }}
             </h3>
-            <p style="font-family: 'Roboto', sans-serif; font-size: 1.25rem; color: #34495e; font-style: italic;">
+            <p style="font-family: 'Roboto', sans-serif; font-size: 1.25rem; color: black; font-style: italic;">
                 {{ $nextShiurDescription ? $nextShiurDescription : '' }}
             </p>
         </div>
     </section>
+
 
 
     <br><br><br><br>
