@@ -53,7 +53,7 @@
                             <button type="submit" id="applyCoupon" class="cta-button apply-coupon-button">Apply Coupon</button>
                         </div>
 
-                        <button type="submit" class="cta-button purchase-button">Purchase Entire Series for ${{ $series->price }}</button>
+                        <button type="submit" class="cta-button purchase-button" style="border: 2px solid black;">Purchase Entire Series for ${{ $series->price }}</button>
                         <p class="other-options-link"><a href="#" id="showOtherPaymentOptions">Other Payment Options</a></p>
                     </form>
 
@@ -177,7 +177,7 @@
         .shiur-link {
             padding: 15px 30px;
             color: white;
-            background-color: #ff007f;
+            background-color: #2D6FA3;
             text-decoration: none;
             border-radius: 10px;
             transition: transform 0.3s, box-shadow 0.3s;
