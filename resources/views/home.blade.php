@@ -2,6 +2,8 @@
 
 @section('content')
 
+    <br><br><br><br>
+
     <!-- Weekly Shiurim Schedule -->
     <section class="weekly-schedule py-5 text-center">
         <h2 class="display-4">Shiurim Schedule</h2>
@@ -60,6 +62,7 @@
         </div>
     </section>
 
+    <br><br><br>
 
     <!-- Current Shiurim Section -->
     <section class="explore-shiurim my-5 container-fluid px-0">
@@ -86,7 +89,7 @@
         </div>
     </section>
 
-    <br><br><br><br>
+    <br><br><br><br><br><br><br>
 
     <!-- Event Countdown Timer -->
     <section class="event-countdown py-5 text-center" style="background-color: #2D6FA3;">
@@ -125,7 +128,7 @@
 
 
 
-    <br><br><br><br>
+    <br><br><br><br><br><br><br>
 
     {{-- <section class="why-choose-us py-5 text-center" style="background-color: #001f3f;">
          <h2 class="display-4 text-light">Discover the Midreshet Adina Difference</h2>
