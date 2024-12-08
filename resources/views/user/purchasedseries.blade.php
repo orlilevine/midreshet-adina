@@ -9,16 +9,16 @@
                 {{ session('error') }}
             </div>
         @endif
-        <div class="row">
+
+        <div class="series-container">
             @if(!$purchasedSeries->isEmpty())
                 @foreach($purchasedSeries as $series)
-                    <div class="col-md-4 d-flex flex-column align-items-center mb-4">
-                        <div style="position: relative; display: block; overflow: hidden; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.2); width: 90%; max-width: 300px;">
-                            <a href="{{ route('user.series.show', ['id' => $series->id]) }}">
-                                <img src="{{ Storage::url($series->image_path) }}"
-                                     alt="{{ $series->title }}"
-                                     style="width: 100%; height: auto; display: block;"/>
-                            </a>
+                    <div class="series-box">
+                        <a href="{{ route('user.series.show', ['id' => $series->id]) }}">
+                            <img src="{{ asset('storage/' . $series->image_path) }}" alt="{{ $series->title }} Cover" style="width: 100%; height: auto;">
+                        </a>
+                        <div class="series-info">
+                            <p class="series-title">{{ $series->title }}</p>
                             @if($series->zoom_link)
                                 @php
                                     $shiurDates = [
@@ -44,9 +44,6 @@
                                     }
 
                                     $currentDateTime = now();
-
-
-
                                     $canJoin = false;
                                     foreach ($allowedTimes as [$start, $end]) {
                                         if ($currentDateTime->between($start, $end)) {
@@ -56,14 +53,33 @@
                                     }
                                 @endphp
 
-
-                            @if($canJoin)
+                                @if($canJoin)
                                     <a href="{{ $series->zoom_link }}" target="_blank" class="join-live-btn">
-                                       class="join-live-btn">
                                         Join Live Class
                                     </a>
                                 @endif
                             @endif
+                            @if ($series->starting_time)
+                                <p class="series-time">
+                                    {{ \Carbon\Carbon::parse($series->starting_time)->format('g:i A') }}
+                                </p>
+                            @endif
+                            <div class="shiur-dates">
+                                @php
+                                    $dates = [];
+                                    for ($i = 1; $i <= 8; $i++) {
+                                        $dateField = 'shiur_date_' . $i;
+                                        if ($series->$dateField) {
+                                            $dates[] = \Carbon\Carbon::parse($series->$dateField)->format('M j');
+                                        }
+                                    }
+                                @endphp
+                                @if (!empty($dates))
+                                    {{ implode(', ', $dates) }}
+                                @else
+                                    <span class="no-dates">Dates TBA</span>
+                                @endif
+                            </div>
                         </div>
                     </div>
                 @endforeach
@@ -73,7 +89,7 @@
         </div>
     </div>
 
-    <!-- Custom Styles -->
+<!-- Custom Styles -->
     <style>
         .join-live-btn {
             position: absolute;
@@ -100,6 +116,64 @@
             to {
                 opacity: 0.5;
             }
+        }
+
+        .series-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 40px; /* Increased gap between series */
+            padding: 20px;
+        }
+
+        .series-box {
+            text-align: center;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 15px;
+            padding: 15px;
+            transition: box-shadow 0.3s ease;
+            margin-bottom: 30px; /* Added margin to create more space between boxes */
+        }
+
+        .series-box:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .series-box img {
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+            margin-bottom: 15px;
+        }
+
+        .series-box img:hover {
+            transform: scale(1.05);
+        }
+
+        .series-info {
+            padding: 10px;
+        }
+
+        .series-title {
+            font-weight: bold;
+            font-size: 1.2em;
+            margin: 10px 0;
+        }
+
+        .series-time {
+            font-size: 1em;
+            color: #000;
+            margin-bottom: 10px;
+        }
+
+        .shiur-dates {
+            font-size: 0.9em;
+            color: #555;
+            margin-top: 5px;
+        }
+
+        .no-dates {
+            font-size: 0.85em;
+            color: #999;
         }
     </style>
 @endsection
