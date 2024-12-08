@@ -201,7 +201,7 @@
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-light">
     <a class="navbar-brand" href="#">
-        <img src="{{ asset('images/logo_with_shadow.png') }}" alt="Logo" style="height: 180px; width: auto;" />
+        <img src="{{ asset('images/logo_with_shadow (1).png') }}" alt="Logo" style="height: 180px; width: auto;" />
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -321,19 +321,19 @@
         <div class="row align-items-center justify-content-between">
             <!-- Logo on the left (Larger size) -->
             <div class="col-md-3 text-left">
-                <img src="{{ asset('images/logo.png') }}" alt="Logo" style="max-width: 180px;">
+                <img src="{{ asset('images/logo_with_shadow (1).png') }}" alt="Logo" style="max-width: 180px;">
             </div>
 
-            <!-- Tagline in the center (Adjusted to be better centered) -->
-            <div class="col-md-6 text-center">
-                <p style="font-size: 1rem; color: #ffffff; margin: 0;">
-                    Helping women grow in their spiritual journey through learning.
+            <!-- Subscription Section on the right (Centered more) -->
+            <div class="col-md-4 text-center">
+                <!-- New message above the subscription form -->
+                <p style="font-size: 0.85rem; color: #ffffff; margin-bottom: -3px;">
+                    Subscribe to our newsletter to hear
                 </p>
-            </div>
-
-            <!-- Subscription Section on the right -->
-            <div class="col-md-3 text-right">
-                <form id="subscriptionForm" onsubmit="showSubscriptionMessage(event)" class="d-flex justify-content-end">
+                <p style="font-size: 0.85rem; color: #ffffff; margin-bottom: 10px;">
+                about the latest shiurim!
+                </p>
+                <form id="subscriptionForm" onsubmit="showSubscriptionMessage(event)" class="d-flex justify-content-center">
                     <input
                         type="email"
                         class="form-control"
@@ -351,6 +351,16 @@
                     Sorry, subscription is not set up yet. Try again later.
                 </p>
             </div>
+
+            <!-- Tagline in the center (Moved slightly to the right) -->
+            <div class="col-md-4 text-center" style="padding-left: 20px;">
+                <p style="font-size: 1rem; color: #ffffff; margin: 0;">
+                    Helping women grow in their spiritual
+                </p>
+                <p style="font-size: 1rem; color: #ffffff; margin: 0;">
+                    journey through learning.
+                </p>
+            </div>
         </div>
 
         <!-- Footer Text -->
@@ -363,7 +373,6 @@
         </div>
     </div>
 </footer>
-
 
 
 
