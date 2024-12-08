@@ -12,11 +12,12 @@
                 <div class="shiur-details">
                     <p class="speaker text-light"><strong>Shira Smiles</strong></p>
                     <p class="time text-light">9:00 - 10:00 AM</p>
-                    <p class="class-title text-light"><em>Birkas Krias Shma</em></p>
+                    <p class="class-title text-light"><em>Tefilla</em></p>
                 </div>
                 <div class="shiur-details">
                     <p class="speaker text-light"><strong>Dina Schoonmaker</strong></p>
                     <p class="time text-light">10:15 - 11:15 AM</p>
+                    <p class="class-title text-light"><em>Personal Growth</em></p>
                 </div>
             </div>
 
@@ -26,6 +27,7 @@
                 <div class="shiur-details">
                     <p class="speaker text-light"><strong>Dina Schoonmaker</strong></p>
                     <p class="time text-light">10:15 - 11:15 AM</p>
+                    <p class="class-title text-light"><em>Bitachon</em></p>
                 </div>
                 <div class="shiur-details">
                     <p class="speaker text-light"><strong>Shira Smiles</strong></p>
