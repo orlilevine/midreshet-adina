@@ -25,7 +25,7 @@
             font-family: 'Roboto', sans-serif;
             font-size: 36px; /* Slightly smaller font */
             font-weight: 600;
-            color: #2c3e50;
+            color: #2D6FA3;
             text-transform: uppercase;
             letter-spacing: 1px;
             margin-bottom: 40px;
@@ -58,7 +58,7 @@
             font-family: 'Merriweather', serif;
             font-size: 24px; /* Slightly smaller font size */
             font-weight: 700;
-            color: #1e2a47;
+            color: #2D6FA3;
             margin-bottom: 10px;
             text-transform: capitalize;
         }
@@ -66,7 +66,7 @@
         .speaker-bio {
             font-family: 'Open Sans', sans-serif;
             font-size: 16px; /* Smaller font size */
-            color: #7f8c8d;
+            color: black;
             line-height: 1.6;
             max-width: 700px;
             margin: 0 auto;

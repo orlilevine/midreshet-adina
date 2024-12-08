@@ -245,7 +245,7 @@
                     Shiurim
                 </a>
                 <div class="dropdown-menu" aria-labelledby="shiursDropdown">
-                    <a class="dropdown-item" href="{{ route('speakers.show', ['speakerId' => 1]) }}">Mrs. Shira Smiles</a>
+                    <a class="dropdown-item" href="{{ route('speakers.show', ['speakerId' => 1]) }}">Reb. Shira Smiles</a>
                     <a class="dropdown-item" href="{{ route('speakers.show', ['speakerId' => 2]) }}">Mrs. Dina Schoonmaker</a>
                     <a class="dropdown-item" href="{{ route('speakers.show', ['speakerId' => 3]) }}">Rabbi Avi Slansky</a>
                 </div>

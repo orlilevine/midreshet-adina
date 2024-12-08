@@ -65,7 +65,7 @@
     <section class="explore-shiurim my-5 container-fluid px-0">
         <div class="container current-shiurim-container">
             <h2 class="text-center display-4">Current Shiurim</h2>
-            <p class="text-center lead">Explore the shiurim happening now.</p>
+            <p class="text-center lead">Click on each shiur to learn more!</p>
             <div class="row justify-content-center" id="shiurContainer">
                 @foreach($currentSeries as $series)
                     <div class="col-md-4 mb-4">
