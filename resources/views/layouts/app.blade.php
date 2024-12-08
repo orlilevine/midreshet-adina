@@ -60,20 +60,26 @@
             color: #63AADD !important;
         }
 
-        .nav-link.login, .nav-link.register {
-            background-color: #63AADD;
-            color: white !important;
-            border-radius: 50px;
-            font-size: 1.2rem;
-            padding: 10px 25px;
-            transition: background-color 0.3s, transform 0.2s;
+        .navbar .nav-link.login, .navbar .nav-link.register {
+            background-color: transparent; /* Match navbar background */
+            color: white; /* Same as navbar text */
+            border: 1px solid white; /* Subtle border */
+            padding: 6px 14px; /* Slightly smaller padding than original */
+            font-size: 15px; /* Between original and smaller size */
+            border-radius: 4px; /* Rounded corners for a soft look */
+            transition: all 0.3s ease; /* Smooth hover effects */
         }
 
-        .nav-link.login:hover, .nav-link.register:hover {
-            background-color: black;
-            transform: scale(1.05);
+        .navbar .nav-link.login:hover, .navbar .nav-link.register:hover {
+            background-color: white; /* Highlight with a contrasting background */
+            color: hotpink; /* Match the navbar theme color */
+            text-decoration: none; /* Remove underline */
         }
 
+        .navbar .nav-link.login:focus, .navbar .nav-link.register:focus {
+            outline: none; /* Remove focus outline */
+            box-shadow: 0 0 4px white; /* Optional subtle focus glow */
+        }
 
         main {
             padding: 60px 0;
