@@ -413,17 +413,12 @@
 
     /* Schedule */
     .schedule-card {
-        width: 250px;
+        width: 225px;
         padding: 1.5rem;
         border-radius: 10px;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
         transition: transform 0.3s;
         text-align: center; /* Center the text inside cards */
-    }
-
-    /* Schedule */
-    .schedule-card:hover {
-        transform: scale(1.05);
     }
 
     /* Schedule */
