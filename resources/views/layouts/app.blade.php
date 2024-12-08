@@ -85,37 +85,6 @@
             padding: 60px 0;
         }
 
-        /* Footer Styles */
-        footer {
-            background-color: #f8f9fa;
-            padding: 4rem 0;
-            margin-bottom: 0;
-        }
-        footer {
-            margin-bottom: 0 !important;
-        }
-
-        .footer-bottom {
-            margin: 0 !important;
-            padding: 0 !important;
-        }
-
-
-        footer h5 {
-            font-size: 1.5rem;
-            color: white;
-        }
-
-        footer p, footer a {
-            font-size: 1.1rem;
-            color: #333;
-        }
-
-        footer a:hover {
-            color: #001f3f;
-            text-decoration: none;
-        }
-
 
         .elevate-slides-container {
             position: relative;
@@ -347,42 +316,54 @@
 </main>
 
 <!-- Footer -->
-<footer class="text-white" style="background: linear-gradient(45deg, #BADFC5, #2F3D46); padding: 3rem 0;">
+<footer style="background-color: #2D6FA3; padding: 10px 0; color: #ffffff;">
     <div class="container">
-        <div class="row">
-            <!-- About Section -->
-            <div class="col-lg-4 col-md-6 mb-4">
-                <h5 class="font-weight-bold mb-3">Midreshet Adina</h5>
-                <p class="text-white">Helping women grow in their spiritual journey through learning.</p>
+        <div class="row align-items-center justify-content-between">
+            <!-- Logo on the left (Larger size) -->
+            <div class="col-md-3 text-left">
+                <img src="{{ asset('images/logo.png') }}" alt="Logo" style="max-width: 180px;">
             </div>
-            <!-- Quick Links Section -->
-            <div class="col-lg-3 col-md-6 mb-4">
-                <h5 class="font-weight-bold mb-3">Quick Links</h5>
-                <ul class="list-unstyled">
-                    <li><a href="{{ route('home') }}" class="text-white">Home</a></li>
-                    <li><a href="{{ route('about') }}" class="text-white">About Us</a></li>
-                    <li><a href="{{ route('contact') }}" class="text-white">Contact</a></li>
-                </ul>
+
+            <!-- Tagline in the center (Adjusted to be better centered) -->
+            <div class="col-md-6 text-center">
+                <p style="font-size: 1rem; color: #ffffff; margin: 0;">
+                    Helping women grow in their spiritual journey through learning.
+                </p>
             </div>
-            <!-- Subscription Section -->
-            <div class="col-md-4">
-                <h5>Subscribe to Our Newsletter</h5>
-                <form id="subscriptionForm" onsubmit="showSubscriptionMessage(event)">
-                    <div class="form-group">
-                        <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
-                    </div>
-                    <button class="btn btn-subscribe">Subscribe</button>
-                    <p id="subscriptionMessage" style="color: #BADFC5; font-weight: bold; display: none; margin-top: 10px;">
-                        Sorry, subscription is not set up yet. Try again later.
-                    </p>
+
+            <!-- Subscription Section on the right -->
+            <div class="col-md-3 text-right">
+                <form id="subscriptionForm" onsubmit="showSubscriptionMessage(event)" class="d-flex justify-content-end">
+                    <input
+                        type="email"
+                        class="form-control"
+                        id="email"
+                        placeholder="Enter your email"
+                        required
+                        style="max-width: 180px; font-size: 0.85rem; padding: 6px; border-radius: 20px; border: none; margin-right: 10px;">
+                    <button
+                        class="btn btn-light"
+                        style="font-size: 0.85rem; padding: 6px 12px; border-radius: 20px; color: #2D6FA3; border: none;">
+                        Subscribe
+                    </button>
                 </form>
+                <p id="subscriptionMessage" style="color: #ffffff; font-weight: bold; display: none; font-size: 0.75rem; margin-top: 5px;">
+                    Sorry, subscription is not set up yet. Try again later.
+                </p>
+            </div>
+        </div>
+
+        <!-- Footer Text -->
+        <div class="row mt-2">
+            <div class="col-md-12 text-center">
+                <p class="mb-0" style="font-size: 0.75rem; color: #ffffff;">
+                    &copy; {{ date('Y') }} Midreshet Adina. All Rights Reserved.
+                </p>
             </div>
         </div>
     </div>
-    <div class="footer-bottom text-center py-3 mt-4" style="margin: 0;">
-        <p class="mb-0 text-white">&copy; 2024 Midreshet Adina. All rights reserved.</p>
-    </div>
 </footer>
+
 
 
 
