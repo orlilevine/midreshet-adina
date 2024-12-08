@@ -1,7 +1,5 @@
 @extends('layouts.app')
 
-@section('title', $shiur->title.' | '. $series->title)
-
 @section('content')
     <div class="series-page-container">
         @if(session('success'))
@@ -10,6 +8,7 @@
 
         <!-- Shiur Header -->
         <div class="series-header">
+            <img src="{{ asset('storage/' . $series->image_path) }}" alt="{{ $series->title }} Cover" class="series-image">
             <h1 class="series-title">{{ $shiur->title }}</h1>
         </div>
 
@@ -17,7 +16,7 @@
         <div class="series-details">
             <p class="series-description">{{ $shiur->description }}</p>
             <p class="series-price">Price: <strong>${{ $shiur->price }}</strong></p>
-            <p>Date: {{ \Carbon\Carbon::parse($shiur->shiur_date)->format('F j, Y') }}</p>
+            <p class="series-date">Date: <strong>{{ \Carbon\Carbon::parse($shiur->shiur_date)->format('F j, Y') }}</strong></p>
 
             @auth
                 @if($hasPurchasedShiur || $hasPurchasedSeries)
@@ -32,7 +31,7 @@
                             <button type="submit" id="applyCoupon" class="cta-button apply-coupon-button">Apply Coupon</button>
                         </div>
 
-                        <button type="submit" class="cta-button purchase-button">Purchase this Shiur for ${{ $shiur->price }}</button>
+                        <button type="submit" class="cta-button purchase-button" style="border: 2px solid black;">Purchase this Shiur for ${{ $shiur->price }}</button>
                         <p class="other-options-link"><a href="#" id="showOtherPaymentOptions">Other Payment Options</a></p>
                     </form>
 
@@ -82,37 +81,42 @@
     <style>
         .series-page-container {
             padding: 40px;
-            background: linear-gradient(135deg, #ff007f, #001f3f);
-            color: white;
+            background: white; /* Removed gradient background */
+            color: black; /* Changed text color to black */
             text-align: center;
             border-radius: 15px;
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1); /* Light shadow */
         }
+
         .alert {
             font-size: 1.2em;
             font-weight: bold;
             color: #28a745;
             margin-bottom: 20px;
         }
+
         .series-header {
             display: flex;
             flex-direction: column;
             align-items: center;
             margin-bottom: 20px;
         }
+
         .series-title {
             font-size: 2.8em;
             margin-top: 15px;
         }
-        .series-description,.series-price {
+
+        .series-description, .series-price, .series-date {
             font-size: 1.2em;
             margin-bottom: 15px;
         }
+
         .cta-button {
             padding: 15px 30px;
             font-size: 1.1em;
             color: white;
-            background-color: #001f3f;
+            background-color: #2D6FA3;
             border: none;
             border-radius: 10px;
             transition: transform 0.3s, box-shadow 0.3s;
@@ -120,16 +124,20 @@
             display: inline-block;
             margin: 10px;
         }
+
         .cta-button:hover {
             transform: scale(1.05);
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
         }
+
         .purchased-button {
             background-color: #28a745;
         }
-        .coupon-section,.payment-options,.payment-form {
+
+        .coupon-section, .payment-options, .payment-form {
             display: none;
         }
+
         .input-field {
             padding: 10px;
             border-radius: 5px;
@@ -137,10 +145,17 @@
             width: 250px;
             margin: 5px;
         }
+
         .other-options-link a {
             color: #001f3f;
             text-decoration: underline;
             cursor: pointer;
+        }
+        .series-image {
+            width: 35%; /* Adjust size as needed */
+            height: auto;
+            /* Removed border-radius */
+            transition: transform 0.3s ease;
         }
     </style>
 
@@ -177,5 +192,4 @@
             });
         });
     </script>
-
 @endsection

@@ -136,9 +136,6 @@
             /* Removed border-radius */
             transition: transform 0.3s ease;
         }
-        .series-image:hover {
-            transform: scale(1.05);
-        }
         .series-title {
             font-size: 2.8em;
             margin-top: 15px;
