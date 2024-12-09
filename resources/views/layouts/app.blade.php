@@ -240,7 +240,7 @@
                 <li class="nav-item"><a class="nav-link login" href="{{ route('login') }}">Login</a></li>
                 <li class="nav-item"><a class="nav-link register" href="{{ route('register') }}">Register</a></li>
             @else
-                @if (Auth::user()->isAdmin())
+                @if (Auth::user()->isAdmin() || Auth::user()->isSuperAdmin())
                     <li class="nav-item"><a class="nav-link" href="{{ route('admin.dashboard') }}">Admin Area</a></li>
                 @endif
                 <li class="nav-item"><a class="nav-link" href="{{ route('user.purchases') }}">My Shiurim</a></li>

@@ -65,8 +65,9 @@ class User extends Authenticatable
      */
     public function isSuperAdmin()
     {
-        return $this->role === self::ROLE_SUPER_ADMIN;
+        return $this->role_id == 1;
     }
+
     public function purchases()
     {
         return $this->hasMany(Purchase::class);
